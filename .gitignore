@@ -9,7 +9,7 @@ auth.edgerc
 .vscode/*
 
 # Local batch file eulating shebang
-# something.cmd
+ddig.cmd
 
 # Logs
 logs
