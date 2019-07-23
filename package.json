@@ -37,7 +37,7 @@
     "debug": "^4.1.1",
     "moment": "^2.24.0",
     "prettyjson": "^1.2.1",
-    "yargs": "^13.2.4"
+    "yargs": "^13.3.0"
   },
   "devDependencies": {
     "eslint": "^6.1.0"
