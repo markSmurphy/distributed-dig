@@ -30,6 +30,8 @@ module.exports = {
                 // Set the DNS resolver server
                 dns.setServers([resolver.resolver]);
 
+// *** Use native 'dns' here instead of dns-sync
+
                 // Perform synchronous DNS resolution as we can't call .setServers() while a lookup is being performed
                 var ipAddress = dnsSync.resolve(domain);
 
