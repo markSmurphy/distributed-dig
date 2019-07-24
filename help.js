@@ -9,7 +9,7 @@ module.exports = {
         const package = require('./package.json');
 
         //display help screen
-        console.log('%s [a.k.a %s]'.cyan);
+        console.log('%s [a.k.a %s]'.cyan, package.name, Object.keys(package.bin)[0]);
         console.log('Read the docs: '.green + package.homepage);
         console.log('Support & bugs: '.magenta + package.bugs.url);
         console.log(endOfLine);

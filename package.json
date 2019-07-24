@@ -1,6 +1,6 @@
 {
   "name": "distributed-dig",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Sends DNS lookup requests across multiple DNS servers.",
   "main": "distributed-dig.js",
   "scripts": {
@@ -34,7 +34,10 @@
   "homepage": "https://github.com/MarkSMurphy/distributed-dig#readme",
   "dependencies": {
     "colors": "^1.3.3",
+    "columnify": "^1.5.4",
     "debug": "^4.1.1",
+    "dns-sync": "^0.1.3",
+    "is-ip": "^3.1.0",
     "moment": "^2.24.0",
     "prettyjson": "^1.2.1",
     "yargs": "^13.3.0"
