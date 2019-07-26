@@ -44,8 +44,7 @@ if ((process.argv.length === 2) || (argv.help)) {
             console.log(columns);
             console.log('Completed in %s milliseconds', response.duration);
         });
-    }
-    catch(err) {
+    } catch(err) {
         console.error('An error occurred: %O'.red, err);
     }
 }

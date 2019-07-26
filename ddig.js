@@ -1,6 +1,8 @@
 var debug = require('debug')('ddig');
 debug('Entry: [%s]', __filename);
 
+const isIp = require('is-ip');
+
 module.exports = {
     resolve(domains, resolvers, callback) {
         // Use 'moment' to do time difference calculations
@@ -25,34 +27,32 @@ module.exports = {
         domains.forEach((domain) => {
             resolvers.forEach((resolver) => {
                 debug('resolving %s using %s (%s)', domain, resolver.resolver, resolver.provider);
-                // *** TO DO *** //
+
                 // Verify the `resolver.resolver` value is a valid IP address
-                // Set the DNS resolver server
-                dns.setServers([resolver.resolver]);
-
-// *** Use native 'dns' here instead of dns-sync
-
-                // Perform synchronous DNS resolution as we can't call .setServers() while a lookup is being performed
-                var ipAddress = dnsSync.resolve(domain);
-
-                debug('dnsSync.resolve() returned a value of type [%s] with a value of [%O]', typeof(ipAddress), ipAddress);
-
-                // Initialise lookup result object
-                var lookupResult = {
-                    'domain' : domain,
-                    'ipAddress' : ipAddress,
-                    'resolver' : resolver.resolver,
-                    'provider' : resolver.provider
-                };
-
-                response.lookups.push(lookupResult);
-
-                /* if (ipAddress === null){
-                    debug('The ipAddress is either null or undefined after attempting to resolve [%s]', domain);
+                if (isIp(resolver.resolver) === false){
+                    debug('Skipping the resolver [%s] because it is not a valid IP address', resolver.resolver);
                 } else {
-                    // output Staging IP entry in hosts file format
-                    console.log('%s %s %s %s', stagingIPAddress, hostname, ' '.repeat(bufferLength), comment);
-                } */
+                    // Set the DNS resolver server
+                    dns.setServers([resolver.resolver]);
+
+                    // *** Use native 'dns' here instead of dns-sync
+
+                    // Perform synchronous DNS resolution as we can't call .setServers() while a lookup is being performed
+                    var ipAddress = dnsSync.resolve(domain);
+
+                    debug('dnsSync.resolve() returned a value of type [%s] with a value of [%O]', typeof(ipAddress), ipAddress);
+
+                    // Initialise lookup result object
+                    var lookupResult = {
+                        'domain' : domain,
+                        'ipAddress' : ipAddress,
+                        'resolver' : resolver.resolver,
+                        'provider' : resolver.provider
+                    };
+
+                    response.lookups.push(lookupResult);
+                }
+
             });
         });
 
