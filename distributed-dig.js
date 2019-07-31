@@ -37,7 +37,7 @@ if ((process.argv.length === 2) || (argv.help)) {
 
         // Pass the domains and resolvers object to ddig.resolve()
         const ddig = require('./ddig');
-        ddig.resolve(domains, resolvers, function(response) {
+        ddig.resolveBulk(domains, resolvers, function(response) {
             debug('Response object from ddig.resolve(): %O', response);
             var columnify = require('columnify');
             var columns = columnify(response.lookups);
