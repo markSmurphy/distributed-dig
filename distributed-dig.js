@@ -28,7 +28,7 @@ if ((process.argv.length === 2) || (argv.help)) {
             // Add domain into the array
             domains.push(process.argv[i]);
         }
-        debug('domains[] array: %O', domains);
+        debug('domains array: %O', domains);
 
         // Get the list of resolvers from the json file
         const fs = require('fs');
@@ -37,7 +37,7 @@ if ((process.argv.length === 2) || (argv.help)) {
 
         // Pass the domains and resolvers object to ddig.resolve()
         const ddig = require('./ddig');
-        ddig.resolve(domains, resolvers, function(response){
+        ddig.resolve(domains, resolvers, function(response) {
             debug('Response object from ddig.resolve(): %O', response);
             var columnify = require('columnify');
             var columns = columnify(response.lookups);
