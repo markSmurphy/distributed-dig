@@ -17,7 +17,6 @@ if ((process.argv.length === 2) || (argv.help)) {
     const help = require('./help');
     help.helpScreen();
 } else {
-    // Main work happens here
     try {
         // Get list of domains to lookup from the command line
         var domains = [];
@@ -28,12 +27,12 @@ if ((process.argv.length === 2) || (argv.help)) {
             // Add domain into the array
             domains.push(process.argv[i]);
         }
-        debug('domains array: %O', domains);
+        debug('%s domains: %O', domains.length, domains);
 
         // Get the list of resolvers from the json file
         const fs = require('fs');
         const resolvers = JSON.parse(fs.readFileSync('dnsResolvers.json'));
-        debug('resolvers object: %O', resolvers);
+        debug('%s resolvers: %O', resolvers.length, resolvers);
 
         // Pass the domains and resolvers object to ddig.resolve()
         const ddig = require('./ddig');
