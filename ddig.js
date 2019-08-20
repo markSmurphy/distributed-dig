@@ -13,23 +13,9 @@ const moment = require('moment');
 // PLatform independent end-of-line
 const EOL = require('os').EOL;
 
-// Default Options
-var options = {
-    'request': {
-        'port': 53,
-        'type': 'udp',
-        'timeout': 2500,
-        'try_edns': false,
-        'cache': false
-    },
-    'question': {
-        'type': 'A'
-    }
-};
-
 module.exports = {
     // resolve() issues a single DNS lookup request
-    resolve(domain, resolver, callback) {
+    resolve(domain, resolver, options, callback) {
         debug('resolve() triggered');
         // Initialise lookup result object
         var lookupResult = null;
@@ -101,7 +87,7 @@ module.exports = {
 
     // resolveDomain() iterates through the resolvers performing a lookup of a single domain
     // Returns json object
-    resolveDomain(domain, resolvers, callback) {
+    resolveDomain(domain, resolvers, options, callback) {
         debug('resolveDomain() triggered for [%s]', domain);
 
         // Iterate through resolvers
@@ -113,7 +99,7 @@ module.exports = {
                 debug('resolveDomain() skipping the resolver [%s] because it is not a valid IP address', resolvers[index].nameServer);
             } else {
                 debug('resolveDomain() calling resolve(%s, %s)', domain, resolvers[index]);
-                module.exports.resolve(domain, resolvers[index], function(lookup){
+                module.exports.resolve(domain, resolvers[index], options, function(lookup){
                     debug('resolveDomain() received the DNS lookup answer: %O', lookup);
                     callback(lookup);
                 });
@@ -124,7 +110,7 @@ module.exports = {
 
     // resolveBulk() performs a lookup of each domain against each resolver
     // Returns json object with results via callback()
-    resolveBulk(domains, resolvers, callback) {
+    resolveBulk(domains, resolvers, options, callback) {
         const startTime = moment();
         debug('resolveBulk() triggered for %s domains and %s resolvers', domains.length, resolvers.length);
 
@@ -136,7 +122,7 @@ module.exports = {
 
         for (var iDomain = 0; iDomain < domains.length; iDomain++) {
             debug('resolveBulk() calling resolveDomain(%s, resolvers)', domains[iDomain]);
-            module.exports.resolveDomain(domains[iDomain], resolvers, function(result){
+            module.exports.resolveDomain(domains[iDomain], resolvers, options, function(result){
                 debug('resolveBulk() received the result: %O', result);
                 if (result) {
                     debug('resolveBulk() adding result to response object');

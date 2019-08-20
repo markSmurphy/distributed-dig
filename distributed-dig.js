@@ -4,7 +4,7 @@ var debug = require('debug')('ddig');
 debug('[%s] started: %O', __filename, process.argv);
 
 // Default resolvers config file
-const resolversFilename = 'dnsResolvers.json'
+const configFilename = 'ddig.json';
 
 // command line options parser
 var argv = require('yargs')
@@ -14,14 +14,57 @@ var argv = require('yargs')
 // eslint-disable-next-line no-unused-vars
 const colours = require('colors');
 
-function getResolvers() {
-    // Get the list of resolvers from the json file
-    const fs = require('fs');
-    let resolvers = JSON.parse(fs.readFileSync(resolversFilename));
-    debug('%s resolvers: %O', resolvers.length, resolvers);
-    return (resolvers);
+function getConfig() {
+    try {
+        const fs = require('fs');
+        let rawJSON = fs.readFileSync(configFilename);
+        let config = JSON.parse(rawJSON);
+        debug('getConfig() read the configuration file [%s]: %O',configFilename, config);
+        return(config);
+    } catch (e) {
+        debug('An error occurred reading the config file [%s]: %O', configFilename, e);
+        return(false);
+    }
 }
 
+function getResolvers() {
+    // Get the list of resolvers from the config file
+    let config = getConfig();
+    if (config) {
+        let resolvers = config.resolvers;
+        debug('%s resolvers: %O', resolvers.length, resolvers);
+        return(resolvers);
+    } else{
+        debug('getResolvers() could not retrieve a list of resolvers from [%s]', configFilename);
+        return(false);
+    }
+}
+
+function getOptions() {
+    // Get the options object from the config file
+    let config = getConfig();
+    if (config) {
+        let options = config.options;
+        debug('options: %O', options);
+        return(options);
+    } else{
+        debug('getOptions() could not retrieve any options because getConfig() returned false.  Using default values', configFilename);
+        // Default Options
+        const default_options = {
+            'request': {
+                'port': 53,
+                'type': 'udp',
+                'timeout': 2500,
+                'try_edns': false,
+                'cache': false
+            },
+            'question': {
+                'type': 'A'
+            }
+        };
+        return(default_options);
+    }
+}
 
 // Check for 'help' command line parameters, or no parameters at all
 if ((process.argv.length === 2) || (argv.help)) {
@@ -31,9 +74,21 @@ if ((process.argv.length === 2) || (argv.help)) {
 } else if (argv.list) {
     // Get list of resolvers
     const resolvers = getResolvers();
-    console.log(resolversFilename.green);
+    console.log('%s'.green.underline, configFilename);
     const columnify = require('columnify');
     const columns = columnify(resolvers);
+    console.log(columns);
+
+} else if (argv.options) {
+    // Get the options
+    const options = getOptions();
+    console.log('%s'.green.underline, configFilename);
+    const columnify = require('columnify');
+    console.log('request'.yellow);
+    var columns = columnify(options.request);
+    console.log(columns);
+    console.log('question'.yellow);
+    columns = columnify(options.question);
     console.log(columns);
 
 } else {
@@ -51,10 +106,12 @@ if ((process.argv.length === 2) || (argv.help)) {
 
         // Get list of resolvers
         const resolvers = getResolvers();
+        // Get options
+        const options = getOptions();
 
         // Pass the domains and resolvers object to ddig.resolve()
         const ddig = require('./ddig');
-        ddig.resolveBulk(domains, resolvers, function(response) {
+        ddig.resolveBulk(domains, resolvers, options, function(response) {
             debug('Response object from ddig.resolve(): %O', response);
             const columnify = require('columnify');
             const columns = columnify(response.lookups);

@@ -1,0 +1,22 @@
+[
+	{
+		"nameServer": "208.67.222.222",
+		"provider": "OpenDNS (Primary)"
+	},
+	{
+		"nameServer": "1.1.1.1",
+		"provider": "Cloudflare (Primary)"
+	},
+	{
+		"nameServer": "8.8.8.8",
+		"provider": "Google Public DNS (Primary)"
+	},
+	{
+		"nameServer": "217.199.173.113",
+		"provider": "United Kingdom"
+	},
+	{
+		"nameServer": "216.98.109.133",
+		"provider": "United States"
+	}
+]

@@ -20,7 +20,8 @@ module.exports = {
         console.log(endOfLine);
         console.log('USAGE:'.grey);
         console.log('   ' + 'ddig domain [domain [domain] ...]     ' + 'Perform multiple DNS lookups '.grey);
-        console.log('   ' + 'ddig --list                           ' + 'List resolvers configured in dnsResolvers.json '.grey);
+        console.log('   ' + 'ddig --list                           ' + 'List resolvers configured in ddig.json '.grey);
+        console.log('   ' + 'ddig --options                        ' + 'List DNS request options configured in ddig.json '.grey);
         console.log('   ' + 'ddig --version                        ' + 'Display version number.'.grey);
         console.log('   ' + 'ddig --help                           ' + 'Display this help.'.grey);
         console.log(endOfLine);
