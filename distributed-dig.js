@@ -71,7 +71,7 @@ if ((process.argv.length === 2) || (argv.help)) {
     // Show help screen
     const help = require('./help');
     help.helpScreen();
-} else if (argv.list) {
+} else if (argv.listResolvers) {
     // Get list of resolvers
     const resolvers = getResolvers();
     console.log('%s'.green.underline, configFilename);
@@ -79,7 +79,7 @@ if ((process.argv.length === 2) || (argv.help)) {
     const columns = columnify(resolvers);
     console.log(columns);
 
-} else if (argv.options) {
+} else if (argv.listOptions) {
     // Get the options
     const options = getOptions();
     console.log('%s'.green.underline, configFilename);
