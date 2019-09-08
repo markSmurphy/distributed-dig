@@ -8,7 +8,7 @@ const DefaultConfigFilename = 'distributed-dig.json';
 var configFilename = DefaultConfigFilename;
 
 // Default DNS TCP options
-const default_options = {
+const defaultOptions = {
     'request': {
         'port': 53,
         'type': 'udp',
@@ -70,7 +70,7 @@ function getOptions() {
     } else{
         debug('getOptions() could not retrieve any options because getConfig() returned false.  Using default values', configFilename);
         // Default Options
-        return(default_options);
+        return(defaultOptions);
     }
 }
 
@@ -126,10 +126,24 @@ if ((process.argv.length === 2) || (argv.help)) {
             resolvers.forEach((resolver) => {
                 // Perform a lookup for the current domain via the current resolver
                 ddig.resolve(domain, resolver, options, (response) => {
-                    console.log('Looking up %s against %s (%s) returned: %O', domain, resolver.nameServer, resolver.provider, response);
-                    let columns = columnify(response);
-                    console.log(columns);
-                    console.log('Completed in %s milliseconds', response.duration);
+                    debug('Looking up %s against %s (%s) returned: %O', domain, resolver.nameServer, resolver.provider, response);
+                    if (response.success) {
+                        // The lookup succeeded.  Extract the properties needed from the response
+                        let result = [{
+                            'domain': response.domain,
+                            'IPAddress': response.ipAddress[response.ipAddress.length - 1].address,
+                            'resolver': response.resolver
+                        }];
+                        let columns = columnify(result,
+                            {showHeaders: false,
+                            paddingChr: '.'}
+                        );
+                        console.log(columns);
+                        //console.table(result);
+                    } else {
+                        // The lookup failed
+                    }
+
                 });
             });
         });
