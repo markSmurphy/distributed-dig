@@ -3,16 +3,36 @@
 var debug = require('debug')('ddig');
 debug('[%s] started: %O', __filename, process.argv);
 
-// Default resolvers config file
-const configFilename = 'ddig.json';
+// Default config file
+const DefaultConfigFilename = 'distributed-dig.json';
+var configFilename = DefaultConfigFilename;
+
+// Default DNS TCP options
+const default_options = {
+    'request': {
+        'port': 53,
+        'type': 'udp',
+        'timeout': 2500,
+        'try_edns': false,
+        'cache': false
+    },
+    'question': {
+        'type': 'A'
+    }
+};
+
+// Core ddig functions
+const ddig = require('./ddig-core');
+
+// Console output formatting for columns and colours
+const columnify = require('columnify');
+// eslint-disable-next-line no-unused-vars
+const colours = require('colors');
 
 // command line options parser
 var argv = require('yargs')
 .help(false)
 .argv;
-
-// eslint-disable-next-line no-unused-vars
-const colours = require('colors');
 
 function getConfig() {
     try {
@@ -50,18 +70,6 @@ function getOptions() {
     } else{
         debug('getOptions() could not retrieve any options because getConfig() returned false.  Using default values', configFilename);
         // Default Options
-        const default_options = {
-            'request': {
-                'port': 53,
-                'type': 'udp',
-                'timeout': 2500,
-                'try_edns': false,
-                'cache': false
-            },
-            'question': {
-                'type': 'A'
-            }
-        };
         return(default_options);
     }
 }
@@ -74,7 +82,7 @@ if ((process.argv.length === 2) || (argv.help)) {
 } else if (argv.listResolvers) {
     // Get list of resolvers
     const resolvers = getResolvers();
-    console.log('%s'.green.underline, configFilename);
+    console.log('%s[resolvers]'.green.underline, configFilename);
     const columnify = require('columnify');
     const columns = columnify(resolvers);
     console.log(columns);
@@ -82,7 +90,7 @@ if ((process.argv.length === 2) || (argv.help)) {
 } else if (argv.listOptions) {
     // Get the options
     const options = getOptions();
-    console.log('%s'.green.underline, configFilename);
+    console.log('%s[options]'.green.underline, configFilename);
     const columnify = require('columnify');
     console.log('request'.yellow);
     var columns = columnify(options.request);
@@ -104,19 +112,26 @@ if ((process.argv.length === 2) || (argv.help)) {
         }
         debug('%s domains: %O', domains.length, domains);
 
+        // Display which configuration file is being used
+        console.log('Using configuration file: '.grey + configFilename.yellow);
+
         // Get list of resolvers
         const resolvers = getResolvers();
         // Get options
         const options = getOptions();
 
-        // Pass the domains and resolvers object to ddig.resolve()
-        const ddig = require('./ddig');
-        ddig.resolveBulk(domains, resolvers, options, function(response) {
-            debug('Response object from ddig.resolve(): %O', response);
-            const columnify = require('columnify');
-            const columns = columnify(response.lookups);
-            console.log(columns);
-            console.log('Completed in %s milliseconds', response.duration);
+        // Iterate through the list of domains
+        domains.forEach((domain) => {
+            // Iterate through each resolver
+            resolvers.forEach((resolver) => {
+                // Perform a lookup for the current domain via the current resolver
+                ddig.resolve(domain, resolver, options, (response) => {
+                    console.log('Looking up %s against %s (%s) returned: %O', domain, resolver.nameServer, resolver.provider, response);
+                    let columns = columnify(response);
+                    console.log(columns);
+                    console.log('Completed in %s milliseconds', response.duration);
+                });
+            });
         });
     } catch(err) {
         console.error('An error occurred: %O'.red, err);
