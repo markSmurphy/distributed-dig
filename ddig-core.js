@@ -20,6 +20,7 @@ module.exports = {
         var lookupResult = {
             'domain': domain,
             'ipAddress': null,
+            'answer': null,
             'resolver': resolver.nameServer,
             'provider': resolver.provider,
             'msg': '',
@@ -90,7 +91,8 @@ module.exports = {
                     debug('The resolver [%s] provided the answer: %O', resolver.nameServer, answer);
 
                     // Populate lookup result object
-                    lookupResult.ipAddress = [JSON.stringify(answer.answer)];
+                    lookupResult.answer = JSON.stringify(answer.answer);
+                    lookupResult.ipAddress = module.exports.parseAnswer(answer.answer, {getIpAddress: true});
                     lookupResult.msg = 'Success';
                     lookupResult.success=true;
                     lookupResult.duration=moment(moment()).diff(startTime);
@@ -100,5 +102,30 @@ module.exports = {
                 }
             });
         }
+    },
+
+    parseAnswer(answer, options) {
+        if ((options===null) || (options.getIpAddress)) {
+            // Just get the IP address; i.e. the A record at the end.
+            for (let i =0; 1 < answer.length; i++) {
+                if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
+                    return(answer[i].address);
+                }
+            }
+        }
+        return('error');
+        /*
+        for (var i = 0; i < answer.length; i++){
+            // Check if the answer hop has a data property (which a CNAME record will have)
+            if(Object.prototype.hasOwnProperty.call(answer[i], 'data')){
+               console.log('%s --> %s', answer[i].name, answer[i].data);
+            // Check if the answer hop has an address property (which an A record will have)
+            } else if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
+               console.log('%s --> %s', answer[i].name, answer[i].address);
+            } else {
+               console.log('Couldn\'t find either a [data] nor an [address] element in the answer\'s %s hop', i);
+            }
+        }
+        */
     }
 };

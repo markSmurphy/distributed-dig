@@ -10,7 +10,6 @@ Issues DNS lookup requests across multiple DNS servers.
 
 * Add option `--config` to specify alternative config file via command line.
 * Use `findup-sync` to use alternative config file (`ddig.json`) in parent folder hierarchy (if `--config` isn't specified).
-* Format output into columns
 * Allow for a `--verbose` option which displays the full DNS recursion.
 * Add `--certs` / `--certificates` which extracts x.505 cert from each endpoint, using [get-ssl-certificate](https://www.npmjs.com/package/get-ssl-certificate) and displays details.
 
@@ -42,6 +41,7 @@ Issues DNS lookup requests across multiple DNS servers.
 * ~~Move all options to `distributed-dig.json`.~~
 * ~~Output config file being used to avoid confusion.~~
 * ~~Refactor to async with closures.~~
+* ~~Format output into columns~~
 
 ## Description
 

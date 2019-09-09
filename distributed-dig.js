@@ -21,6 +21,13 @@ const defaultOptions = {
     }
 };
 
+// Initialise empty array of domains
+var domains = [];
+// Global variables to hold column widths
+var domainColumnWidth = 0;
+var resolverColumnWidth = 0;
+var providerColumnWidth = 0;
+
 // Core ddig functions
 const ddig = require('./ddig-core');
 
@@ -53,6 +60,19 @@ function getResolvers() {
     if (config) {
         let resolvers = config.resolvers;
         debug('%s resolvers: %O', resolvers.length, resolvers);
+        // Get maximum column widths
+        for (let i = 0; i < resolvers.length; i++) {
+
+            // Resolver
+            if (resolvers[i].nameServer.length > resolverColumnWidth) {
+                resolverColumnWidth = resolvers[i].nameServer.length;
+            }
+
+            // Provider
+            if (resolvers[i].provider.length > providerColumnWidth) {
+                providerColumnWidth = resolvers[i].provider.length;
+            }
+        }
         return(resolvers);
     } else{
         debug('getResolvers() could not retrieve a list of resolvers from [%s]', configFilename);
@@ -102,13 +122,22 @@ if ((process.argv.length === 2) || (argv.help)) {
 } else {
     try {
         // Get list of domains to lookup from the command line
-        var domains = [];
+
         // Loop through command line parameters.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'
         var i = 2;
         for (i = 2; i < process.argv.length; i++) {
             debug('Extracted "%s" from the command line', process.argv[i]);
-            // Add domain into the array
-            domains.push(process.argv[i]);
+            // check if it looks like a command line switch
+            if (process.argv[i].charAt(0) === '-'){
+                debug('"%s" looks like a command line switch, not a hostname.  Ignoring it.');
+            } else {
+                // Add domain into the array
+                domains.push(process.argv[i]);
+                // Set domain column width
+                if (process.argv[i].length > domainColumnWidth) {
+                    domainColumnWidth = process.argv[i].length;
+                }
+            }
         }
         debug('%s domains: %O', domains.length, domains);
 
@@ -127,23 +156,34 @@ if ((process.argv.length === 2) || (argv.help)) {
                 // Perform a lookup for the current domain via the current resolver
                 ddig.resolve(domain, resolver, options, (response) => {
                     debug('Looking up %s against %s (%s) returned: %O', domain, resolver.nameServer, resolver.provider, response);
+                    var result;
                     if (response.success) {
                         // The lookup succeeded.  Extract the properties needed from the response
-                        let result = [{
+                        result = [{
                             'domain': response.domain,
-                            'IPAddress': response.ipAddress[response.ipAddress.length - 1].address,
-                            'resolver': response.resolver
+                            'IPAddress': response.ipAddress.green,
+                            'provider': response.provider.grey
                         }];
-                        let columns = columnify(result,
-                            {showHeaders: false,
-                            paddingChr: '.'}
-                        );
-                        console.log(columns);
-                        //console.table(result);
                     } else {
                         // The lookup failed
+                        result = [{
+                            'domain': response.domain,
+                            'IPAddress': response.msg.red,
+                            'provider': response.provider.grey
+                        }];
                     }
 
+                    // Display the result
+                    let columns = columnify(result,
+                        {showHeaders: false,
+                            config: {
+                                domain: {minWidth: domainColumnWidth},
+                                IPAddress: {minWidth: 15},
+                                provider: providerColumnWidth
+                              }
+                        }
+                    );
+                    console.log(columns);
                 });
             });
         });
