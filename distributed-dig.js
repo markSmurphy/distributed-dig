@@ -130,7 +130,7 @@ if ((process.argv.length === 2) || (argv.help)) {
         const columnify = require('columnify');
         const columns = columnify(config.resolvers);
         console.log(columns, {
-            
+
         });
     }
 } else if (argv.listOptions) {
@@ -155,18 +155,21 @@ if ((process.argv.length === 2) || (argv.help)) {
     try {
         // Loop through command line parameters to extract domains.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'
         var i = 2;
+        const isValidDomain = require('is-valid-domain')
+
         for (i = 2; i < process.argv.length; i++) {
             debug('Extracted "%s" from the command line', process.argv[i]);
-            // check if it looks like a command line switch
-            if (process.argv[i].charAt(0) === '-'){
-                debug('"%s" looks like a command line switch, not a hostname.  Ignoring it.');
-            } else {
+            // Check that's a valid domain
+            if (isValidDomain(process.argv[i])){
                 // Add domain into the array
                 domains.push(process.argv[i]);
                 // Set domain column width
                 if (process.argv[i].length > domainColumnWidth) {
                     domainColumnWidth = process.argv[i].length;
                 }
+            } else {
+                debug('"%s" looks like a command line switch, not a hostname.  Ignoring it.');
+                console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid domain name');
             }
         }
         debug('%s domains: %O', domains.length, domains);
