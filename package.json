@@ -1,6 +1,6 @@
 {
   "name": "distributed-dig",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sends DNS lookup requests across multiple DNS servers.",
   "main": "distributed-dig.js",
   "scripts": {
@@ -16,15 +16,18 @@
     "url": "git+https://github.com/MarkSMurphy/distributed-dig.git"
   },
   "keywords": [
-    "DNS",
-    "Resolution",
-    "Distributed",
-    "Lookup",
+    "dns",
+    "resolution",
+    "distributed",
+    "lookup",
     "IP",
-    "Resolve",
-    "Domain",
+    "resolve",
+    "resolver",
+    "domain",
     "fqdn",
-    "cli"
+    "cli",
+    "address",
+    "edns"
   ],
   "author": "Mark Murphy",
   "license": "MIT",

@@ -8,6 +8,7 @@ const DefaultConfigFilename = 'distributed-dig.json';
 var configFilename = DefaultConfigFilename;
 
 // Default DNS TCP options
+// eslint-disable-next-line no-unused-vars
 const defaultOptions = {
     'request': {
         'port': 53,
@@ -20,6 +21,9 @@ const defaultOptions = {
         'type': 'A'
     }
 };
+
+// Holds the config json
+var config;
 
 // Initialise empty array of domains
 var domains = [];
@@ -47,6 +51,36 @@ function getConfig() {
         let rawJSON = fs.readFileSync(configFilename);
         let config = JSON.parse(rawJSON);
         debug('getConfig() read the configuration file [%s]: %O',configFilename, config);
+
+        // Parse list of Resolvers
+        parseResolvers();
+
+        //Check for CLI switches which override config file settings
+        // Verbose mode
+        if (argv.verbose) {
+            config.options.verbose = true;
+        }
+
+        // DNS Port
+        if (argv.port) {
+            config.options.request.port = argv.port;
+        }
+
+        // DNS Protocol
+        if (argv.protocol) {
+            config.options.request.type = argv.protocol;
+        }
+
+        // DNS Timeout
+        if (argv.timeout) {
+            config.options.request.timeout = argv.timeout;
+        }
+
+        // EDNS(0)
+        if (argv.try_edns) {
+            config.options.request.try_edns = argv.edns;
+        }
+
         return(config);
     } catch (e) {
         debug('An error occurred reading the config file [%s]: %O', configFilename, e);
@@ -54,45 +88,30 @@ function getConfig() {
     }
 }
 
-function getResolvers() {
-    // Get the list of resolvers from the config file
-    let config = getConfig();
-    if (config) {
-        let resolvers = config.resolvers;
-        debug('%s resolvers: %O', resolvers.length, resolvers);
-        // Get maximum column widths
-        for (let i = 0; i < resolvers.length; i++) {
+function parseResolvers() {
+    try {
+        debug('%s resolvers: %O', config.resolvers.length, config.resolvers);
 
-            // Resolver
-            if (resolvers[i].nameServer.length > resolverColumnWidth) {
-                resolverColumnWidth = resolvers[i].nameServer.length;
+        // Get maximum column widths
+        for (let i = 0; i < config.resolvers.length; i++) {
+
+            // Maximum resolver length
+            if (config.resolvers[i].nameServer.length > resolverColumnWidth) {
+                resolverColumnWidth = config.resolvers[i].nameServer.length;
             }
 
-            // Provider
-            if (resolvers[i].provider.length > providerColumnWidth) {
-                providerColumnWidth = resolvers[i].provider.length;
+            // Maximum provider length
+            if (config.resolvers[i].provider.length > providerColumnWidth) {
+                providerColumnWidth = config.resolvers[i].provider.length;
             }
         }
-        return(resolvers);
-    } else{
-        debug('getResolvers() could not retrieve a list of resolvers from [%s]', configFilename);
-        return(false);
+    } catch (error) {
+        debug('Exception caught in parseResolvers(): %O', error);
     }
 }
 
-function getOptions() {
-    // Get the options object from the config file
-    let config = getConfig();
-    if (config) {
-        let options = config.options;
-        debug('options: %O', options);
-        return(options);
-    } else{
-        debug('getOptions() could not retrieve any options because getConfig() returned false.  Using default values', configFilename);
-        // Default Options
-        return(defaultOptions);
-    }
-}
+// Initialise configuration
+config = getConfig();
 
 // Check for 'help' command line parameters, or no parameters at all
 if ((process.argv.length === 2) || (argv.help)) {
@@ -101,29 +120,40 @@ if ((process.argv.length === 2) || (argv.help)) {
     help.helpScreen();
 } else if (argv.listResolvers) {
     // Get list of resolvers
-    const resolvers = getResolvers();
-    console.log('%s[resolvers]'.green.underline, configFilename);
-    const columnify = require('columnify');
-    const columns = columnify(resolvers);
-    console.log(columns);
-
+    console.log('%s'.yellow.underline, configFilename);
+    if (config.options.verbose) {
+    // Raw JSON output
+        const prettyjson = require('prettyjson');
+        console.log('{resolvers}'.yellow);
+        console.log(prettyjson.render(config.resolvers));
+    } else {
+        const columnify = require('columnify');
+        const columns = columnify(config.resolvers);
+        console.log(columns, {
+            
+        });
+    }
 } else if (argv.listOptions) {
     // Get the options
-    const options = getOptions();
-    console.log('%s[options]'.green.underline, configFilename);
-    const columnify = require('columnify');
-    console.log('request'.yellow);
-    var columns = columnify(options.request);
-    console.log(columns);
-    console.log('question'.yellow);
-    columns = columnify(options.question);
-    console.log(columns);
+    console.log('%s'.yellow.underline, configFilename);
+    if (config.options.verbose) {
+        // Raw JSON output
+        const prettyjson = require('prettyjson');
+        console.log('{options}'.yellow);
+        console.log(prettyjson.render(config.options));
+    } else {
+        const columnify = require('columnify');
+        console.log('{request}'.yellow);
+        var columns = columnify(config.options.request);
+        console.log(columns);
+        console.log('{question}'.yellow);
+        columns = columnify(config.options.question);
+        console.log(columns);
+    }
 
 } else {
     try {
-        // Get list of domains to lookup from the command line
-
-        // Loop through command line parameters.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'
+        // Loop through command line parameters to extract domains.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'
         var i = 2;
         for (i = 2; i < process.argv.length; i++) {
             debug('Extracted "%s" from the command line', process.argv[i]);
@@ -142,19 +172,17 @@ if ((process.argv.length === 2) || (argv.help)) {
         debug('%s domains: %O', domains.length, domains);
 
         // Display which configuration file is being used
-        console.log('Using configuration file: '.grey + configFilename.yellow);
+        if (domains.length>0) {
+            console.log('Using configuration file: '.grey + configFilename.yellow);
+        }
 
-        // Get list of resolvers
-        const resolvers = getResolvers();
-        // Get options
-        const options = getOptions();
 
         // Iterate through the list of domains
         domains.forEach((domain) => {
             // Iterate through each resolver
-            resolvers.forEach((resolver) => {
+            config.resolvers.forEach((resolver) => {
                 // Perform a lookup for the current domain via the current resolver
-                ddig.resolve(domain, resolver, options, (response) => {
+                ddig.resolve(domain, resolver, config.options, (response) => {
                     debug('Looking up %s against %s (%s) returned: %O', domain, resolver.nameServer, resolver.provider, response);
                     var result;
                     if (response.success) {

@@ -1,5 +1,7 @@
 # distributed-dig
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/47a2084dfb3146a58e7711d6444324a7)](https://www.codacy.com?utm_source=bitbucket.org&amp;utm_medium=referral&amp;utm_content=MarkSMurphy/distributed-dig&amp;utm_campaign=Badge_Grade)
+
 ## Quick Start
 
 ## Overview
@@ -25,6 +27,14 @@ Issues DNS lookup requests across multiple DNS servers.
     ```
 
 * Allow for `--certs` *and* `--verbose` to display more x.509 properties.
+* Add CLI switches to modify default request options:
+  * `port` : __53__
+  * `type` : __udp__
+  * `timeout` : __2500__
+  * `try_edns` : __false__
+  * `cache` : __false__
+* Allow for a combination of `--list-options` and `--verbose` to pretty print [options] section raw json.
+* Allow for a combination of `--list-resolvers` and `--verbose` to pretty print [resolvers] section raw json.
 * Update `README.md` to include:
   * Badges
   * Quick Start
