@@ -1,6 +1,6 @@
 {
   "name": "distributed-dig",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -704,6 +704,7 @@
         "esprima": "^4.0.0"
       }
     },
+    "jshint": {},
     "json-schema-traverse": {
       "version": "0.4.1",
       "resolved": "https://registry.npmjs.org/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz",
