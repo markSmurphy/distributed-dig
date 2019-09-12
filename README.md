@@ -11,8 +11,8 @@ Issues DNS lookup requests across multiple DNS servers.
 ## To Do
 
 * Add option `--config` to specify alternative config file via command line.
-* Use `findup-sync` to use alternative config file (`distributed-dig.json`) in parent folder hierarchy (if `--config` isn't specified).
-* Allow for a `--verbose` option which displays the full DNS recursion.
+  * Use `findup-sync` to find config file if not in current directory.
+* Allow for the `--verbose` option displaying the full DNS recursion.
 * Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
 * Add `--certs` switch which instructs `ddig-core.js.resolve()` to extract an x.505 cert from each endpoint, using [get-ssl-certificate](https://www.npmjs.com/package/get-ssl-certificate) and add the details to the `lookupResult` response object.
 
@@ -46,6 +46,7 @@ Issues DNS lookup requests across multiple DNS servers.
   * ~~`timeout` : **2500**~~
   * ~~`try_edns` : **false**~~
   * `cache` : **false**
+* ~~ Add a `--verbose` switch which displays more columns.~~
 * ~~Allow for a combination of `--list-options` and `--verbose` to pretty print `options` section raw json.~~
 * ~~Allow for a combination of `--list-resolvers` and `--verbose` to pretty print `resolvers` section raw json.~~
 * ~~Move **Default Options** json from `distributed-dig.js` into its own file/function for easier maintainability.~~

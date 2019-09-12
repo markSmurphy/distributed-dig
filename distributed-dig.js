@@ -29,7 +29,7 @@ var config = {};
 var domains = [];
 // Global variables to hold column widths
 var domainColumnWidth = 0;
-var resolverColumnWidth = 0;
+var nameServerColumnWidth = 0;
 var providerColumnWidth = 0;
 
 // Core ddig functions
@@ -40,30 +40,49 @@ const columnify = require('columnify');
 // eslint-disable-next-line no-unused-vars
 const colours = require('colors');
 
+// Import IP validation library
+const isIp = require('is-ip');
+
 // command line options parser
 var argv = require('yargs')
 .help(false)
 .argv;
 
-function parseResolvers() {
+function getNameServerColumnWidth(resolvers) {
     try {
-        debug('%s resolvers: %O', config.resolvers.length, config.resolvers);
-
+        debug('parsing %s resolvers for "nameServer" the column width', resolvers.length);
         // Get maximum column widths
-        for (let i = 0; i < config.resolvers.length; i++) {
-
+        var columnWidth = 0;
+        for (let i = 0; i < resolvers.length; i++) {
             // Maximum resolver length
-            if (config.resolvers[i].nameServer.length > resolverColumnWidth) {
-                resolverColumnWidth = config.resolvers[i].nameServer.length;
-            }
-
-            // Maximum provider length
-            if (config.resolvers[i].provider.length > providerColumnWidth) {
-                providerColumnWidth = config.resolvers[i].provider.length;
+            if ((resolvers[i].nameServer.length > columnWidth) && (isIp(resolvers[i].nameServer))) {
+                columnWidth = resolvers[i].nameServer.length;
+                debug('setting getNameServerColumnWidth to: %s', resolvers[i].nameServer.length);
             }
         }
+        return(columnWidth);
     } catch (error) {
-        debug('Exception caught in parseResolvers(): %O', error);
+        debug('Exception caught in getNameServerColumnWidth(): %O', error);
+        return(15);
+    }
+}
+
+function getProviderColumnWidth(resolvers) {
+    try {
+        debug('parsing %s resolvers for "provider" the column width', resolvers.length);
+        // Get maximum column width
+        var columnWidth = 0;
+        for (let i = 0; i < resolvers.length; i++) {
+            // Maximum resolver length
+            if ((resolvers[i].provider.length > columnWidth) && (isIp(resolvers[i].nameServer))) {
+                columnWidth = resolvers[i].provider.length;
+                debug('Setting getProviderColumnWidth to: %s', resolvers[i].provider.length);
+            }
+        }
+        return(columnWidth);
+    } catch (error) {
+        debug('Exception caught in getProviderColumnWidth(): %O', error);
+        return(30);
     }
 }
 
@@ -74,8 +93,9 @@ function getConfig() {
         let config = JSON.parse(rawJSON);
         debug('getConfig() read the configuration file [%s]: %O',configFilename, config);
 
-        // Parse list of Resolvers
-        parseResolvers();
+        // Parse list of Resolvers to acquire column widths
+        nameServerColumnWidth = getNameServerColumnWidth(config.resolvers);
+        providerColumnWidth = getProviderColumnWidth(config.resolvers);
 
         //Check for CLI switches which override config file settings
         // Verbose mode
@@ -179,8 +199,11 @@ if ((process.argv.length === 2) || (argv.help)) {
                     domainColumnWidth = process.argv[i].length;
                 }
             } else {
-                debug('"%s" looks like a command line switch, not a hostname.  Ignoring it.');
-                console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid domain name');
+                debug('"%s" is not a valid hostname.  Excluding it from the domains[] array');
+                if (process.argv[i].substring(0, 2) != '--') {
+                    console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid domain name');
+                }
+
             }
         }
         debug('%s domains: %O', domains.length, domains);
@@ -203,8 +226,13 @@ if ((process.argv.length === 2) || (argv.help)) {
                         result = [{
                             'domain': response.domain,
                             'IPAddress': response.ipAddress.green,
-                            'provider': response.provider.grey
+                            'provider': response.provider.grey,
                         }];
+                        // Add additional 'success' columns if `verbose` is switched on
+                        if (config.options.verbose) {
+                            result[0].nameServer = response.nameServer.grey;
+                            result[0].duration = response.duration + 'ms';
+                        }
                     } else {
                         // The lookup failed
                         result = [{
@@ -212,16 +240,22 @@ if ((process.argv.length === 2) || (argv.help)) {
                             'IPAddress': response.msg.red,
                             'provider': response.provider.grey
                         }];
+                        // Add additional 'failed' columns if `verbose` is switched on
+                        if (config.options.verbose) {
+                            result[0].nameServer = response.nameServer.grey;
+                            result[0].duration = response.duration + 'ms';
+                        }
                     }
-
                     // Display the result
                     let columns = columnify(result,
                         {showHeaders: false,
                             config: {
                                 domain: {minWidth: domainColumnWidth},
                                 IPAddress: {minWidth: 15},
-                                provider: providerColumnWidth
-                              }
+                                provider: {minWidth: providerColumnWidth},
+                                nameServer: {minWidth: nameServerColumnWidth},
+                                duration: {minWidth: 5}
+                            }
                         }
                     );
                     console.log(columns);

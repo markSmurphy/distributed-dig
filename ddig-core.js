@@ -21,7 +21,7 @@ module.exports = {
             'domain': domain,
             'ipAddress': null,
             'answer': null,
-            'resolver': resolver.nameServer,
+            'nameServer': resolver.nameServer,
             'provider': resolver.provider,
             'msg': '',
             'success': false,

@@ -108,14 +108,6 @@
         {
             "nameServer": "2a05:dfc7:5::5353",
             "provider": "Antarctica"
-        },
-        {
-            "nameServer": "10.256.257.259",
-            "provider": "Testing a bad nameServer configuration (Primary)"
-        },
-        {
-            "nameServer": "IP address goes here",
-            "provider": "Testing a bad nameServer configuration (Secondary)"
         }
     ]
 }
