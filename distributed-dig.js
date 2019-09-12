@@ -200,7 +200,7 @@ if ((process.argv.length === 2) || (argv.help)) {
                 }
             } else {
                 debug('"%s" is not a valid hostname.  Excluding it from the domains[] array');
-                if (process.argv[i].substring(0, 2) != '--') {
+                if (process.argv[i].substring(0, 2) !== '--') {
                     console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid domain name');
                 }
 
