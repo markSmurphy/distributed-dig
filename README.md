@@ -11,9 +11,10 @@ Issues DNS lookup requests across multiple DNS servers.
 ## To Do
 
 * Add option `--config` to specify alternative config file via command line.
-* Use `findup-sync` to use alternative config file (`ddig.json`) in parent folder hierarchy (if `--config` isn't specified).
+* Use `findup-sync` to use alternative config file (`distributed-dig.json`) in parent folder hierarchy (if `--config` isn't specified).
 * Allow for a `--verbose` option which displays the full DNS recursion.
-* Add `--certs` / `--certificates` which extracts x.505 cert from each endpoint, using [get-ssl-certificate](https://www.npmjs.com/package/get-ssl-certificate) and displays details.
+* Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
+* Add `--certs` switch which instructs `ddig-core.js.resolve()` to extract an x.505 cert from each endpoint, using [get-ssl-certificate](https://www.npmjs.com/package/get-ssl-certificate) and add the details to the `lookupResult` response object.
 
     ```javascript
     var sslCertificate = require('get-ssl-certificate');

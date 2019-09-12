@@ -186,7 +186,7 @@ if ((process.argv.length === 2) || (argv.help)) {
         debug('%s domains: %O', domains.length, domains);
 
         // Display which configuration file is being used
-        if (domains.length>0) {
+        if (domains.length > 0) {
             console.log('Using configuration file: '.grey + configFilename.yellow);
         }
 
