@@ -120,7 +120,7 @@ if ((process.argv.length === 2) || (argv.help)) {
     help.helpScreen();
 } else if (argv.listResolvers) {
     // Get list of resolvers
-    console.log('%s'.yellow.underline, configFilename);
+    console.log('%s'.yellow, configFilename);
     if (config.options.verbose) {
     // Raw JSON output
         const prettyjson = require('prettyjson');
@@ -128,14 +128,25 @@ if ((process.argv.length === 2) || (argv.help)) {
         console.log(prettyjson.render(config.resolvers));
     } else {
         const columnify = require('columnify');
-        const columns = columnify(config.resolvers);
-        console.log(columns, {
-
+        const columns = columnify(config.resolvers, {
+            config: {
+                'nameServer': {
+                    headingTransform: function() {
+                      return 'Resolver IP Address'.underline
+                    }
+                },
+                'provider': {
+                    headingTransform: function() {
+                      return 'DNS Provider'.underline
+                    }
+                }
+            }
         });
+        console.log(columns);
     }
 } else if (argv.listOptions) {
     // Get the options
-    console.log('%s'.yellow.underline, configFilename);
+    console.log('%s'.yellow, configFilename);
     if (config.options.verbose) {
         // Raw JSON output
         const prettyjson = require('prettyjson');
@@ -144,10 +155,10 @@ if ((process.argv.length === 2) || (argv.help)) {
     } else {
         const columnify = require('columnify');
         console.log('{request}'.yellow);
-        var columns = columnify(config.options.request);
+        var columns = columnify(config.options.request, {columns: ['Option', 'Value']});
         console.log(columns);
         console.log('{question}'.yellow);
-        columns = columnify(config.options.question);
+        columns = columnify(config.options.question, {columns: ['Option', 'Value']});
         console.log(columns);
     }
 
@@ -178,7 +189,6 @@ if ((process.argv.length === 2) || (argv.help)) {
         if (domains.length>0) {
             console.log('Using configuration file: '.grey + configFilename.yellow);
         }
-
 
         // Iterate through the list of domains
         domains.forEach((domain) => {
