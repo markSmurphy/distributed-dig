@@ -13,6 +13,7 @@ Issues DNS lookup requests across multiple DNS servers.
 * Add option `--config` to specify alternative config file via command line.
   * Use `findup-sync` to find config file if not in current directory.
 * Allow for the `--verbose` option displaying the full DNS recursion.
+* Add a column to indicate the first of each unique IP address.
 * Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
 * Add `--certs` switch which instructs `ddig-core.js.resolve()` to extract an x.505 cert from each endpoint, using [get-ssl-certificate](https://www.npmjs.com/package/get-ssl-certificate) and add the details to the `lookupResult` response object.
 
