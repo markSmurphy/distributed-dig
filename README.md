@@ -40,11 +40,11 @@ Issues DNS lookup requests across multiple DNS servers.
   * Debugging
   * Restrictions
 * ~~Add CLI switches to modify default request options:~~
-  * ~~`port` : __53__~~
-  * ~~`type` : __udp__~~
-  * ~~`timeout` : __2500__~~
-  * ~~`try_edns` : __false__~~
-  * `cache` : __false__
+  * ~~`port` : **53**~~
+  * ~~`type` : **udp**~~
+  * ~~`timeout` : **2500**~~
+  * ~~`try_edns` : **false**~~
+  * `cache` : **false**
 * ~~Allow for a combination of `--list-options` and `--verbose` to pretty print `options` section raw json.~~
 * ~~Allow for a combination of `--list-resolvers` and `--verbose` to pretty print `resolvers` section raw json.~~
 * ~~Move **Default Options** json from `distributed-dig.js` into its own file/function for easier maintainability.~~

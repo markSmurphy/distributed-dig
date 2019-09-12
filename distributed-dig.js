@@ -23,7 +23,7 @@ const defaultOptions = {
 };
 
 // Holds the config json
-var config;
+var config = {};
 
 // Initialise empty array of domains
 var domains = [];
@@ -44,6 +44,28 @@ const colours = require('colors');
 var argv = require('yargs')
 .help(false)
 .argv;
+
+function parseResolvers() {
+    try {
+        debug('%s resolvers: %O', config.resolvers.length, config.resolvers);
+
+        // Get maximum column widths
+        for (let i = 0; i < config.resolvers.length; i++) {
+
+            // Maximum resolver length
+            if (config.resolvers[i].nameServer.length > resolverColumnWidth) {
+                resolverColumnWidth = config.resolvers[i].nameServer.length;
+            }
+
+            // Maximum provider length
+            if (config.resolvers[i].provider.length > providerColumnWidth) {
+                providerColumnWidth = config.resolvers[i].provider.length;
+            }
+        }
+    } catch (error) {
+        debug('Exception caught in parseResolvers(): %O', error);
+    }
+}
 
 function getConfig() {
     try {
@@ -88,28 +110,6 @@ function getConfig() {
     }
 }
 
-function parseResolvers() {
-    try {
-        debug('%s resolvers: %O', config.resolvers.length, config.resolvers);
-
-        // Get maximum column widths
-        for (let i = 0; i < config.resolvers.length; i++) {
-
-            // Maximum resolver length
-            if (config.resolvers[i].nameServer.length > resolverColumnWidth) {
-                resolverColumnWidth = config.resolvers[i].nameServer.length;
-            }
-
-            // Maximum provider length
-            if (config.resolvers[i].provider.length > providerColumnWidth) {
-                providerColumnWidth = config.resolvers[i].provider.length;
-            }
-        }
-    } catch (error) {
-        debug('Exception caught in parseResolvers(): %O', error);
-    }
-}
-
 // Initialise configuration
 config = getConfig();
 
@@ -132,12 +132,12 @@ if ((process.argv.length === 2) || (argv.help)) {
             config: {
                 'nameServer': {
                     headingTransform: function() {
-                      return 'Resolver IP Address'.underline
+                      return 'Resolver IP Address'.underline;
                     }
                 },
                 'provider': {
                     headingTransform: function() {
-                      return 'DNS Provider'.underline
+                      return 'DNS Provider'.underline;
                     }
                 }
             }
@@ -166,7 +166,7 @@ if ((process.argv.length === 2) || (argv.help)) {
     try {
         // Loop through command line parameters to extract domains.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'
         var i = 2;
-        const isValidDomain = require('is-valid-domain')
+        const isValidDomain = require('is-valid-domain');
 
         for (i = 2; i < process.argv.length; i++) {
             debug('Extracted "%s" from the command line', process.argv[i]);
@@ -197,7 +197,7 @@ if ((process.argv.length === 2) || (argv.help)) {
                 // Perform a lookup for the current domain via the current resolver
                 ddig.resolve(domain, resolver, config.options, (response) => {
                     debug('Looking up %s against %s (%s) returned: %O', domain, resolver.nameServer, resolver.provider, response);
-                    var result;
+                    var result = {};
                     if (response.success) {
                         // The lookup succeeded.  Extract the properties needed from the response
                         result = [{
