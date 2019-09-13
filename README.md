@@ -10,6 +10,7 @@ Issues DNS lookup requests across multiple DNS servers.
 
 ## To Do
 
+* Update DNS resolvers list
 * Add option `--config` to specify alternative config file via command line.
   * Use `findup-sync` to find config file if not in current directory.
 * Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.

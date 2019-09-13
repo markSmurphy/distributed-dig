@@ -122,7 +122,7 @@ function getConfig() {
         }
 
         // EDNS(0)
-        if (argv.try_edns) {
+        if (argv.edns) {
             config.options.request.try_edns = argv.edns;
         }
 
@@ -239,7 +239,7 @@ if ((process.argv.length === 2) || (argv.help)) {
                         }];
                         if (ddig.isAddressUnique(response.ipAddress)) {
                             // If this is first time we've seen this IP address mark the 'unique' column
-                            result[0].unique = '•'.bold;
+                            result[0].unique = '•';
                         }
 
                         // Add additional 'success' columns if `verbose` is switched on
