@@ -211,9 +211,14 @@ if ((process.argv.length === 2) || (argv.help)) {
         }
         debug('%s domains: %O', domains.length, domains);
 
-        // Display which configuration file is being used
+        // If we've got some domains to lookup, display some useful extra information
         if (domains.length > 0) {
+            // Display which configuration file is being used
             console.log('Using configuration file: '.grey + configFilename.yellow);
+            // If we're going to be outputting verbose columns, check the terminal width is sufficient
+            if ((config.options.verbose) && (process.stdout.columns < 120)) {
+                console.log('When using the --verbose switch you might want to consider increasing your console width to at least 120 (it\'s currently %s)'.cyan, process.stdout.columns);
+            }
         }
 
         // Iterate through the list of domains
@@ -261,7 +266,7 @@ if ((process.argv.length === 2) || (argv.help)) {
                             IPAddress: {minWidth: 15},
                             provider: {minWidth: providerColumnWidth},
                             nameServer: {minWidth: nameServerColumnWidth},
-                            duration: {minWidth: 5}
+                            duration: {minWidth: 7}
                         }
                     });
                     console.log(columns);
