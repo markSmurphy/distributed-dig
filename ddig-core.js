@@ -144,12 +144,13 @@ module.exports = {
     },
 
     isAddressUnique(ipAddress) {
+        debug('isAddressUnique(): Checking if %s has been seen before', ipAddress);
         try {
-            debug('isAddressUnique(): Checking if %s has been seen before', ipAddress)
+            // Loop through previously seen addresses
             for (let i = 0; i < module.exports.isAddressUnique.addresses.length; i++) {
                 debug('Checking against: %s', module.exports.isAddressUnique.addresses[i]);
                 if (ipAddress === module.exports.isAddressUnique.addresses[i]) {
-                    debug('A match has been found. Returning False as %s is not unique', ipAddress)
+                    debug('A match has been found. Returning False as %s is not unique', ipAddress);
                     // IP Address found on the list, so it's not unique; return false
                     return(false);
                 }
@@ -157,7 +158,7 @@ module.exports = {
             debug('%s wasn\'t found on the list so adding it...');
             // We've gone through the whole list without finding the IP address, so add it to the list
             module.exports.isAddressUnique.addresses.push(ipAddress);
-            // Return true as it is unique
+            // Return true as the address is unique
             debug('Returning True');
             return(true);
         } catch (error) {
