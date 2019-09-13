@@ -232,10 +232,16 @@ if ((process.argv.length === 2) || (argv.help)) {
                     if (response.success) {
                         // The lookup succeeded.  Extract the properties needed from the response
                         result = [{
+                            'unique': '',
                             'domain': response.domain,
                             'IPAddress': response.ipAddress.green,
                             'provider': response.provider.grey,
                         }];
+                        if (ddig.isAddressUnique(response.ipAddress)) {
+                            // If this is first time we've seen this IP address mark the 'unique' column
+                            result[0].unique = '•'.bold;
+                        }
+
                         // Add additional 'success' columns if `verbose` is switched on
                         if (config.options.verbose) {
                             //result[0].nameServer = response.nameServer.grey;
@@ -246,6 +252,7 @@ if ((process.argv.length === 2) || (argv.help)) {
                     } else {
                         // The lookup failed
                         result = [{
+                            'unique': '',
                             'domain': response.domain,
                             'IPAddress': response.msg.red,
                             'provider': response.provider.grey
@@ -262,6 +269,7 @@ if ((process.argv.length === 2) || (argv.help)) {
                         showHeaders: false,
                         preserveNewLines: true,
                         config: {
+                            unique: {minWidth:1, maxWidth: 1},
                             domain: {minWidth: domainColumnWidth},
                             IPAddress: {minWidth: 15},
                             provider: {minWidth: providerColumnWidth},
