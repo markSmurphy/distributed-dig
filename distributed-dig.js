@@ -3,6 +3,9 @@
 var debug = require('debug')('ddig');
 debug('[%s] started: %O', __filename, process.argv);
 
+// Platform agnostic new line character
+const EOL =  require('os').EOL;
+
 // Default config file
 const DefaultConfigFilename = 'distributed-dig.json';
 var configFilename = DefaultConfigFilename;
@@ -201,9 +204,9 @@ if ((process.argv.length === 2) || (argv.help)) {
             } else {
                 debug('"%s" is not a valid hostname.  Excluding it from the domains[] array');
                 if (process.argv[i].substring(0, 2) !== '--') {
+                    // Excluding CLI switches beginning with '--' from warnings
                     console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid domain name');
                 }
-
             }
         }
         debug('%s domains: %O', domains.length, domains);
@@ -230,8 +233,10 @@ if ((process.argv.length === 2) || (argv.help)) {
                         }];
                         // Add additional 'success' columns if `verbose` is switched on
                         if (config.options.verbose) {
-                            result[0].nameServer = response.nameServer.grey;
+                            //result[0].nameServer = response.nameServer.grey;
+                            result[0].provider += EOL + response.nameServer.grey;
                             result[0].duration = response.duration + 'ms';
+                            result[0].recursion = response.recursion;
                         }
                     } else {
                         // The lookup failed
@@ -242,22 +247,23 @@ if ((process.argv.length === 2) || (argv.help)) {
                         }];
                         // Add additional 'failed' columns if `verbose` is switched on
                         if (config.options.verbose) {
-                            result[0].nameServer = response.nameServer.grey;
+                            //result[0].nameServer = response.nameServer.grey;
+                            result[0].provider += EOL + response.nameServer.grey;
                             result[0].duration = response.duration + 'ms';
                         }
                     }
                     // Display the result
-                    let columns = columnify(result,
-                        {showHeaders: false,
-                            config: {
-                                domain: {minWidth: domainColumnWidth},
-                                IPAddress: {minWidth: 15},
-                                provider: {minWidth: providerColumnWidth},
-                                nameServer: {minWidth: nameServerColumnWidth},
-                                duration: {minWidth: 5}
-                            }
+                    let columns = columnify(result, {
+                        showHeaders: false,
+                        preserveNewLines: true,
+                        config: {
+                            domain: {minWidth: domainColumnWidth},
+                            IPAddress: {minWidth: 15},
+                            provider: {minWidth: providerColumnWidth},
+                            nameServer: {minWidth: nameServerColumnWidth},
+                            duration: {minWidth: 5}
                         }
-                    );
+                    });
                     console.log(columns);
                 });
             });

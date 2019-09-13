@@ -1,4 +1,4 @@
-// Exports one public function, resolve(), which accepts multiple domains and multiple resolvers.
+// Exports a public function, resolve(), which accepts multiple domains and multiple resolvers.
 // The other local functions handle the nested iteration to resolve each domain against each resolver.
 const debug = require('debug')('ddig');
 debug('Entry: [%s]', __filename);
@@ -12,6 +12,9 @@ const dns = require('native-dns-multisocket');
 // Use 'moment' to do time difference calculations
 const moment = require('moment');
 
+// Platform agnostic new line character
+const EOL =  require('os').EOL;
+
 module.exports = {
     resolve(domain, resolver, options, callback) {
         const startTime = moment();
@@ -20,6 +23,7 @@ module.exports = {
         var lookupResult = {
             'domain': domain,
             'ipAddress': null,
+            'recursion': null,
             'answer': null,
             'nameServer': resolver.nameServer,
             'provider': resolver.provider,
@@ -78,7 +82,6 @@ module.exports = {
             req.on('message', function (err, answer) {
                 if (err) {
                     debug('Error received: %O', err);
-
                     lookupResult.msg = 'An error occurred';
                     lookupResult.error = JSON.stringify(err);
                     lookupResult.success=false;
@@ -93,6 +96,7 @@ module.exports = {
                     // Populate lookup result object
                     lookupResult.answer = JSON.stringify(answer.answer);
                     lookupResult.ipAddress = module.exports.parseAnswer(answer.answer, {getIpAddress: true});
+                    lookupResult.recursion = module.exports.parseAnswer(answer.answer, {getRecursion: true});
                     lookupResult.msg = 'Success';
                     lookupResult.success=true;
                     lookupResult.duration=moment(moment()).diff(startTime);
@@ -105,27 +109,37 @@ module.exports = {
     },
 
     parseAnswer(answer, options) {
-        if ((options===null) || (options.getIpAddress)) {
-            // Just get the IP address; i.e. the A record at the end.
-            for (let i =0; 1 < answer.length; i++) {
-                if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
-                    return(answer[i].address);
+        debug('parseAnswer() called with OPTIONS: %O ANSWER: %O', options, answer);
+        var response = '';
+        try {
+            if ((options===null) || (options.getIpAddress)) {
+                // Just get the IP address; i.e. the A record at the end.
+                for (let i = 0; i < answer.length; i++) {
+                    if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
+                        response = answer[i].address;
+                    }
+                }
+            } else if (options.getRecursion) {
+                // Get the whole nested recursion
+                for (let i = 0; i < answer.length; i++){
+                    // Check if the answer element has a "data" property (which a CNAME record will have)
+                    if(Object.prototype.hasOwnProperty.call(answer[i], 'data')){
+                        response = response.concat(answer[i].name, ' --> ', answer[i].data, EOL);
+                    // Check if the answer element has an "address" property (which an A record will have)
+                    } else if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
+                        response = response.concat(answer[i].name, ' --> ', answer[i].address, EOL);
+                    } else {
+                       debug('Warning: There is an unhandled element [%s] in answer array: %O', i, answer[i]);
+                    }
                 }
             }
+
+            debug('parseAnswer() returning: %s', response);
+            return(response);
+
+        } catch (error) {
+            debug('parseAnswer() caught an exception: %O', error);
+            return('error parsing answer');
         }
-        return('error');
-        /*
-        for (var i = 0; i < answer.length; i++){
-            // Check if the answer hop has a data property (which a CNAME record will have)
-            if(Object.prototype.hasOwnProperty.call(answer[i], 'data')){
-               console.log('%s --> %s', answer[i].name, answer[i].data);
-            // Check if the answer hop has an address property (which an A record will have)
-            } else if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
-               console.log('%s --> %s', answer[i].name, answer[i].address);
-            } else {
-               console.log('Couldn\'t find either a [data] nor an [address] element in the answer\'s %s hop', i);
-            }
-        }
-        */
     }
 };
