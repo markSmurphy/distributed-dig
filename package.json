@@ -1,7 +1,7 @@
 {
   "name": "distributed-dig",
-  "version": "0.1.1",
-  "description": "Sends DNS lookup requests across multiple DNS servers.",
+  "version": "1.0.0",
+  "description": "Issues DNS lookup requests across multiple DNS servers and collates the results.",
   "main": "distributed-dig.js",
   "scripts": {
     "test": "node distributed-dig.js www.asos.com"
@@ -47,6 +47,6 @@
     "yargs": "^14.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.3.0"
+    "eslint": "^6.4.0"
   }
 }

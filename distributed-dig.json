@@ -93,10 +93,6 @@
         "provider": "United States"
       },
       {
-        "nameServer": "189.38.95.95",
-        "provider": "Brazil"
-      },
-      {
         "nameServer": "218.38.30.15",
         "provider": "South Korea"
       },
@@ -105,8 +101,12 @@
         "provider": "Australia"
       },
       {
-        "nameServer": "2a05:dfc7:5::5353",
-        "provider": "Antarctica"
+        "nameServer": "190.220.8.141",
+        "provider": "Argentina"
+      },
+      {
+        "nameServer": "201.147.98.2",
+        "provider": "Mexico"
       }
     ]
   }
