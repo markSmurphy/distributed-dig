@@ -33,12 +33,12 @@ npm install -g distributed-dig
 ddig domain [domain [domain] ...] [options]
 ```
 
-![`ddig --help`](https://marksmurphy.github.io/img/ddig.help.gif)
-
 ### Options
 
+The following options are available:
+
 ```text
-   --port <number>                  Specify the DNS port [`53`]
+   --port <number>                  Specify the DNS port [53]
    --protocol <upd|tcp>             Specify the DNS protocol [udp]
    --timeout <number>               Specify the DNS timeout in milliseconds [2500]
    --edns <true|false>              Enable or disable EDNS(0) [false]
@@ -48,6 +48,66 @@ ddig domain [domain [domain] ...] [options]
    --version                        Display version number
    --help                           Display this help
 ```
+
+#### help
+
+Displays the help screen:
+
+![`ddig --help`](https://marksmurphy.github.io/img/ddig.help.gif)
+
+#### port
+
+Specify the TCP/UDP port tro use when connecting to the DNS resolver.
+Default: `53`
+
+#### protocol
+
+Specify whether to use UDP or TCP when connecting to the DNS resolver.
+Default: `udp`
+
+#### timeout
+
+Specifies the timeout in milliseconds to wait for a response from each DNS resolver.
+Default: `2500` (_2.5 seconds_)
+
+#### edns
+
+Enables [EDNS(0)](https://en.wikipedia.org/wiki/Extension_mechanisms_for_DNS)
+Default: `false` (_disabled))
+
+With EDNS(0) enabled, if an upstream resolver doesn't support it then the standard DNS will be used as a fallback.
+
+_Even though EDNS is support by ~90% of resolvers on the internet [^1], it is disabled by default in `ddig` as it may cause the resolver to return the IP address it considers closest to you, which is counterproductive to the purpose of querying many geographically distributed DNS resolvers._
+
+[^1]: [Internet Systems Consortium - Partial EDNS Compliance Hampers Deployment of New DNS Features](https://www.isc.org/blogs/partial-edns-compliance-hampers-deployment-of-new-dns-features/)
+
+#### list-resolvers
+
+Lists the resolvers configured in the `distributed-dig.json` config file:
+
+![ddig --list-resolvers](https://marksmurphy.github.io/img/ddig.list-resolvers.gif)
+
+#### list-options
+
+Lists the options configured in the `distributed-dig.json` config file:
+
+![ddig --list-options](https://marksmurphy.github.io/img/ddig.list-options.gif)
+
+#### verbose
+
+Switches on verbose mode which outputs additional fields:
+
+* Full recursive answer (i.e. nested `cname` records)
+* Resolver IP Address
+* Response time
+
+![ddig www.asos.com --verbose](https://marksmurphy.github.io/img/ddig.single.domain.verbose.gif)
+
+`--verbose` also modifies the `--list-resolvers` and `--list-options` switches.
+
+#### version
+
+Prints out the utility's version number.
 
 ## Examples
 
@@ -64,6 +124,8 @@ ddig domain [domain [domain] ...] [options]
 * Add the option `--config` to specify alternative config file via command line.
   * Use `findup-sync` to find config file if not in current directory.
 * Add the option `--unique` to display only the first occurrence of each unique IP address.
+* Make `list-resolvers` and `list-options` reporting of the config file consistent.  Perhaps have a `printConfigFile()` function.
+* Add more _examples_ to the `--help` screen.
 * Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
 * Add `--certs` switch which instructs `ddig-core.js.resolve()` to extract an x.505 cert from each endpoint, using [get-ssl-certificate](https://www.npmjs.com/package/get-ssl-certificate) and add the details to the `lookupResult` response object.
 
@@ -83,9 +145,9 @@ ddig domain [domain [domain] ...] [options]
   * ~~Badges~~
   * ~~Quick Start~~
   * ~~Overview~~
-  * Description
-  * Installation
-  * Usage
+  * ~~Installation~~
+  * ~~Usage~~
+    * ~~Options~~
   * Examples
   * Features
   * Configuration File(s)
@@ -100,7 +162,7 @@ ddig domain [domain [domain] ...] [options]
 * ~~Add a column to indicate the first of each unique IP address.~~
 * ~~Add a warning when terminal width is narrow and using --verbose switch.~~
 * ~~Allow for the `--verbose` option displaying the full DNS recursion.~~
-* ~~ Add a `--verbose` switch which displays more columns.~~
+* ~~Add a `--verbose` switch which displays more columns.~~
 * ~~Allow for a combination of `--list-options` and `--verbose` to pretty print `options` section raw json.~~
 * ~~Allow for a combination of `--list-resolvers` and `--verbose` to pretty print `resolvers` section raw json.~~
 * ~~Move **Default Options** json from `distributed-dig.js` into its own file/function for easier maintainability.~~
