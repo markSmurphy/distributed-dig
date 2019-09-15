@@ -8,8 +8,11 @@ auth.edgerc
 # Visual Studio Code
 .vscode/*
 
-# Local batch file eulating shebang
+# Local batch file emulating shebang
 ddig.cmd
+
+# Screenshots folder
+screenshots/*
 
 # Logs
 logs

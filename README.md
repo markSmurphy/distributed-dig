@@ -8,9 +8,56 @@
 
 ## Quick Start
 
+* Install globally using `npm install -g distributed-dig`
+* Run `ddig [domain [domain] ...] [options]`
+
+![`ddig [domain]`](https://marksmurphy.github.io/img/ddig.single.domain.gif)
+
 ## Overview
 
-Issues multiple DNS lookup requests across a multitude of DNS resolvers.  Useful for checking if a DNS record has been fully propagated, or for querying the origins behind an [AWS Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html) / [Azure Traffic Manager](https://azure.microsoft.com/en-gb/services/traffic-manager/) record (*or any other DNS-based load balancing solution*).
+Issues multiple DNS lookup requests across a multitude of DNS resolvers.
+
+Useful for checking if a DNS record has been fully propagated, or for querying the origins behind an [AWS Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html) / [Azure Traffic Manager](https://azure.microsoft.com/en-gb/services/traffic-manager/) record (*or any other DNS-based load balancing solution*).
+
+## ~~ Description~~
+
+## Installation
+
+```text
+npm install -g distributed-dig
+```
+
+## Usage
+
+```text
+ddig domain [domain [domain] ...] [options]
+```
+
+![`ddig --help`](https://marksmurphy.github.io/img/ddig.help.gif)
+
+### Options
+
+```text
+   --port <number>                  Specify the DNS port [`53`]
+   --protocol <upd|tcp>             Specify the DNS protocol [udp]
+   --timeout <number>               Specify the DNS timeout in milliseconds [2500]
+   --edns <true|false>              Enable or disable EDNS(0) [false]
+   --list-resolvers                 List resolvers configured in config file
+   --list-options                   List DNS request options configured in config file
+   --verbose                        Outputs more information
+   --version                        Display version number
+   --help                           Display this help
+```
+
+## Examples
+
+## Features
+
+### Configuration File(s)
+
+## Debugging
+
+## Restrictions
 
 ## To Do
 
@@ -34,8 +81,8 @@ Issues multiple DNS lookup requests across a multitude of DNS resolvers.  Useful
 * Allow for `--certs` *and* `--verbose` to display more x.509 properties.
 * Update `README.md` sections:
   * ~~Badges~~
-  * Quick Start
-  * Overview
+  * ~~Quick Start~~
+  * ~~Overview~~
   * Description
   * Installation
   * Usage
@@ -62,19 +109,3 @@ Issues multiple DNS lookup requests across a multitude of DNS resolvers.  Useful
 * ~~Refactor to async with closures.~~
 * ~~Format output into columns~~
 * ~~Update DNS resolvers list.~~
-
-## Description
-
-## Installation
-
-## Usage
-
-## Examples
-
-## Features
-
-### Configuration File(s)
-
-## Debugging
-
-## Restrictions
