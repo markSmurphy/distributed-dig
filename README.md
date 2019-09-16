@@ -197,6 +197,8 @@ Resolvers are configured in an array with each resolver having a `nameServer` el
 ]
 ```
 
+You can find a list of public DNS servers [here](https://public-dns.info/) and tailor the configured list for your own requirements.
+
 ## Debugging
 
 `distributed-dig` uses the npm package [debug](https://www.npmjs.com/package/debug "www.npmjs.com").  If you set the environment variable `debug` to `ddig` you'll see full debug output.
