@@ -129,7 +129,7 @@ function getConfig() {
         }
 
         // Read the configuration file
-        let rawJSON = fs.readFileSync(configFilePath + '\\' + configFileName);
+        let rawJSON = fs.readFileSync(configFilePath + '//' + configFileName);
         let config = JSON.parse(rawJSON);
         debug('getConfig() read the configuration file [%s]: %O',configFileName, config);
 
