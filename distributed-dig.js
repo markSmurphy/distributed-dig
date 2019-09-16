@@ -107,7 +107,7 @@ function getConfig() {
             debug('Looking for [%s] in [%s] ...', configFileName, homedir);
 
             // Check for the config file in the "home" directory
-            if (fs.existsSync(homedir + '\\' + configFileName))
+            if (fs.existsSync(homedir + '//' + configFileName))
             {
                 debug('[%s] found in [%s]', configFileName, homedir);
                 // Config file found in homedir so remember the path
@@ -115,7 +115,7 @@ function getConfig() {
 
             } else {
                 // Check for the config file in the application's root directory
-                if (fs.existsSync(configFilePath + '\\' + configFileName)) {
+                if (fs.existsSync(configFilePath + '//' + configFileName)) {
                     // Config file found in application root directory
                     debug('[%s] found in [%s]', configFileName, configFilePath);
                 } else {
