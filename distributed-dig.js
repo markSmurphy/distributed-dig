@@ -6,9 +6,12 @@ debug('[%s] started: %O', __filename, process.argv);
 // Platform agnostic new line character
 const EOL =  require('os').EOL;
 
-// Default config file
-const DefaultConfigFilename = 'distributed-dig.json';
-var configFilename = DefaultConfigFilename;
+// Default config file & location
+const DefaultConfigFileName = 'distributed-dig.json';
+var configFileName = DefaultConfigFileName;
+const path = require('path');
+var configFilePath = path.resolve(__dirname);
+const homedir = require('os').homedir();
 
 // Default DNS TCP options
 // eslint-disable-next-line no-unused-vars
@@ -92,9 +95,43 @@ function getProviderColumnWidth(resolvers) {
 function getConfig() {
     try {
         const fs = require('fs');
-        let rawJSON = fs.readFileSync(configFilename);
+
+        debug('Looking for [%s] in [%s] ...', configFileName, process.cwd());
+        // Check if the config file exists in current directory
+        if (fs.existsSync(configFileName)) {
+            // Config file found in current directory so remember the path
+            debug('[%s] found in [%s]', configFileName, process.cwd());
+            configFilePath = process.cwd();
+
+        } else {
+            debug('Looking for [%s] in [%s] ...', configFileName, homedir);
+
+            // Check for the config file in the "home" directory
+            if (fs.existsSync(homedir + '\\' + configFileName))
+            {
+                debug('[%s] found in [%s]', configFileName, homedir);
+                // Config file found in homedir so remember the path
+                configFilePath = homedir;
+
+            } else {
+                // Check for the config file in the application's root directory
+                if (fs.existsSync(configFilePath + '\\' + configFileName)) {
+                    // Config file found in application root directory
+                    debug('[%s] found in [%s]', configFileName, configFilePath);
+                } else {
+                    console.log('Error:'.red + ' The config file ' + configFileName.yellow + ' could not be found in:');
+                    console.log(process.cwd());
+                    console.log(homedir);
+                    console.log(configFilePath);
+                    return(false);
+                }
+            }
+        }
+
+        // Read the configuration file
+        let rawJSON = fs.readFileSync(configFilePath + '\\' + configFileName);
         let config = JSON.parse(rawJSON);
-        debug('getConfig() read the configuration file [%s]: %O',configFilename, config);
+        debug('getConfig() read the configuration file [%s]: %O',configFileName, config);
 
         // Parse list of Resolvers to acquire column widths
         nameServerColumnWidth = getNameServerColumnWidth(config.resolvers);
@@ -128,7 +165,7 @@ function getConfig() {
 
         return(config);
     } catch (e) {
-        debug('An error occurred reading the config file [%s]: %O', configFilename, e);
+        debug('An error occurred reading the config file [%s]: %O', configFileName, e);
         return(false);
     }
 }
@@ -143,7 +180,7 @@ if ((process.argv.length === 2) || (argv.help)) {
     help.helpScreen();
 } else if (argv.listResolvers) {
     // Get list of resolvers
-    console.log('Using configuration file: '.grey + configFilename.yellow);
+    console.log('Using configuration file: '.grey + configFileName.yellow + ' ['.grey + configFilePath.grey + ']'.grey );
     if (config.options.verbose) {
     // Raw JSON output
         const prettyjson = require('prettyjson');
@@ -169,7 +206,7 @@ if ((process.argv.length === 2) || (argv.help)) {
     }
 } else if (argv.listOptions) {
     // Get the options
-    console.log('Using configuration file: '.grey + configFilename.yellow);
+    console.log('Using configuration file: '.grey + configFileName.yellow + ' ['.grey + configFilePath.grey + ']'.grey );
     if (config.options.verbose) {
         // Raw JSON output
         const prettyjson = require('prettyjson');
@@ -214,7 +251,7 @@ if ((process.argv.length === 2) || (argv.help)) {
         // If we've got some domains to lookup, display some useful extra information
         if (domains.length > 0) {
             // Display which configuration file is being used
-            console.log('Using configuration file: '.grey + configFilename.yellow);
+            console.log('Using configuration file: '.grey + configFileName.yellow + ' ['.grey + configFilePath.grey + ']'.grey );
             // If we're going to be outputting verbose columns, check the terminal width is sufficient
             if ((config.options.verbose) && (process.stdout.columns < 130)) {
                 console.log('When using the --verbose switch you might want to consider increasing your console width to at least 130 (it\'s currently %s)'.cyan, process.stdout.columns);

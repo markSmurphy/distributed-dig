@@ -155,7 +155,11 @@ If you use the `--verbose` switch and have a terminal window that's narrower tha
 
 ## Configuration File
 
-All Options and Resolvers are configured in `distributed-dig.json` file.
+All Options and Resolvers are configured in `distributed-dig.json` file.  This file can exist in any of the following locations:
+
+* The current working directory - `node -p process.cwd()`
+* The home directory - `node -p require('os').homedir()`
+* The application's root directory (i.e. the same directory as `distributed-dig.js`)
 
 ### Request Options
 
