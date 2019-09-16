@@ -30,10 +30,13 @@ module.exports = {
         console.log('   ' + '--list-resolvers                 ' + 'List resolvers configured in config file'.grey);
         console.log('   ' + '--list-options                   ' + 'List DNS request options configured in config file'.grey);
         console.log('   ' + '--verbose                        ' + 'Outputs more information'.grey);
+        console.log('   ' + '--no-color                       ' + 'Switches off colour output'.grey);
         console.log('   ' + '--version                        ' + 'Display version number'.grey);
         console.log('   ' + '--help                           ' + 'Display this help'.grey);
         console.log(endOfLine);
-        console.log('EXAMPLE:'.grey);
+        console.log('EXAMPLES:'.grey);
         console.log('   ddig www.asos.com');
+        console.log('   ddig www.asos.com --verbose');
+        console.log('   ddig www.asos.com secure.asos.com --timeout 5000');
     }
   };

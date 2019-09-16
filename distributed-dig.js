@@ -143,11 +143,11 @@ if ((process.argv.length === 2) || (argv.help)) {
     help.helpScreen();
 } else if (argv.listResolvers) {
     // Get list of resolvers
-    console.log('%s'.yellow, configFilename);
+    console.log('Using configuration file: '.grey + configFilename.yellow);
     if (config.options.verbose) {
     // Raw JSON output
         const prettyjson = require('prettyjson');
-        console.log('{resolvers}'.yellow);
+        console.log('Resolvers'.yellow);
         console.log(prettyjson.render(config.resolvers));
     } else {
         const columnify = require('columnify');
@@ -169,11 +169,11 @@ if ((process.argv.length === 2) || (argv.help)) {
     }
 } else if (argv.listOptions) {
     // Get the options
-    console.log('%s'.yellow, configFilename);
+    console.log('Using configuration file: '.grey + configFilename.yellow);
     if (config.options.verbose) {
         // Raw JSON output
         const prettyjson = require('prettyjson');
-        console.log('{options}'.yellow);
+        console.log('Options'.yellow);
         console.log(prettyjson.render(config.options));
     } else {
         const columnify = require('columnify');
@@ -216,8 +216,8 @@ if ((process.argv.length === 2) || (argv.help)) {
             // Display which configuration file is being used
             console.log('Using configuration file: '.grey + configFilename.yellow);
             // If we're going to be outputting verbose columns, check the terminal width is sufficient
-            if ((config.options.verbose) && (process.stdout.columns < 120)) {
-                console.log('When using the --verbose switch you might want to consider increasing your console width to at least 120 (it\'s currently %s)'.cyan, process.stdout.columns);
+            if ((config.options.verbose) && (process.stdout.columns < 130)) {
+                console.log('When using the --verbose switch you might want to consider increasing your console width to at least 130 (it\'s currently %s)'.cyan, process.stdout.columns);
             }
         }
 

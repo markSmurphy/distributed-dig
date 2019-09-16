@@ -19,9 +19,9 @@ Issues multiple DNS lookup requests across a multitude of DNS resolvers.
 
 Useful for checking if a DNS record has been fully propagated, or for querying the origins behind an [AWS Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html) / [Azure Traffic Manager](https://azure.microsoft.com/en-gb/services/traffic-manager/) record (*or any other DNS-based load balancing solution*).
 
-## ~~ Description~~
-
 ## Installation
+
+Installing globally is recommended:
 
 ```text
 npm install -g distributed-dig
@@ -33,7 +33,7 @@ npm install -g distributed-dig
 ddig domain [domain [domain] ...] [options]
 ```
 
-### Options
+## Options
 
 The following options are available:
 
@@ -45,55 +45,55 @@ The following options are available:
    --list-resolvers                 List resolvers configured in config file
    --list-options                   List DNS request options configured in config file
    --verbose                        Outputs more information
+   --no-color                       Switches off colour output
    --version                        Display version number
    --help                           Display this help
 ```
 
-#### help
+### help
 
 Displays the help screen:
 
 ![`ddig --help`](https://marksmurphy.github.io/img/ddig.help.gif)
 
-#### port
+### port
 
 Specify the TCP/UDP port tro use when connecting to the DNS resolver.
 Default: `53`
 
-#### protocol
+### protocol
 
 Specify whether to use UDP or TCP when connecting to the DNS resolver.
 Default: `udp`
 
-#### timeout
+### timeout
 
 Specifies the timeout in milliseconds to wait for a response from each DNS resolver.
-Default: `2500` (_2.5 seconds_)
+Default: `2500` (*2.5 seconds*)
 
-#### edns
+### edns
 
 Enables [EDNS(0)](https://en.wikipedia.org/wiki/Extension_mechanisms_for_DNS)
 Default: `false` (_disabled))
 
 With EDNS(0) enabled, if an upstream resolver doesn't support it then the standard DNS will be used as a fallback.
-
-_Even though EDNS is support by ~90% of resolvers on the internet [^1], it is disabled by default in `ddig` as it may cause the resolver to return the IP address it considers closest to you, which is counterproductive to the purpose of querying many geographically distributed DNS resolvers._
+*Even though EDNS is support by ~90% of resolvers on the internet [^1], it is disabled by default in `ddig` as it may cause the resolver to return the IP address it considers closest to you, which is counterproductive to the purpose of querying many geographically distributed DNS resolvers.*
 
 [^1]: [Internet Systems Consortium - Partial EDNS Compliance Hampers Deployment of New DNS Features](https://www.isc.org/blogs/partial-edns-compliance-hampers-deployment-of-new-dns-features/)
 
-#### list-resolvers
+### list-resolvers
 
 Lists the resolvers configured in the `distributed-dig.json` config file:
 
 ![ddig --list-resolvers](https://marksmurphy.github.io/img/ddig.list-resolvers.gif)
 
-#### list-options
+### list-options
 
 Lists the options configured in the `distributed-dig.json` config file:
 
 ![ddig --list-options](https://marksmurphy.github.io/img/ddig.list-options.gif)
 
-#### verbose
+### verbose
 
 Switches on verbose mode which outputs additional fields:
 
@@ -105,69 +105,122 @@ Switches on verbose mode which outputs additional fields:
 
 `--verbose` also modifies the `--list-resolvers` and `--list-options` switches.
 
-#### version
+### no-color
 
-Prints out the utility's version number.
+If your terminal has problems rendering the colour output then you can switch it off by using `--no-color`
+
+### version
+
+Prints out distributed-dig's version number.
 
 ## Examples
 
+### Lookup a single domain
+
+* List the IP address returned for `www.asos.com` from each of the configured resolver:
+
+```text
+ddig www.asos.com
+```
+
+### Lookup a single domain with verbose enabled
+
+* List the IP address and full recursive path returned for `www.asos.com` from each of the configured resolver:
+
+```text
+ddig www.asos.com --verbose
+```
+
+### Lookup multiple domains with an increased timeout
+
+* List the IP addresses returned for `www.asos.com`, `my.asos.com` & `secure.asos.com` from each of the configured resolver with a 5 second timeout:
+
+```text
+ddig www.asos.com my.asos.com secure.asos.com --timeout 5000
+```
+
 ## Features
 
-### Configuration File(s)
+### Unique IP Address Identifier
+
+The first occurrence of each unique IP address is marked by a bullet point:
+
+![ddig unique IP Address Identifier](https://marksmurphy.github.io/img/ddig.unique.png)
+
+### Column Width Warning
+
+If you use the `--verbose` switch and have a terminal window that's narrower than 130 columns you'll see a warning:
+
+![ddig column width warning](https://marksmurphy.github.io/img/ddig.width.warning.png)
+
+## Configuration File
+
+All Options and Resolvers are configured in `distributed-dig.json` file.
+
+### Request Options
+
+The default options are:
+
+```json
+"options": {
+    "request": {
+      "port": 53,
+      "type": "udp",
+      "timeout": 2500,
+      "try_edns": false,
+      "cache": false
+    },
+    "question": {
+      "type": "A"
+    }
+}
+```
+
+### DNS Resolvers
+
+Resolvers are configured in an array with each resolver having a `nameServer` element which should be the IPv4 or IPv6 address, and a `provider` element which is just a freeform text label:
+
+```json
+"resolvers": [
+    {
+      "nameServer": "208.67.222.222",
+      "provider": "OpenDNS (Primary)"
+    },
+    {
+      "nameServer": "208.67.220.220",
+      "provider": "OpenDNS (Secondary)"
+    },
+    {
+      "nameServer": "217.199.173.113",
+      "provider": "United Kingdom"
+    }
+]
+```
 
 ## Debugging
 
-## Restrictions
+`distributed-dig` uses the npm package [debug](https://www.npmjs.com/package/debug "www.npmjs.com").  If you set the environment variable `debug` to `ddig` you'll see full debug output.
 
-## To Do
+### Windows
 
-* Add the option `--config` to specify alternative config file via command line.
-  * Use `findup-sync` to find config file if not in current directory.
-* Add the option `--unique` to display only the first occurrence of each unique IP address.
-* Make `list-resolvers` and `list-options` reporting of the config file consistent.  Perhaps have a `printConfigFile()` function.
-* Add more _examples_ to the `--help` screen.
-* Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
-* Add `--certs` switch which instructs `ddig-core.js.resolve()` to extract an x.505 cert from each endpoint, using [get-ssl-certificate](https://www.npmjs.com/package/get-ssl-certificate) and add the details to the `lookupResult` response object.
+```text
+set debug=ddig
+```
 
-    ```javascript
-    var sslCertificate = require('get-ssl-certificate');
+### Linux
 
-    sslCertificate.get('www.asos.com').then(function (certificate) {
-        //console.log(certificate);
-        console.log('Common Name: ' + certificate.subject.CN);
-        console.log('Subject Alt Name: ' + certificate.subjectaltname);
-        console.log('Valid To: ' + certificate.valid_to);
-    });
-    ```
+```text
+DEBUG=ddig
+```
 
-* Allow for `--certs` *and* `--verbose` to display more x.509 properties.
-* Update `README.md` sections:
-  * ~~Badges~~
-  * ~~Quick Start~~
-  * ~~Overview~~
-  * ~~Installation~~
-  * ~~Usage~~
-    * ~~Options~~
-  * Examples
-  * Features
-  * Configuration File(s)
-  * Debugging
-  * Restrictions
-* ~~Add CLI switches to modify default request options:~~
-  * ~~`port` : **53**~~
-  * ~~`type` : **udp**~~
-  * ~~`timeout` : **2500**~~
-  * ~~`try_edns` : **false**~~
-  * `cache` : **false**
-* ~~Add a column to indicate the first of each unique IP address.~~
-* ~~Add a warning when terminal width is narrow and using --verbose switch.~~
-* ~~Allow for the `--verbose` option displaying the full DNS recursion.~~
-* ~~Add a `--verbose` switch which displays more columns.~~
-* ~~Allow for a combination of `--list-options` and `--verbose` to pretty print `options` section raw json.~~
-* ~~Allow for a combination of `--list-resolvers` and `--verbose` to pretty print `resolvers` section raw json.~~
-* ~~Move **Default Options** json from `distributed-dig.js` into its own file/function for easier maintainability.~~
-* ~~Move all options to `distributed-dig.json`.~~
-* ~~Output config file being used to avoid confusion.~~
-* ~~Refactor to async with closures.~~
-* ~~Format output into columns~~
-* ~~Update DNS resolvers list.~~
+### Powershell
+
+```text
+$env:debug="ddig"
+```
+
+## FAQ
+
+**Question:** What terminal/console are you using in the screen shots?
+
+**Answer:** A pre-release of Microsoft's new tabbed [Windows Terminal](https://github.com/microsoft/terminal) which has many excellent features, and the ability to [configure a background image](https://www.howtogeek.com/426346/how-to-customize-the-new-windows-terminal-app/).
