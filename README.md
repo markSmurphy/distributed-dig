@@ -74,7 +74,7 @@ Default: `2500` (*2.5 seconds*)
 ### edns
 
 Enables [EDNS(0)](https://en.wikipedia.org/wiki/Extension_mechanisms_for_DNS)
-Default: `false` (_disabled_)
+Default: `false` (*disabled*)
 
 With EDNS(0) enabled, if an upstream resolver doesn't support it then the standard DNS will be used as a fallback.
 *Even though EDNS is support by ~90% of resolvers on the internet [^1], it is disabled by default in `ddig` as it may cause the resolver to return the IP address it considers closest to you, which is counterproductive to the purpose of querying many geographically distributed DNS resolvers.*
