@@ -123,6 +123,8 @@ Prints out distributed-dig's version number.
 ddig www.asos.com
 ```
 
+![ddig www.asos.com](https://marksmurphy.github.io/img/ddig.example.01.png)
+
 ### Lookup a single domain with verbose enabled
 
 * List the IP address and full recursive path returned for `www.asos.com` from each of the configured resolver:
@@ -131,13 +133,17 @@ ddig www.asos.com
 ddig www.asos.com --verbose
 ```
 
+![ddig www.asos.com --verbose](https://marksmurphy.github.io/img/ddig.example.02.png)
+
 ### Lookup multiple domains with an increased timeout
 
-* List the IP addresses returned for `www.asos.com`, `my.asos.com` & `secure.asos.com` from each of the configured resolver with a 5 second timeout:
+* List the IP addresses returned for both `www.asos.com` & `secure.asos.com` from each of the configured resolver with a 5 second timeout:
 
 ```text
 ddig www.asos.com my.asos.com secure.asos.com --timeout 5000
 ```
+
+![ddig www.asos.com my.asos.com secure.asos.com](https://marksmurphy.github.io/img/ddig.example.03.png)
 
 ## Features
 

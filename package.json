@@ -1,7 +1,7 @@
 {
   "name": "distributed-dig",
-  "version": "1.0.4",
-  "description": "Issues DNS lookup requests across multiple DNS servers and collates the results.",
+  "version": "1.1.0",
+  "description": "A utility which makes DNS lookup requests across multiple DNS resolvers and collates the results.",
   "main": "distributed-dig.js",
   "scripts": {
     "test": "node distributed-dig.js www.asos.com"
@@ -27,7 +27,8 @@
     "fqdn",
     "cli",
     "address",
-    "edns"
+    "edns",
+    "ddig"
   ],
   "author": "Mark Murphy",
   "license": "MIT",
