@@ -115,4 +115,4 @@ const defaultConfig = {
       printDefaultConfig() {
           console.log(JSON.stringify(defaultConfig));
       }
-  }
+  };
