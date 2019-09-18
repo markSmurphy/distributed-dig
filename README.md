@@ -93,9 +93,13 @@ Lists the options configured in the `distributed-dig.json` config file:
 
 ![ddig --list-options](https://marksmurphy.github.io/img/ddig.list-options.gif)
 
+### list-defaults
+
+Prints out a sample default config file in raw json.  Pipe it to a file for an initial customised configuration file.
+
 ### verbose
 
-Switches on verbose mode which outputs additional fields:
+Switches on verbose mode which outputs the following additional fields:
 
 * Full recursive answer (i.e. nested `cname` records)
 * Resolver IP Address
@@ -230,6 +234,26 @@ DEBUG=ddig
 ```text
 $env:debug="ddig"
 ```
+
+## Changelog
+
+### [Unreleased] - TBA
+
+#### Added
+
+* New `--list-defaults` option which prints a default config json file to the console, for use as an initial custom config.
+
+#### Changed
+
+* Improved input validation for `--timeout` & `--protocol`
+
+### [1.0.4] - September 17<sup>th</sup> 2019
+
+* Fixed file system path separator problem when attempting to locate a config file on Linux systems.
+
+### [1.0.0] - September 17<sup>th</sup> 2019
+
+* Initial Release.
 
 ## FAQ
 

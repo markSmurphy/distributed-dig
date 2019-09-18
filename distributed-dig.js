@@ -210,7 +210,10 @@ if (config) {
             columns = columnify(config.options.question, {columns: ['Option', 'Value']});
             console.log(columns);
         }
-
+    } else if (argv.listDefaults) {
+        //
+        const defaults = require('./ddig-defaults');
+        defaults.printDefaultConfig();
     } else {
         try {
             // Loop through command line parameters to extract domains.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'
