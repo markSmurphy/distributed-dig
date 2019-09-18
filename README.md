@@ -38,23 +38,19 @@ ddig domain [domain [domain] ...] [options]
 The following options are available:
 
 ```text
-   --port <number>                  Specify the DNS port [53]
-   --protocol <upd|tcp>             Specify the DNS protocol [udp]
-   --timeout <number>               Specify the DNS timeout in milliseconds [2500]
-   --edns <true|false>              Enable or disable EDNS(0) [false]
-   --list-resolvers                 List resolvers configured in config file
-   --list-options                   List DNS request options configured in config file
-   --verbose                        Outputs more information
-   --no-color                       Switches off colour output
-   --version                        Display version number
-   --help                           Display this help
+--port <number>                  Specify the DNS port [53]
+--protocol <upd|tcp>             Specify the DNS protocol [udp]
+--timeout <number>               Specify the DNS timeout in milliseconds [2500]
+--edns <true|false>              Enable or disable EDNS(0) [false]
+--config <filename>              Specify an alternative configuration file
+--list-resolvers                 List resolvers configured in config file
+--list-options                   List DNS request options configured in config file
+--list-defaults                  Print json of default config file settings
+--verbose                        Outputs more information
+--no-color                       Switches off colour output
+--version                        Display version number
+--help                           Display this help
 ```
-
-### help
-
-Displays the help screen:
-
-![`ddig --help`](https://marksmurphy.github.io/img/ddig.help.gif)
 
 ### port
 
@@ -80,6 +76,16 @@ With EDNS(0) enabled, if an upstream resolver doesn't support it then the standa
 *Even though EDNS is support by ~90% of resolvers on the internet [^1], it is disabled by default in `ddig` as it may cause the resolver to return the IP address it considers closest to you, which is counterproductive to the purpose of querying many geographically distributed DNS resolvers.*
 
 [^1]: [Internet Systems Consortium - Partial EDNS Compliance Hampers Deployment of New DNS Features](https://www.isc.org/blogs/partial-edns-compliance-hampers-deployment-of-new-dns-features/)
+
+### config
+
+Specifies an alternative configuration file.
+
+To create a custom config you can:
+
+1. pipe **--list-defaults** to a new file: `ddig --list-defaults > custom.json`
+2. Edit `custom.json`
+3. Use the new configuration file: `ddig --config custom.json`
 
 ### list-resolvers
 
@@ -116,6 +122,12 @@ If your terminal has problems rendering the colour output then you can switch it
 ### version
 
 Prints out distributed-dig's version number.
+
+### help
+
+Displays the help screen:
+
+![`ddig --help`](https://marksmurphy.github.io/img/ddig.help.gif)
 
 ## Examples
 
@@ -241,7 +253,8 @@ $env:debug="ddig"
 
 #### Added
 
-* New `--list-defaults` option which prints a default config json file to the console, for use as an initial custom config.
+* New `--config` option to specify an alternative configuration file.
+* New `--list-defaults` option which prints a default config json file to the console; useful as an initial custom configuration file.
 
 #### Changed
 

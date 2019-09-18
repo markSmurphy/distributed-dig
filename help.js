@@ -27,6 +27,7 @@ module.exports = {
         console.log('   ' + '--protocol <upd|tcp>             ' + 'Specify the DNS protocol [udp]'.grey);
         console.log('   ' + '--timeout <number>               ' + 'Specify the DNS timeout in milliseconds [2500]'.grey);
         console.log('   ' + '--edns <true|false>              ' + 'Enable or disable EDNS(0) [false]'.grey);
+        console.log('   ' + '--config <filename>              ' + 'Specify an alternative configuration file'.grey);
         console.log('   ' + '--list-resolvers                 ' + 'List resolvers configured in config file'.grey);
         console.log('   ' + '--list-options                   ' + 'List DNS request options configured in config file'.grey);
         console.log('   ' + '--list-defaults                  ' + 'Print json of default config file settings'.grey);

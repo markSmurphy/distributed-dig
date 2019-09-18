@@ -79,6 +79,17 @@ function getProviderColumnWidth(resolvers) {
 
 function getConfig() {
     try {
+        // check if we're using a custom config or the default config file
+        if (argv.config) {
+            // check if the --config switch has a valid filename
+            const validFilename = require('valid-filename');
+            if ((typeof(argv.config) === 'string') && (validFilename(argv.config))) {
+                // Filename is valid.  Switch the default configuration filename for the provided one
+                configFileName = argv.config
+            } else {
+                console.log('Warning: '.yellow + 'ignoring ' + '--config '.blue + argv.config.blue + ' as it\'s not a valid filename');
+            }
+        }
         const fs = require('fs');
         var cwd = process.cwd();
         debug('Looking for [%s] in [%s] ...', configFileName, cwd);

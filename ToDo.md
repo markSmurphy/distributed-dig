@@ -1,7 +1,7 @@
 # To Do
 
-* Add the option `--config` to specify alternative config file via command line.
-  * Use `findup-sync` to find config file if not in current directory.
+* Get `--config` working with a full path: `ddig %temp%\file.json`
+* Use `findup-sync` to find config file if not in current directory.
 * Add a `--file` option to take domain names from a flat text file.
 * Add the option `--unique` to display only the first occurrence of each unique IP address.
 * Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
