@@ -245,7 +245,8 @@ $env:debug="ddig"
 
 #### Changed
 
-* Improved input validation for `--timeout` & `--protocol`
+* Improved input validation for `--timeout` & `--protocol`.
+* Improved the `Warning` logic for ignored domains to remove erroneous warnings with valid switches and options.
 
 ### [1.0.4] - September 17<sup>th</sup> 2019
 

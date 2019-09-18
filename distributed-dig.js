@@ -232,9 +232,14 @@ if (config) {
                     }
                 } else {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array');
-                    if (process.argv[i].substring(0, 2) !== '--') {
-                        // Excluding CLI switches beginning with '--' from warnings
+                    // Check if there's a dot in the text.  If so it's probably intended to be a domain name
+                    if (process.argv[i].indexOf('.') !== -1) {
                         console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid domain name');
+                    }
+
+                    // Check for arguments that are missing the double dash prefix
+                    if ((process.argv[i].substring(0, 1) === '-') && (process.argv[i].substring(0, 2) !== '--')) {
+                        console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid argument');
                     }
                 }
             }
