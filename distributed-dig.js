@@ -41,7 +41,7 @@ var argv = require('yargs')
 
 function getNameServerColumnWidth(resolvers) {
     try {
-        debug('parsing %s resolvers for "nameServer" the column width', resolvers.length);
+        debug('parsing %s resolvers for the column width of "nameServer"', resolvers.length);
         // Get maximum column widths
         var columnWidth = 0;
         for (let i = 0; i < resolvers.length; i++) {
@@ -60,7 +60,7 @@ function getNameServerColumnWidth(resolvers) {
 
 function getProviderColumnWidth(resolvers) {
     try {
-        debug('parsing %s resolvers for "provider" the column width', resolvers.length);
+        debug('parsing %s resolvers for the column width of "provider"', resolvers.length);
         // Get maximum column width
         var columnWidth = 0;
         for (let i = 0; i < resolvers.length; i++) {
@@ -73,56 +73,80 @@ function getProviderColumnWidth(resolvers) {
         return(columnWidth);
     } catch (error) {
         debug('Exception caught in getProviderColumnWidth(): %O', error);
+        // Return a default column width of 30
         return(30);
     }
 }
 
 function getConfig() {
+    debug('getConfig() Entry');
+    const fs = require('fs');
     try {
-        // check if we're using a custom config or the default config file
+        // Check if the custom config file argument was used
         if (argv.config) {
-            // check if the --config switch has a valid filename
-            const validFilename = require('valid-filename');
-            if ((typeof(argv.config) === 'string') && (validFilename(argv.config))) {
-                // Filename is valid.  Switch the default configuration filename for the provided one
-                configFileName = argv.config
-            } else {
-                console.log('Warning: '.yellow + 'ignoring ' + '--config '.blue + argv.config.blue + ' as it\'s not a valid filename');
-            }
-        }
-        const fs = require('fs');
-        var cwd = process.cwd();
-        debug('Looking for [%s] in [%s] ...', configFileName, cwd);
-        // Check if the config file exists in current directory
-        if (fs.existsSync(configFileName)) {
-            // Config file found in current directory so remember the path
-            debug('[%s] found in [%s]', configFileName, cwd);
-            configFilePath = cwd;
-
-        } else {
-            debug('Looking for [%s] in [%s] ...', configFileName, homedir);
-
-            // Check for the config file in the "home" directory
-            if (fs.existsSync(homedir + '//' + configFileName)) {
-                debug('[%s] found in [%s]', configFileName, homedir);
-                // Config file found in homedir so remember the path
-                configFilePath = homedir;
-            } else {
-                // Check for the config file in the application's root directory
-                if (fs.existsSync(configFilePath + '//' + configFileName)) {
-                    // Config file found in application root directory
-                    debug('[%s] found in [%s]', configFileName, configFilePath);
+            debug('"--config" argument detected');
+            // Check that a string was passed along with "--config"
+            if (typeof(argv.config) === 'string') {
+                debug('The --config parameter [%s] is of type "string"', argv.config);
+                // Check that the file exists
+                if (fs.existsSync(argv.config)) {
+                    debug('The specified config file exists.');
+                    // Split the string into it file & path components
+                    configFilePath = path.dirname(argv.config);
+                    debug('Path: %s', configFilePath);
+                    configFileName = path.basename(argv.config);
+                    debug('Name: %s', configFileName);
                 } else {
-                    console.log('Error:'.red + ' The config file ' + configFileName.yellow + ' could not be found in:');
-                    console.log('current dir: '.grey + cwd);
-                    console.log('home dir:    '.grey + homedir);
-                    console.log('ddig root:   '.grey + configFilePath);
+                    // the --config parameter doesn't contain a file that exists
+                    debug('[%s] does not exist', argv.config);
+                    console.log('Error: '.red + 'The specified config file [' + argv.config.blue + '] does not exist');
                     return(false);
+                }
+            } else {
+                // No filename was passed with --config
+                console.log('Warning: '.yellow + 'ignoring ' + '--config'.blue + '.  You must specify a valid filename');
+                return(false);
+            }
+        } else {
+            // Use default configuration file
+            var cwd = process.cwd();
+            debug('Looking for [%s] in [%s] ...', configFileName, cwd);
+            // Check if the config file exists in current directory
+            if (fs.existsSync(configFileName)) {
+                // Config file found in current directory so remember the path
+                debug('[%s] found in [%s]', configFileName, cwd);
+                configFilePath = cwd;
+
+            } else {
+                debug('Looking for [%s] in [%s] ...', configFileName, homedir);
+                // Check for the config file in the "home" directory
+                if (fs.existsSync(homedir + '//' + configFileName)) {
+                    debug('[%s] found in [%s]', configFileName, homedir);
+                    // Config file found in homedir so remember the path
+                    configFilePath = homedir;
+                } else {
+                    // Check for the config file in the application's root directory
+                    if (fs.existsSync(configFilePath + '//' + configFileName)) {
+                        // Config file found in application root directory
+                        debug('[%s] found in [%s]', configFileName, configFilePath);
+                    } else {
+                        console.log('Error:'.red + ' The config file ' + configFileName.yellow + ' could not be found in:');
+                        console.log('current dir: '.grey + cwd);
+                        console.log('home dir:    '.grey + homedir);
+                        console.log('ddig root:   '.grey + configFilePath);
+                        return(false);
+                    }
                 }
             }
         }
+    } catch (error) {
+        debug('getConfig() caught an exception whilst determining where the configuration file is: %O', error);
+        return(false);
+    }
 
-        // Read the configuration file
+    // Read the configuration file
+    try {
+        debug('Reading config file: %s', configFilePath + '//' + configFileName);
         let rawJSON = fs.readFileSync(configFilePath + '//' + configFileName);
         let config = JSON.parse(rawJSON);
         debug('getConfig() read the configuration file [%s]: %O',configFileName, config);
@@ -131,26 +155,30 @@ function getConfig() {
         nameServerColumnWidth = getNameServerColumnWidth(config.resolvers);
         providerColumnWidth = getProviderColumnWidth(config.resolvers);
 
-        //Check for CLI switches which override config file settings
+        //Check for arguments which override config file settings
         // Verbose mode
         if (argv.verbose) {
             config.options.verbose = true;
+            debug('[verbose] set to true');
         }
 
         // DNS Port
         if (argv.port) {
             config.options.request.port = argv.port;
+            debug('[port] set to: %s', config.options.request.port);
         }
 
         // DNS Protocol
         if (argv.protocol) {
             config.options.request.type = String.prototype.toLowerCase(argv.protocol);
+            debug('[type (protocol)] set to: %s', config.options.request.type);
         }
 
         // DNS Timeout
         if (argv.timeout) {
             if(typeof argv.timeout === 'number'){
                 config.options.request.timeout = argv.timeout;
+                debug('[timeout] set to: %s', config.options.request.timeout);
             } else {
                 console.log('Ignoring '.grey + '--timeout'.blue + ' as its value is not a number'.grey);
             }
@@ -159,6 +187,7 @@ function getConfig() {
         // EDNS(0)
         if (argv.edns) {
             config.options.request.try_edns = argv.edns;
+            debug('[try_edns] set to: %s', config.options.request.try_edns);
         }
 
         return(config);
@@ -167,6 +196,8 @@ function getConfig() {
         return(false);
     }
 }
+
+// **** main() **** //
 
 // Initialise configuration
 config = getConfig();
@@ -242,12 +273,7 @@ if (config) {
                         domainColumnWidth = process.argv[i].length;
                     }
                 } else {
-                    debug('"%s" is not a valid hostname.  Excluding it from the domains[] array');
-                    // Check if there's a dot in the text.  If so it's probably intended to be a domain name
-                    if (process.argv[i].indexOf('.') !== -1) {
-                        console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid domain name');
-                    }
-
+                    debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
                     // Check for arguments that are missing the double dash prefix
                     if ((process.argv[i].substring(0, 1) === '-') && (process.argv[i].substring(0, 2) !== '--')) {
                         console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid argument');

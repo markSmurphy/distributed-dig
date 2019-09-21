@@ -117,11 +117,11 @@ Switches on verbose mode which outputs the following additional fields:
 
 ### no-color
 
-If your terminal has problems rendering the colour output then you can switch it off by using `--no-color`
+If your terminal has problems rendering the colour output then you can switch it off by using `--no-color`.
 
 ### version
 
-Prints out distributed-dig's version number.
+Prints out `distributed-dig`'s version number.
 
 ### help
 
@@ -249,7 +249,7 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [Unreleased] - TBA
+### [1.1.0] - TBA
 
 #### Added
 

@@ -8,7 +8,7 @@ module.exports = {
         // parse package.json for the version number
         const package = require('./package.json');
 
-        //display help screen
+        // Display help screen
         console.log('%s [a.k.a %s]'.cyan, package.name, Object.keys(package.bin)[0]);
         console.log('Read the docs: '.green + package.homepage);
         console.log('Support & bugs: '.magenta + package.bugs.url);
@@ -37,8 +37,8 @@ module.exports = {
         console.log('   ' + '--help                           ' + 'Display this help'.grey);
         console.log(endOfLine);
         console.log('EXAMPLES:'.grey);
-        console.log('   ddig www.asos.com');
-        console.log('   ddig www.asos.com --verbose');
-        console.log('   ddig www.asos.com secure.asos.com --timeout 5000');
+        console.log('   ddig www.example.com');
+        console.log('   ddig www.example.com --verbose');
+        console.log('   ddig example.com www.example.com --timeout 5000');
     }
   };

@@ -150,16 +150,16 @@ module.exports = {
             for (let i = 0; i < module.exports.isAddressUnique.addresses.length; i++) {
                 debug('Checking against: %s', module.exports.isAddressUnique.addresses[i]);
                 if (ipAddress === module.exports.isAddressUnique.addresses[i]) {
-                    debug('A match has been found. Returning False as %s is not unique', ipAddress);
+                    debug('A match has been found. Returning "False" as %s is not unique', ipAddress);
                     // IP Address found on the list, so it's not unique; return false
                     return(false);
                 }
             }
-            debug('%s wasn\'t found on the list so adding it...');
+            debug('%s was not found on the list, so adding it...', ipAddress);
             // We've gone through the whole list without finding the IP address, so add it to the list
             module.exports.isAddressUnique.addresses.push(ipAddress);
             // Return true as the address is unique
-            debug('Returning True');
+            debug('Returning "True"');
             return(true);
         } catch (error) {
             debug('isAddressUnique() caught an exception: %O', error);
