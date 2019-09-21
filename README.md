@@ -267,6 +267,12 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.1.2] - TBC
+
+#### Changed
+
+* Removed unneeded dependency `valid-filename`
+
 ### [1.1.1] - September 21<sup>st</sup> 2019
 
 #### Changed
