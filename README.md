@@ -13,11 +13,15 @@
 
 ![`ddig [domain]`](https://marksmurphy.github.io/img/ddig.single.domain.gif)
 
+---
+
 ## Overview
 
-Issues multiple DNS lookup requests across a multitude of DNS resolvers.
+A utility which makes DNS lookup requests across multiple DNS resolvers and collates the results.
 
 Useful for checking if a DNS record has been fully propagated, or for querying the origins behind an [AWS Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html) / [Azure Traffic Manager](https://azure.microsoft.com/en-gb/services/traffic-manager/) record (*or any other DNS-based load balancing solution*).
+
+---
 
 ## Installation
 
@@ -27,11 +31,15 @@ Installing globally is recommended:
 npm install -g distributed-dig
 ```
 
+---
+
 ## Usage
 
 ```text
 ddig domain [domain [domain] ...] [options]
 ```
+
+---
 
 ## Options
 
@@ -85,7 +93,7 @@ To create a custom config you can:
 
 1. pipe **--list-defaults** to a new file: `ddig --list-defaults > custom.json`
 2. Edit `custom.json`
-3. Use the new configuration file: `ddig --config custom.json`
+3. Use the new configuration file: `ddig --config [path]custom.json example.com`
 
 ### list-resolvers
 
@@ -129,6 +137,8 @@ Displays the help screen:
 
 ![`ddig --help`](https://marksmurphy.github.io/img/ddig.help.gif)
 
+---
+
 ## Examples
 
 ### Lookup a single domain
@@ -161,6 +171,8 @@ ddig www.asos.com my.asos.com secure.asos.com --timeout 5000
 
 ![ddig www.asos.com my.asos.com secure.asos.com](https://marksmurphy.github.io/img/ddig.example.03.png)
 
+---
+
 ## Features
 
 ### Unique IP Address Identifier
@@ -174,6 +186,8 @@ The first occurrence of each unique IP address is marked by a bullet point:
 If you use the `--verbose` switch and have a terminal window that's narrower than 130 columns you'll see a warning:
 
 ![ddig column width warning](https://marksmurphy.github.io/img/ddig.width.warning.png)
+
+---
 
 ## Configuration File
 
@@ -225,6 +239,8 @@ Resolvers are configured in an array with each resolver having a `nameServer` el
 
 You can find a list of public DNS servers [here](https://public-dns.info/) and tailor the configured list for your own requirements.
 
+---
+
 ## Debugging
 
 `distributed-dig` uses the npm package [debug](https://www.npmjs.com/package/debug "www.npmjs.com").  If you set the environment variable `debug` to `ddig` you'll see full debug output.
@@ -247,9 +263,18 @@ DEBUG=ddig
 $env:debug="ddig"
 ```
 
+---
+
 ## Changelog
 
-### [1.1.0] - TBA
+### [1.1.1] - September 21<sup>st</sup> 2019
+
+#### Changed
+
+* Fixed a problem when specifying a full path with the `--config` option.
+* Fixed erroneous warnings when using `--config`.
+
+### [1.1.0] - September 20<sup>th</sup> 2019
 
 #### Added
 
