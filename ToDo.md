@@ -1,5 +1,8 @@
 # To Do
 
+* Better handle domains which have multiple `A` records [moteefe.com].
+* Look into **whois** and **geo-location** support (`node-whois` `node-xwhois`).
+* Look into short command-line switches
 * Use `findup-sync` to find config file if not in current directory.
 * Add a `--file` option to take domain names from a flat text file.
 * Add the option `--unique` to display only the first occurrence of each unique IP address.

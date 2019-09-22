@@ -273,12 +273,16 @@ $env:debug="ddig"
 
 * Removed unneeded dependency `valid-filename`
 
+---
+
 ### [1.1.1] - September 21<sup>st</sup> 2019
 
 #### Changed
 
 * Fixed a problem when specifying a full path with the `--config` option.
 * Fixed erroneous warnings when using `--config`.
+
+---
 
 ### [1.1.0] - September 20<sup>th</sup> 2019
 
@@ -292,9 +296,13 @@ $env:debug="ddig"
 * Improved input validation for `--timeout` & `--protocol`.
 * Improved the `Warning` logic for ignored domains to remove erroneous warnings with valid switches and options.
 
+---
+
 ### [1.0.4] - September 17<sup>th</sup> 2019
 
 * Fixed file system path separator problem when attempting to locate a config file on Linux systems.
+
+---
 
 ### [1.0.0] - September 17<sup>th</sup> 2019
 
