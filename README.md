@@ -272,6 +272,7 @@ $env:debug="ddig"
 #### Changed
 
 * Removed unneeded dependency `valid-filename`
+* Updated dependency `colors`
 
 ---
 
