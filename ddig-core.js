@@ -109,9 +109,15 @@ module.exports = {
     },
 
     parseAnswer(answer, options) {
-        debug('parseAnswer() called with OPTIONS: %O ANSWER: %O', options, answer);
-        var response = '';
+        debug('parseAnswer() called with ---> [options]: %O ---> [answer]: %O', options, answer);
+        // Validate the answer object has something to parse
+        if (answer === []) {
+            // No IP addresses, `answer` is an empty array
+            return('no_address');
+        }
+
         try {
+            var response = '';
             if ((options===null) || (options.getIpAddress)) {
                 // Just get the IP address; i.e. the A record at the end.
                 for (let i = 0; i < answer.length; i++) {

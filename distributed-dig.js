@@ -48,7 +48,7 @@ function getNameServerColumnWidth(resolvers) {
             // Maximum resolver length
             if ((resolvers[i].nameServer.length > columnWidth) && (isIp(resolvers[i].nameServer))) {
                 columnWidth = resolvers[i].nameServer.length;
-                debug('setting getNameServerColumnWidth to: %s', resolvers[i].nameServer.length);
+                debug('[Name Server] column width increased to %d', columnWidth);
             }
         }
         return(columnWidth);
@@ -67,7 +67,7 @@ function getProviderColumnWidth(resolvers) {
             // Maximum resolver length
             if ((resolvers[i].provider.length > columnWidth) && (isIp(resolvers[i].nameServer))) {
                 columnWidth = resolvers[i].provider.length;
-                debug('Setting getProviderColumnWidth to: %s', resolvers[i].provider.length);
+                debug('[Provider] column width increased to %d', columnWidth);
             }
         }
         return(columnWidth);
@@ -87,10 +87,10 @@ function getConfig() {
             debug('"--config" argument detected');
             // Check that a string was passed along with "--config"
             if (typeof(argv.config) === 'string') {
-                debug('The --config parameter [%s] is of type "string"', argv.config);
+                debug('The --config parameter was passed [%s] which is type "string".  Checking if it is a valid file', argv.config);
                 // Check that the file exists
                 if (fs.existsSync(argv.config)) {
-                    debug('The specified config file exists.');
+                    debug('The specified config file [%s] exists.', argv.config);
                     // Split the string into it file & path components
                     configFilePath = path.dirname(argv.config);
                     debug('Path: %s', configFilePath);
@@ -146,8 +146,8 @@ function getConfig() {
 
     // Read the configuration file
     try {
-        debug('Reading config file: %s', configFilePath + '//' + configFileName);
-        let rawJSON = fs.readFileSync(configFilePath + '//' + configFileName);
+        debug('Reading config file: %s', configFilePath + '/' + configFileName);
+        let rawJSON = fs.readFileSync(configFilePath + '/' + configFileName);
         let config = JSON.parse(rawJSON);
         debug('getConfig() read the configuration file [%s]: %O',configFileName, config);
 
@@ -197,6 +197,16 @@ function getConfig() {
     }
 }
 
+function printUsingConfigFile() {
+    // Don't bother displaying the directory if it's the current working directory represented by "."
+    if (configFilePath === '.') {
+        console.log('Using configuration file: '.grey + configFileName.yellow);
+    } else {
+        console.log('Using configuration file: '.grey + configFileName.yellow + ' ['.grey + configFilePath.grey + ']'.grey);
+    }
+
+}
+
 // **** main() **** //
 
 // Initialise configuration
@@ -210,8 +220,8 @@ if (config) {
         const help = require('./help');
         help.helpScreen();
     } else if (argv.listResolvers) {
+        printUsingConfigFile();
         // Get list of resolvers
-        console.log('Using configuration file: '.grey + configFileName.yellow + ' ['.grey + configFilePath.grey + ']'.grey );
         if (config.options.verbose) {
         // Raw JSON output
             const prettyjson = require('prettyjson');
@@ -237,7 +247,7 @@ if (config) {
         }
     } else if (argv.listOptions) {
         // Get the options
-        console.log('Using configuration file: '.grey + configFileName.yellow + ' ['.grey + configFilePath.grey + ']'.grey );
+        printUsingConfigFile();
         if (config.options.verbose) {
             // Raw JSON output
             const prettyjson = require('prettyjson');
@@ -263,15 +273,23 @@ if (config) {
             const isValidDomain = require('is-valid-domain');
 
             for (i = 2; i < process.argv.length; i++) {
-                debug('Extracted "%s" from the command line', process.argv[i]);
+                debug('Extracted [%s] from the command line', process.argv[i]);
                 // Check that's a valid domain
                 if (isValidDomain(process.argv[i])){
-                    // Add domain into the array
-                    domains.push(process.argv[i]);
-                    // Set domain column width
-                    if (process.argv[i].length > domainColumnWidth) {
-                        domainColumnWidth = process.argv[i].length;
+                    debug('[%s] passed domain name validation');
+                    if (process.argv[i] === argv.config) {
+                        debug('[%s] is the config file, so excluding it from the domains list', process.argv[i]);
+                    } else {
+                        debug('Adding [%s] to the domains[] array');
+                        // Add domain into the array
+                        domains.push(process.argv[i]);
+                        // Set domain column width
+                        if (process.argv[i].length > domainColumnWidth) {
+                            domainColumnWidth = process.argv[i].length;
+                            debug('Domain column width increased to %d', domainColumnWidth);
+                        }
                     }
+
                 } else {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
                     // Check for arguments that are missing the double dash prefix
@@ -285,7 +303,7 @@ if (config) {
             // If we've got some domains to lookup, display some useful extra information
             if (domains.length > 0) {
                 // Display which configuration file is being used
-                console.log('Using configuration file: '.grey + configFileName.yellow + ' ['.grey + configFilePath.grey + ']'.grey );
+                printUsingConfigFile();
                 // If we're going to be outputting verbose columns, check the terminal width is sufficient
                 if ((config.options.verbose) && (process.stdout.columns < 130)) {
                     console.log('When using the --verbose switch you might want to consider increasing your console width to at least 130 (it\'s currently %s)'.cyan, process.stdout.columns);

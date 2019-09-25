@@ -1,9 +1,9 @@
 # To Do
 
-* Better handle reporting of invalid domain name (i.e. no IP address - `www.fuseinternational.com`)
 * Better handle domains which have multiple `A` records [moteefe.com].
+* Include TTL in `--verbose` output (*increase recommended console width accordingly*).
 * Look into **whois** and **geo-location** support (`node-whois` `node-xwhois`).
-* Look into short command-line switches
+* Look into short command-line switches.
 * Use `findup-sync` to find config file if not in current directory.
 * Add a `--file` option to take domain names from a flat text file.
 * Add the option `--unique` to display only the first occurrence of each unique IP address.

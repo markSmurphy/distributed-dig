@@ -271,8 +271,11 @@ $env:debug="ddig"
 
 #### Changed
 
-* Removed unneeded dependency `valid-filename`
-* Updated dependency `colors`
+* Removed unneeded dependency `valid-filename`.
+* Updated dependency `colors` to version 1.4.0
+* Improved reporting on configuration file location when directory is `.`.
+* Improved `debug` logging.
+* Improved reporting on an empty answer (i.e. *no error, but no IP address returned*).
 
 ---
 
