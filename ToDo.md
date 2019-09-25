@@ -1,5 +1,6 @@
 # To Do
 
+* Better handle reporting of invalid domain name (i.e. no IP address - `www.fuseinternational.com`)
 * Better handle domains which have multiple `A` records [moteefe.com].
 * Look into **whois** and **geo-location** support (`node-whois` `node-xwhois`).
 * Look into short command-line switches
