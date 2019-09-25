@@ -267,7 +267,7 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.1.2] - TBC
+### [1.1.2] - September 25<sup>th</sup> 2019
 
 #### Changed
 
