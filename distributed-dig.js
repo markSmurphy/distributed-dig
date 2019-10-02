@@ -218,7 +218,7 @@ if (config) {
     if ((process.argv.length === 2) || (argv.help)) {
         // Show help screen
         const help = require('./help');
-        help.helpScreen();
+        help.helpScreen(argv.verbose);
     } else if (argv.listResolvers) {
         printUsingConfigFile();
         // Get list of resolvers

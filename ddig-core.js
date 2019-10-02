@@ -171,6 +171,40 @@ module.exports = {
             debug('isAddressUnique() caught an exception: %O', error);
             return(false);
         }
+    },
+
+    formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+
+        try {
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        } catch (error) {
+            debug('formatBytes() caught an exception: %O', error);
+            return('%d Bytes', bytes);
+        }
+
+    },
+
+    secondsToHms(seconds) {
+        try {
+            seconds = Number(seconds);
+
+            var h = Math.floor(seconds / 3600);
+            var m = Math.floor(seconds % 3600 / 60);
+            var s = Math.floor(seconds % 3600 % 60);
+
+            return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+        } catch (error) {
+            debug('secondsToHms() caught an exception: %O', error);
+            return('%d seconds', seconds);
+        }
+
     }
 };
 

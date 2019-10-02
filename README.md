@@ -276,6 +276,8 @@ $env:debug="ddig"
 * Improved reporting on configuration file location when directory is `.`.
 * Improved `debug` logging.
 * Improved reporting on an empty answer (i.e. *no error, but no IP address returned*).
+* Added `--verbose` support tp `--help` to display more information.
+* Dabbled with using `chalk` instead of `colors`.
 
 ---
 
