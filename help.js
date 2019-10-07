@@ -60,7 +60,7 @@ module.exports = {
             console.log('   Temp directory     ' + chalk.blue(os.tmpdir()));
             console.log('   Console width      ' + chalk.blue(process.stdout.columns));
             console.log('   Console height     ' + chalk.blue(process.stdout.rows));
-            console.log('   Colour support     ' + chalk.blue('level ' + chalk.supportsColor.level));
+            console.log('   Colour support     ' + chalk.blue(ddig.getColourLevelDesc()));
         }
     }
 };

@@ -273,6 +273,7 @@ $env:debug="ddig"
 
 * Added `--verbose` support tp `--help` to display more information.
 * Dabbled with using `chalk` instead of `colors`.
+* Updated dependency `yargs` to version 14.2.0
 
 ---
 

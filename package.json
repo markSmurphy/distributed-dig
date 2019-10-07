@@ -46,7 +46,7 @@
     "moment": "^2.24.0",
     "native-dns-multisocket": "^0.7.0",
     "prettyjson": "^1.2.1",
-    "yargs": "^14.0.0"
+    "yargs": "^14.2.0"
   },
   "devDependencies": {
     "eslint": "^6.5.1"
