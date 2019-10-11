@@ -1,6 +1,16 @@
 # To Do
 
-* Better handle domains which have multiple `A` records [moteefe.com].
+* Better handle domains which have multiple `A` records [moteefe.com] or [fuse.fuseuniversal.com].
+  * `ddig fuse.fuseuniversal.com --verbose` the IP address picked for the leftmost column appears to be the last one in the rightmost column's list.
+
+```text
+
+• fuse.fuseuniversal.com 52.30.90.176    Verisign DNS (Primary)         49ms    fuse.fuseuniversal.com --> 34.247.233.174
+                                         64.6.64.6                              fuse.fuseuniversal.com --> 52.30.90.176
+• fuse.fuseuniversal.com 34.247.233.174  Comodo Secure DNS (Secondary)  68ms    fuse.fuseuniversal.com --> 52.30.90.176
+                                         8.20.247.20                            fuse.fuseuniversal.com --> 34.247.233.174
+```
+
 * Include TTL in `--verbose` output (*increase recommended console width accordingly*).
 * Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [`ip-geolocate`](https://www.npmjs.com/package/ip-geolocate) [ipstack.com](https://ipstack.com/)).
 * Look into short command-line switches.
