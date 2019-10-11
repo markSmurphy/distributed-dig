@@ -2,7 +2,7 @@
 
 * Better handle domains which have multiple `A` records [moteefe.com].
 * Include TTL in `--verbose` output (*increase recommended console width accordingly*).
-* Look into **whois** and **geo-location** support (`node-whois` `node-xwhois`).
+* Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [`ip-geolocate`](https://www.npmjs.com/package/ip-geolocate) [ipstack.com](https://ipstack.com/)).
 * Look into short command-line switches.
 * Use `findup-sync` to find config file if not in current directory.
 * Add a `--file` option to take domain names from a flat text file.
