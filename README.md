@@ -267,13 +267,14 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.1.3] - TBC
+### [1.1.3] - November 13<sup>th</sup> 2019
 
 #### Changed
 
 * Added `--verbose` support tp `--help` to display more information.
-* Dabbled with using `chalk` instead of `colors`.
+* Dabbled with using `chalk` instead of `colors` (on `--help` output).
 * Updated dependency `yargs` to version 14.2.0
+* Fixed a cross-platform file path separator bug.
 
 ---
 
