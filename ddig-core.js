@@ -219,7 +219,7 @@ module.exports = {
             if ((level > 3 || level < 0) || (level == undefined)) {
                 //The level passed isn't in our range so detect it
                 const chalk = require('chalk');
-                level = chalk.supportsColor.level
+                level = chalk.supportsColor.level;
                 if (level == undefined) {
                     level = 0;
                 }
