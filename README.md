@@ -284,11 +284,15 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.1.4] - TBC
+### [1.1.4] - November 20<sup>th</sup> 2019
 
 #### Changed
 
-* Use * instead of unicode character • to signify unique IP address when `process.stdout.isTTY` is `false`, which indicates that the output is being piped or redirected to where there's no guarantee of unicode support.
+* Use * instead of unicode character • to signify unique IP address when `process.stdout.isTTY` is `false` [^1].
+* Updated Dependencies.
+* Shrink-wrapped `npm` dependencies.
+
+[^1]: `process.stdout.isTTY` is `false` when the output is being piped or redirected.  There's no guarantee that the target of the pipe (e.g. `more` on Windows) or the redirect (e.g. a text file) has unicode support.
 
 ---
 
