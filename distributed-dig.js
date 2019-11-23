@@ -265,7 +265,7 @@ if (config) {
     } else if (argv.listDefaults) {
         //
         const defaults = require('./ddig-defaults');
-        defaults.printDefaultConfig();
+        defaults.printDefaultConfig(true);
     } else {
         try {
             // Loop through command line parameters to extract domains.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'

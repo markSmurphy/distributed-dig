@@ -112,7 +112,14 @@ const defaultConfig = {
   };
 
   module.exports = {
-      printDefaultConfig() {
-          console.log(JSON.stringify(defaultConfig));
+      printDefaultConfig(prettyPrint) {
+          if (prettyPrint) {
+              const prettyjson = require('prettyjson');
+              console.log('Default Configuration'.yellow);
+              console.log(prettyjson.render(defaultConfig));
+          } else {
+              // Raw json output
+              console.log(JSON.stringify(defaultConfig));
+          }
       }
   };

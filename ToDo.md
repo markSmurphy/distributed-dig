@@ -1,6 +1,5 @@
 # To Do
 
-* Pretty Print json output for `--list-defaults`
 * Better handle domains which have multiple `A` records [moteefe.com] or [fuse.fuseuniversal.com].
   * `ddig fuse.fuseuniversal.com --verbose` the IP address picked for the leftmost column appears to be the last one in the rightmost column's list.
 
