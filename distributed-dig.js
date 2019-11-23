@@ -265,7 +265,8 @@ if (config) {
     } else if (argv.listDefaults) {
         //
         const defaults = require('./ddig-defaults');
-        defaults.printDefaultConfig(true);
+        // if printDefaultConfig(true) then output json is pretty printed; pass through the opposite of the verbose switch so it's pretty by default and --verbose switches it off
+        defaults.printDefaultConfig(!argv.verbose);
     } else {
         try {
             // Loop through command line parameters to extract domains.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'
