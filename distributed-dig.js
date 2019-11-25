@@ -8,10 +8,10 @@ const EOL =  require('os').EOL;
 
 // Default config file & location
 const DefaultConfigFileName = 'distributed-dig.json';
-var configFileName = DefaultConfigFileName;
 const path = require('path');
-var configFilePath = path.resolve(__dirname);
 const homedir = require('os').homedir();
+var configFilePath = path.resolve(__dirname);
+var configFileName = DefaultConfigFileName;
 
 // Holds the config json
 var config = {};
