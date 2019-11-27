@@ -293,7 +293,7 @@ $env:debug="ddig"
 
 ---
 
-### [1.2.0] - November TBC<sup>th</sup> 2019
+### [1.2.0] - November 27<sup>th</sup> 2019
 
 #### Changed
 
