@@ -284,7 +284,7 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.2.1] - November 27<sup>th</sup> 2019
+### [1.2.2] - November 27<sup>th</sup> 2019
 
 #### Changed
 
