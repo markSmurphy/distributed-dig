@@ -293,6 +293,12 @@ $env:debug="ddig"
 
 ---
 
+### [1.2.0] - November TBC<sup>th</sup> 2019
+
+#### Changed
+
+* Switched to using `chalk` instead of `colors`.
+
 ### [1.1.4] - November 20<sup>th</sup> 2019
 
 #### Changed

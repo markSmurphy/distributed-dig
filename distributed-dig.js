@@ -28,8 +28,10 @@ const ddig = require('./ddig-core');
 
 // Console output formatting for columns and colours
 const columnify = require('columnify');
+// console colours
+const chalk = require('chalk');
 // eslint-disable-next-line no-unused-vars
-const colours = require('colors');
+
 
 // Import IP validation library
 const isIp = require('is-ip');
@@ -99,12 +101,12 @@ function getConfig() {
                 } else {
                     // the --config parameter doesn't contain a file that exists
                     debug('[%s] does not exist', argv.config);
-                    console.log('Error: '.red + 'The specified config file [' + argv.config.blue + '] does not exist');
+                    console.log(chalk.red('Error: ') + 'The specified config file [' + chalk.blue(argv.config) + '] does not exist');
                     return(false);
                 }
             } else {
                 // No filename was passed with --config
-                console.log('Warning: '.yellow + 'ignoring ' + '--config'.blue + '.  You must specify a valid filename');
+                console.log(chalk.yellow('Warning: ') + 'ignoring ' + chalk.blue('--config') + '.  You must specify a valid filename');
                 return(false);
             }
         } else {
@@ -130,10 +132,10 @@ function getConfig() {
                         // Config file found in application root directory
                         debug('[%s] found in [%s]', configFileName, configFilePath);
                     } else {
-                        console.log('Error:'.red + ' The config file ' + configFileName.yellow + ' could not be found in:');
-                        console.log('current dir: '.grey + cwd);
-                        console.log('home dir:    '.grey + homedir);
-                        console.log('ddig root:   '.grey + configFilePath);
+                        console.log(chalk.red('Error:') + ' The config file ' + chalk.yellow(configFileName) + ' could not be found in:');
+                        console.log(chalk.grey('current dir: ') + cwd);
+                        console.log(chalk.grey('home dir:    ') + homedir);
+                        console.log(chalk.grey('ddig root:   ') + configFilePath);
                         return(false);
                     }
                 }
@@ -180,7 +182,7 @@ function getConfig() {
                 config.options.request.timeout = argv.timeout;
                 debug('[timeout] set to: %s', config.options.request.timeout);
             } else {
-                console.log('Ignoring '.grey + '--timeout'.blue + ' as its value is not a number'.grey);
+                console.log(chalk.grey('Ignoring ') + chalk.blue('--timeout') + chalk.grey(' as its value is not a number'));
             }
         }
 
@@ -200,14 +202,12 @@ function getConfig() {
 function printUsingConfigFile() {
     // Don't bother displaying the directory if it's the current working directory represented by "."
     if (configFilePath === '.') {
-        console.log('Using configuration file: '.grey + configFileName.yellow);
+        console.log(chalk.grey('Using configuration file: ') + chalk.yellow(configFileName));
     } else {
-        console.log('Using configuration file: '.grey + configFileName.yellow + ' ['.grey + configFilePath.grey + ']'.grey);
+        console.log(chalk.grey('Using configuration file: ') + chalk.yellow(configFileName) + chalk.grey(' [') + chalk.grey(configFilePath) + chalk.grey(']'));
     }
 
 }
-
-// **** main() **** //
 
 // Initialise configuration
 config = getConfig();
@@ -225,7 +225,7 @@ if (config) {
         if (config.options.verbose) {
         // Raw JSON output
             const prettyjson = require('prettyjson');
-            console.log('Resolvers'.yellow);
+            console.log(chalk.yellow('Resolvers'));
             console.log(prettyjson.render(config.resolvers));
         } else {
             const columnify = require('columnify');
@@ -251,14 +251,14 @@ if (config) {
         if (config.options.verbose) {
             // Raw JSON output
             const prettyjson = require('prettyjson');
-            console.log('Options'.yellow);
+            console.log(chalk.yellow('Options'));
             console.log(prettyjson.render(config.options));
         } else {
             const columnify = require('columnify');
-            console.log('{request}'.yellow);
+            console.log(chalk.yellow('{request}'));
             var columns = columnify(config.options.request, {columns: ['Option', 'Value']});
             console.log(columns);
-            console.log('{question}'.yellow);
+            console.log(chalk.yellow('{question}'));
             columns = columnify(config.options.question, {columns: ['Option', 'Value']});
             console.log(columns);
         }
@@ -307,7 +307,7 @@ if (config) {
                 printUsingConfigFile();
                 // If we're going to be outputting verbose columns, check the terminal width is sufficient
                 if ((config.options.verbose) && (process.stdout.columns < 130)) {
-                    console.log('When using the --verbose switch you might want to consider increasing your console width to at least 130 (it\'s currently %s)'.cyan, process.stdout.columns);
+                    console.log(chalk.cyan('When using the --verbose switch you might want to consider increasing your console width to at least 130 (it\'s currently %s)'), process.stdout.columns);
                 }
             }
 
@@ -324,8 +324,8 @@ if (config) {
                             result = [{
                                 'unique': '',
                                 'domain': response.domain,
-                                'IPAddress': response.ipAddress.green,
-                                'provider': response.provider.grey,
+                                'IPAddress': chalk.green(response.ipAddress),
+                                'provider': chalk.grey(response.provider),
                             }];
                             if (ddig.isAddressUnique(response.ipAddress)) {
                                 // If this is first time we've seen this IP address mark the 'unique' column
@@ -343,7 +343,7 @@ if (config) {
                             // Add additional 'success' columns if `verbose` is switched on
                             if (config.options.verbose) {
                                 //result[0].nameServer = response.nameServer.grey;
-                                result[0].provider += EOL + response.nameServer.grey;
+                                result[0].provider += EOL + chalk.grey(response.nameServer);
                                 result[0].duration = response.duration + 'ms';
                                 result[0].recursion = response.recursion;
                             }
@@ -352,13 +352,12 @@ if (config) {
                             result = [{
                                 'unique': '',
                                 'domain': response.domain,
-                                'IPAddress': response.msg.red,
-                                'provider': response.provider.grey
+                                'IPAddress': chalk.red(response.msg),
+                                'provider': chalk.grey(response.provider)
                             }];
                             // Add additional 'failed' columns if `verbose` is switched on
                             if (config.options.verbose) {
-                                //result[0].nameServer = response.nameServer.grey;
-                                result[0].provider += EOL + response.nameServer.grey;
+                                result[0].provider += EOL + chalk.grey(response.nameServer);
                                 result[0].duration = response.duration + 'ms';
                             }
                         }
@@ -380,7 +379,7 @@ if (config) {
                 });
             });
         } catch(err) {
-            console.error('An error occurred: %O'.red, err);
+            console.error(chalk.red('An error occurred: %O'), err);
         }
     }
 }
