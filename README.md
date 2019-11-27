@@ -284,6 +284,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.2.1] - November 27<sup>th</sup> 2019
+
+#### Changed
+
+* Fixed `npm-shrinkwrap.json` problem that prevented `npm update` succeeding.
+
+---
+
 ### [1.2.0] - November 27<sup>th</sup> 2019
 
 #### Changed
