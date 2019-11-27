@@ -284,20 +284,15 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.1.5] - TBA<sup>th</sup> 2019
-
-#### Changed
-
-* Updated dependencies.
-* `--list-defaults` now pretty prints the raw json output.
-
----
-
 ### [1.2.0] - November 27<sup>th</sup> 2019
 
 #### Changed
 
 * Switched to using `chalk` instead of `colors`.
+* Updated dependencies.
+* `--list-defaults` now pretty-prints the raw json output.
+
+---
 
 ### [1.1.4] - November 20<sup>th</sup> 2019
 
