@@ -12,6 +12,8 @@
 ```
 
 * Include TTL in `--verbose` output (*increase recommended console width accordingly*).
+* Include record type in output.
+* Use `dns.GetServers()` to save current resolvers and highlight those in output if they're called.
 * Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [`ip-geolocate`](https://www.npmjs.com/package/ip-geolocate) [ipstack.com](https://ipstack.com/)).
 * Look into short command-line switches.
 * Use `findup-sync` to find config file if not in current directory.
@@ -33,4 +35,7 @@
     ```
 
   * [ssldecoder](https://www.npmjs.com/package/ssldecoder)
+  * Direct HTTPS request
+* Add option to make HTTPS request to endpoints (to each uniquely resolved IP address and insert `host` header) and list all or specified response headers.
 * Allow for `--certs` *and* `--verbose` to display more x.509 properties.
+* Look to add [fuzzy search](https://www.npmjs.com/package/fuzzy) for unknown (mistyped) CLI options
