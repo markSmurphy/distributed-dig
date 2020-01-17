@@ -12,11 +12,11 @@ const https = require('https');
 https.get('https://92.122.153.27', {
     headers : { host : 'www.asos.com' },
     //servername : 'www.asos.com'
-}, res => {
+}, (res) => {
     //console.log(res);
     var cert = res.socket.getPeerCertificate();
     console.log(cert);
     console.log(cert.subject);
-}).on('error', e => {
+}).on('error', (e) => {
     console.log('Error: ', e.message);
 });
