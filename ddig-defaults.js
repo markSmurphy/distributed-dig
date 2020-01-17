@@ -1,3 +1,5 @@
+// Default DNS resolvers obtained from https://public-dns.info/
+
 const defaultConfig = {
     'options': {
       'request': {
@@ -93,7 +95,7 @@ const defaultConfig = {
         'provider': 'United States'
       },
       {
-        'nameServer': '218.38.30.15',
+        'nameServer': '221.138.17.154',
         'provider': 'South Korea'
       },
       {

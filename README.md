@@ -286,6 +286,15 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.2.3] - ---TBC---
+
+#### Changed
+
+* Updated default DNS resolvers list.
+* Updated dependencies.
+
+---
+
 ### [1.2.2] - November 27<sup>th</sup> 2019
 
 #### Changed

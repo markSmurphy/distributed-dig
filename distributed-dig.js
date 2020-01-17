@@ -329,7 +329,6 @@ if (config) {
                             }];
                             if (ddig.isAddressUnique(response.ipAddress)) {
                                 // If this is first time we've seen this IP address mark the 'unique' column
-
                                 if (process.stdout.isTTY) { // A Text Terminal is attached to stdout
                                     // Use the mathematical Existential Quantification symbol "∃" (There Exists)
                                     //result[0].unique = '∃';
@@ -338,6 +337,9 @@ if (config) {
                                 } else { // A Text Terminal is NOT attached to stdout. Output is being piped. Refrain from using unicode characters
                                     result[0].unique = '*';
                                 }
+
+                                // Extract x.509 certificate
+                                // **** TO DO *****
                             }
 
                             // Add additional 'success' columns if `verbose` is switched on
