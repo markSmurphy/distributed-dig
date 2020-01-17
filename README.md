@@ -96,7 +96,7 @@ Enables [EDNS(0)](https://en.wikipedia.org/wiki/Extension_mechanisms_for_DNS)
 Default: `false` (*disabled*)
 
 With EDNS(0) enabled, if an upstream resolver doesn't support it then the standard DNS will be used as a fallback.
-*Even though EDNS is support by ~90% of resolvers on the internet [^1], it is disabled by default in `ddig` as it may cause the resolver to return the IP address it considers closest to you, which is counterproductive to the purpose of querying many geographically distributed DNS resolvers.*
+*Even though EDNS is support by ~90% of resolvers on the internet [^1], it is disabled by default in `ddig` as it may cause the resolver to return the IP address it considers closest to you, which is counter-productive to the purpose of querying many geographically distributed DNS resolvers.*
 
 [^1]: [Internet Systems Consortium - Partial EDNS Compliance Hampers Deployment of New DNS Features](https://www.isc.org/blogs/partial-edns-compliance-hampers-deployment-of-new-dns-features/)
 
@@ -237,7 +237,7 @@ The default options are:
 
 ### DNS Resolvers
 
-Resolvers are configured in an array with each resolver having a `nameServer` element which should be the IPv4 or IPv6 address, and a `provider` element which is just a freeform text label:
+Resolvers are configured in an array with each resolver having a `nameServer` element which should be the IPv4 or IPv6 address, and a `provider` element which is just a free-form text label:
 
 ```json
 "resolvers": [
