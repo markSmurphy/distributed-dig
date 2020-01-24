@@ -18,8 +18,10 @@
 * Look into short command-line switches.
 * Use `findup-sync` to find config file if not in current directory.
 * Add a `--file` option to take domain names from a flat text file.
-* Add the option `--unique` to display only the first occurrence of each unique IP address.
+* Add the option `--unique` | to display only the first occurrence of each unique IP address.
+* Add `--bare` option which just shows resolver output rather than which resolver it came from.
 * Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
+  * [fuzzy-search](https://www.npmjs.com/package/fuzzy-search) ... `npm install fuzzy-search --save`
 * Add `--certs` switch which instructs `distributed-dig.js` to extract an x.505 certificate from each unique IP address, and add the details to the `lookupResult` response object using:
 
     ```javascript
