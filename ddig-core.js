@@ -193,8 +193,8 @@ module.exports = {
     },
 
     secondsToHms(seconds) {
-        if (seconds) {
-            try {
+        try {
+            if (seconds) {
                 seconds = Number(seconds);
 
                 var h = Math.floor(seconds / 3600);
@@ -202,13 +202,13 @@ module.exports = {
                 var s = Math.floor(seconds % 3600 % 60);
 
                 return ('0' + h).slice(-2) + ' hours, ' + ('0' + m).slice(-2) + ' minutes, ' + ('0' + s).slice(-2) + ' seconds';
-            } catch (error) {
+            } else {
+                return('<invalid>');
+            }
+        } catch (error) {
                 debug('secondsToHms() caught an exception: %O', error);
                 // an unexpected error occurred; return the original value
                 return('%d seconds', seconds);
-            }
-        } else {
-            return('<invalid>');
         }
     },
 
@@ -216,11 +216,11 @@ module.exports = {
         const colourLevel = ['Colours Disabled', '16 Colours (Basic)', '256 Colours', '16 Million Colours (True Colour)'];
         try {
 
-            if ((level > 3 || level < 0) || (level == undefined)) {
+            if ((level > 3 || level < 0) || (typeof level === 'undefined')) {
                 //The level passed isn't in our range so detect it
                 const chalk = require('chalk');
                 level = chalk.supportsColor.level;
-                if (level == undefined) {
+                if (typeof level === 'undefined') {
                     level = 0;
                 }
             }
