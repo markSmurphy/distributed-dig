@@ -320,6 +320,7 @@ if (config) {
                         debug('Looking up %s against %s (%s) returned: %O', domain, resolver.nameServer, resolver.provider, response);
                         var result = {};
                         if (response.success) {
+                            // *** Basic Output ***
                             // The lookup succeeded.  Extract the properties needed from the response
                             result = [{
                                 'unique': '',

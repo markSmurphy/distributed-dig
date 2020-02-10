@@ -97,6 +97,7 @@ module.exports = {
                     lookupResult.answer = JSON.stringify(answer.answer);
                     lookupResult.ipAddress = module.exports.parseAnswer(answer.answer, {getIpAddress: true});
                     lookupResult.recursion = module.exports.parseAnswer(answer.answer, {getRecursion: true});
+                    // ** TO DO *** Get record type here [DNSResourceRecords.json]
                     lookupResult.msg = 'Success';
                     lookupResult.success=true;
                     lookupResult.duration=moment(moment()).diff(startTime);
