@@ -286,12 +286,16 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.2.3] - ---TBC---
+### [1.3.0] - February 14<sup>th</sup> 2020
 
 #### Changed
 
 * Updated default DNS resolvers list.
 * Updated dependencies.
+
+#### Fixed
+
+* Better handling of `nxdomain`.  Non-existent domains aren't DNS errors, just an empty answer - so now handling those more sensibly.
 
 ---
 

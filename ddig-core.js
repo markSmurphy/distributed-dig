@@ -84,23 +84,33 @@ module.exports = {
                     debug('Error received: %O', err);
                     lookupResult.msg = 'An error occurred';
                     lookupResult.error = JSON.stringify(err);
-                    lookupResult.success=false;
-                    lookupResult.duration=moment(moment()).diff(startTime);
+                    lookupResult.success = false;
+                    lookupResult.duration = moment(moment()).diff(startTime);
 
                     // Return the result
                     callback(lookupResult);
 
                 } else{
-                    debug('The resolver [%s] provided the answer: %O', resolver.nameServer, answer);
+                    // Check that the answer is a populated array
+                    if (Array.isArray(answer) && answer.length) {
+                        debug('The resolver [%s] provided the answer: %O', resolver.nameServer, answer);
 
-                    // Populate lookup result object
-                    lookupResult.answer = JSON.stringify(answer.answer);
-                    lookupResult.ipAddress = module.exports.parseAnswer(answer.answer, {getIpAddress: true});
-                    lookupResult.recursion = module.exports.parseAnswer(answer.answer, {getRecursion: true});
-                    // ** TO DO *** Get record type here [DNSResourceRecords.json]
-                    lookupResult.msg = 'Success';
-                    lookupResult.success=true;
-                    lookupResult.duration=moment(moment()).diff(startTime);
+                        // Populate lookup result object
+                        lookupResult.answer = JSON.stringify(answer.answer);
+                        lookupResult.ipAddress = module.exports.parseAnswer(answer.answer, {getIpAddress: true});
+                        lookupResult.recursion = module.exports.parseAnswer(answer.answer, {getRecursion: true});
+                        // ** TO DO *** Get record type here [DNSResourceRecords.json]
+                        lookupResult.msg = 'Success';
+                        lookupResult.success = true;
+                        lookupResult.duration = moment(moment()).diff(startTime);
+                    } else{
+                        debug('The resolver [%s] provided an empty answer: %O', resolver.nameServer, answer);
+
+                        lookupResult.msg = 'Non-Existent Domain';
+                        lookupResult.error = 'NXDomain';
+                        lookupResult.success = false;
+                        lookupResult.duration = moment(moment()).diff(startTime);
+                    }
 
                     // Return the result
                     callback(lookupResult);
