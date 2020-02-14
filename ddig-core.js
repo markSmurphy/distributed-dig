@@ -92,7 +92,7 @@ module.exports = {
 
                 } else{
                     // Check that the answer is a populated array
-                    if (Array.isArray(answer) && answer.length) {
+                    if (Array.isArray(answer.answer) && answer.answer.length) {
                         debug('The resolver [%s] provided the answer: %O', resolver.nameServer, answer);
 
                         // Populate lookup result object

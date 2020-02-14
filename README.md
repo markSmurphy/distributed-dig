@@ -286,6 +286,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.3.1] - February 14<sup>th</sup> 2020
+
+#### Fixed
+
+* Fixed a nest array bounds check which resulted in valid domains being reported as non-existent.
+
+---
+
 ### [1.3.0] - February 14<sup>th</sup> 2020
 
 #### Changed
