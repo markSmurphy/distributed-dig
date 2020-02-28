@@ -43,3 +43,4 @@
 * Add option to make HTTPS request to endpoints (to each uniquely resolved IP address and insert `host` header) and list all or specified response headers.
 * Allow for `--certs` *and* `--verbose` to display more x.509 properties.
 * Look to add [fuzzy search](https://www.npmjs.com/package/fuzzy) for unknown (mistyped) CLI options
+* Replace moment.js with native code as per [You-Don't-Need-Moment.js](https://github.com/you-dont-need/You-Dont-Need-Momentjs#difference)
