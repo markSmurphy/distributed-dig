@@ -30,7 +30,9 @@ module.exports = {
             'msg': '',
             'success': false,
             'duration': 0,
-            'error': ''
+            'error': '',
+            'recordType': null,
+            'ttl': 0
         };
 
         // Validate the resolver IP address is valid
@@ -99,7 +101,9 @@ module.exports = {
                         lookupResult.answer = JSON.stringify(answer.answer);
                         lookupResult.ipAddress = module.exports.parseAnswer(answer.answer, {getIpAddress: true});
                         lookupResult.recursion = module.exports.parseAnswer(answer.answer, {getRecursion: true});
-                        // ** TO DO *** Get record type here [DNSResourceRecords.json]
+                        lookupResult.recordType = module.exports.parseAnswer(answer.answer, {getRecordType: true});
+                        lookupResult.ttl = module.exports.parseAnswer(answer.answer, {getTTL: true});
+
                         lookupResult.msg = 'Success';
                         lookupResult.success = true;
                         lookupResult.duration = moment(moment()).diff(startTime);
@@ -129,6 +133,7 @@ module.exports = {
 
         try {
             var response = '';
+            // Extract IP Address
             if ((options===null) || (options.getIpAddress)) {
                 // Just get the IP address; i.e. the A record at the end.
                 for (let i = 0; i < answer.length; i++) {
@@ -149,6 +154,16 @@ module.exports = {
                        debug('Warning: There is an unhandled element [%s] in answer array: %O', i, answer[i]);
                     }
                 }
+            } else if (options.getRecordType) {
+                // Get the Resource Record type (CNAME, A, AAA, etc)
+                var rrtype =module.exports.ResourceRecordType(answer[0].type);
+                // Add record type to the response object
+                response = rrtype;
+                debug('Resource Record Type: %s', rrtype);
+            } else if (options.getTTL) {
+                // Get the record's time-to-live value
+                response = answer[0].ttl
+                debug('TTL: %s', answer[0].ttl);
             }
 
             debug('parseAnswer() returning: %s', response);
@@ -228,7 +243,7 @@ module.exports = {
         try {
 
             if ((level > 3 || level < 0) || (typeof level === 'undefined')) {
-                //The level passed isn't in our range so detect it
+                // The level passed isn't in our range so detect it
                 const chalk = require('chalk');
                 level = chalk.supportsColor.level;
                 if (typeof level === 'undefined') {
@@ -241,6 +256,47 @@ module.exports = {
         } catch (error) {
             debug('getColourLevelDesc() caught an exception: %O', error);
             return('Unknown');
+        }
+    },
+
+    ResourceRecordType(value) { // Takes the integer value returned in an answer and returns the corresponding record name
+        const DNSResourceRecordsDatabase = 'DNSResourceRecords.json';
+        try {
+            debug('ResourceRecordType() called with value: %s', value);
+            // Read in Resource Record database
+            const fs = require('fs');
+            debug('Reading in DNS Resource Records data from %s', DNSResourceRecordsDatabase);
+            let rawData = fs.readFileSync(DNSResourceRecordsDatabase);
+            let DNSRecords = JSON.parse(rawData);
+
+            DNSRecords.RecordTypes.forEach(element => {
+                debug('Evaluating resource record database value [%s] against [%s]', element.value, value);
+                if (element.value === value) {
+                    debug('Returning: %s', element.type);
+                    return(element.type);
+                }
+                // *** TO DO *** This is inefficient as the forEach loop continues even after finding a match
+            });
+
+            // We're going to return 'Unknown' by default unless we find something
+            var returnValue = 'Unknown';
+            for (let i = 0; i < DNSRecords.RecordTypes.length; i++) {
+                debug('Evaluating resource record database value [%s] against [%s]', DNSRecords.RecordTypes[i].value, value);
+                if (DNSRecords.RecordTypes[i].value === value) {
+                    debug('Returning: %s', DNSRecords.RecordTypes[i].type);
+                    // Set new return value of the record type found
+                    returnValue = DNSRecords.RecordTypes[i].type;
+                    // Stop processing the rest of the loop by skipping the array index forward to the end
+                    i = DNSRecords.RecordTypes.length
+                }
+            }
+
+            // Return the Record Type
+            return (returnValue);
+
+        } catch (error) {
+            debug('An error occurred in "ResourceRecordType(): %O"', error);
+            return ('Unknown');
         }
     }
 };

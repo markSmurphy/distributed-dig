@@ -1,437 +1,439 @@
-[
-    {
-        "TYPE": "A",
-        "Value": 1,
-        "Meaning": "a host address"
-    },
-    {
-        "TYPE": "NS",
-        "Value": 2,
-        "Meaning": "an authoritative name server"
-    },
-    {
-        "TYPE": "MD",
-        "Value": 3,
-        "Meaning": "a mail destination (OBSOLETE - use MX)"
-    },
-    {
-        "TYPE": "MF",
-        "Value": 4,
-        "Meaning": "a mail forwarder (OBSOLETE - use MX)"
-    },
-    {
-        "TYPE": "CNAME",
-        "Value": 5,
-        "Meaning": "the canonical name for an alias"
-    },
-    {
-        "TYPE": "SOA",
-        "Value": 6,
-        "Meaning": "marks the start of a zone of authority"
-    },
-    {
-        "TYPE": "MB",
-        "Value": 7,
-        "Meaning": "a mailbox domain name (EXPERIMENTAL)"
-    },
-    {
-        "TYPE": "MG",
-        "Value": 8,
-        "Meaning": "a mail group member (EXPERIMENTAL)"
-    },
-    {
-        "TYPE": "MR",
-        "Value": 9,
-        "Meaning": "a mail rename domain name (EXPERIMENTAL)"
-    },
-    {
-        "TYPE": null,
-        "Value": 10,
-        "Meaning": "a null RR (EXPERIMENTAL)"
-    },
-    {
-        "TYPE": "WKS",
-        "Value": 11,
-        "Meaning": "a well known service description"
-    },
-    {
-        "TYPE": "PTR",
-        "Value": 12,
-        "Meaning": "a domain name pointer"
-    },
-    {
-        "TYPE": "HINFO",
-        "Value": 13,
-        "Meaning": "host information"
-    },
-    {
-        "TYPE": "MINFO",
-        "Value": 14,
-        "Meaning": "mailbox or mail list information"
-    },
-    {
-        "TYPE": "MX",
-        "Value": 15,
-        "Meaning": "mail exchange"
-    },
-    {
-        "TYPE": "TXT",
-        "Value": 16,
-        "Meaning": "text strings"
-    },
-    {
-        "TYPE": "RP",
-        "Value": 17,
-        "Meaning": "for Responsible Person"
-    },
-    {
-        "TYPE": "AFSDB",
-        "Value": 18,
-        "Meaning": "for AFS Data Base location"
-    },
-    {
-        "TYPE": "X25",
-        "Value": 19,
-        "Meaning": "for X.25 PSDN address"
-    },
-    {
-        "TYPE": "ISDN",
-        "Value": 20,
-        "Meaning": "for ISDN address"
-    },
-    {
-        "TYPE": "RT",
-        "Value": 21,
-        "Meaning": "for Route Through"
-    },
-    {
-        "TYPE": "NSAP",
-        "Value": 22,
-        "Meaning": "for NSAP address, NSAP style A record"
-    },
-    {
-        "TYPE": "NSAP-PTR",
-        "Value": 23,
-        "Meaning": "for domain name pointer, NSAP style"
-    },
-    {
-        "TYPE": "SIG",
-        "Value": 24,
-        "Meaning": "for security signature"
-    },
-    {
-        "TYPE": "KEY",
-        "Value": 25,
-        "Meaning": "for security key"
-    },
-    {
-        "TYPE": "PX",
-        "Value": 26,
-        "Meaning": "X.400 mail mapping information"
-    },
-    {
-        "TYPE": "GPOS",
-        "Value": 27,
-        "Meaning": "Geographical Position"
-    },
-    {
-        "TYPE": "AAAA",
-        "Value": 28,
-        "Meaning": "IP6 Address"
-    },
-    {
-        "TYPE": "LOC",
-        "Value": 29,
-        "Meaning": "Location Information"
-    },
-    {
-        "TYPE": "NXT",
-        "Value": 30,
-        "Meaning": "Next Domain (OBSOLETE)"
-    },
-    {
-        "TYPE": "EID",
-        "Value": 31,
-        "Meaning": "Endpoint Identifier"
-    },
-    {
-        "TYPE": "NIMLOC",
-        "Value": 32,
-        "Meaning": "Nimrod Locator"
-    },
-    {
-        "TYPE": "SRV",
-        "Value": 33,
-        "Meaning": "Server Selection"
-    },
-    {
-        "TYPE": "ATMA",
-        "Value": 34,
-        "Meaning": "ATM Address"
-    },
-    {
-        "TYPE": "NAPTR",
-        "Value": 35,
-        "Meaning": "Naming Authority Pointer"
-    },
-    {
-        "TYPE": "KX",
-        "Value": 36,
-        "Meaning": "Key Exchanger"
-    },
-    {
-        "TYPE": "CERT",
-        "Value": 37,
-        "Meaning": "CERT"
-    },
-    {
-        "TYPE": "A6",
-        "Value": 38,
-        "Meaning": "A6 (OBSOLETE - use AAAA)"
-    },
-    {
-        "TYPE": "DNAME",
-        "Value": 39,
-        "Meaning": "DNAME"
-    },
-    {
-        "TYPE": "SINK",
-        "Value": 40,
-        "Meaning": "SINK"
-    },
-    {
-        "TYPE": "OPT",
-        "Value": 41,
-        "Meaning": "OPT"
-    },
-    {
-        "TYPE": "APL",
-        "Value": 42,
-        "Meaning": "APL"
-    },
-    {
-        "TYPE": "DS",
-        "Value": 43,
-        "Meaning": "Delegation Signer"
-    },
-    {
-        "TYPE": "SSHFP",
-        "Value": 44,
-        "Meaning": "SSH Key Fingerprint"
-    },
-    {
-        "TYPE": "IPSECKEY",
-        "Value": 45,
-        "Meaning": "IPSECKEY"
-    },
-    {
-        "TYPE": "RRSIG",
-        "Value": 46,
-        "Meaning": "RRSIG"
-    },
-    {
-        "TYPE": "NSEC",
-        "Value": 47,
-        "Meaning": "NSEC"
-    },
-    {
-        "TYPE": "DNSKEY",
-        "Value": 48,
-        "Meaning": "DNSKEY"
-    },
-    {
-        "TYPE": "DHCID",
-        "Value": 49,
-        "Meaning": "DHCID"
-    },
-    {
-        "TYPE": "NSEC3",
-        "Value": 50,
-        "Meaning": "NSEC3"
-    },
-    {
-        "TYPE": "NSEC3PARAM",
-        "Value": 51,
-        "Meaning": "NSEC3PARAM"
-    },
-    {
-        "TYPE": "TLSA",
-        "Value": 52,
-        "Meaning": "TLSA"
-    },
-    {
-        "TYPE": "SMIMEA",
-        "Value": 53,
-        "Meaning": "S/MIME cert association"
-    },
-    {
-        "TYPE": "HIP",
-        "Value": 55,
-        "Meaning": "Host Identity Protocol"
-    },
-    {
-        "TYPE": "NINFO",
-        "Value": 56,
-        "Meaning": "NINFO"
-    },
-    {
-        "TYPE": "RKEY",
-        "Value": 57,
-        "Meaning": "RKEY"
-    },
-    {
-        "TYPE": "TALINK",
-        "Value": 58,
-        "Meaning": "Trust Anchor LINK"
-    },
-    {
-        "TYPE": "CDS",
-        "Value": 59,
-        "Meaning": "Child DS"
-    },
-    {
-        "TYPE": "CDNSKEY",
-        "Value": 60,
-        "Meaning": "DNSKEY(s) the Child wants reflected in DS"
-    },
-    {
-        "TYPE": "OPENPGPKEY",
-        "Value": 61,
-        "Meaning": "OpenPGP Key"
-    },
-    {
-        "TYPE": "CSYNC",
-        "Value": 62,
-        "Meaning": "Child-To-Parent Synchronization"
-    },
-    {
-        "TYPE": "ZONEMD",
-        "Value": 63,
-        "Meaning": "message digest for DNS zone"
-    },
-    {
-        "TYPE": "SPF",
-        "Value": 99,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "UINFO",
-        "Value": 100,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "UID",
-        "Value": 101,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "GID",
-        "Value": 102,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "UNSPEC",
-        "Value": 103,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "NID",
-        "Value": 104,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "L32",
-        "Value": 105,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "L64",
-        "Value": 106,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "LP",
-        "Value": 107,
-        "Meaning": ""
-    },
-    {
-        "TYPE": "EUI48",
-        "Value": 108,
-        "Meaning": "an EUI-48 address"
-    },
-    {
-        "TYPE": "EUI64",
-        "Value": 109,
-        "Meaning": "an EUI-64 address"
-    },
-    {
-        "TYPE": "TKEY",
-        "Value": 249,
-        "Meaning": "Transaction Key"
-    },
-    {
-        "TYPE": "TSIG",
-        "Value": 250,
-        "Meaning": "Transaction Signature"
-    },
-    {
-        "TYPE": "IXFR",
-        "Value": 251,
-        "Meaning": "incremental transfer"
-    },
-    {
-        "TYPE": "AXFR",
-        "Value": 252,
-        "Meaning": "transfer of an entire zone"
-    },
-    {
-        "TYPE": "MAILB",
-        "Value": 253,
-        "Meaning": "mailbox-related RRs (MB, MG or MR)"
-    },
-    {
-        "TYPE": "MAILA",
-        "Value": 254,
-        "Meaning": "mail agent RRs (OBSOLETE - see MX)"
-    },
-    {
-        "TYPE": "*",
-        "Value": 255,
-        "Meaning": "A request for some or all records the server has available"
-    },
-    {
-        "TYPE": "URI",
-        "Value": 256,
-        "Meaning": "URI"
-    },
-    {
-        "TYPE": "CAA",
-        "Value": 257,
-        "Meaning": "Certification Authority Restriction"
-    },
-    {
-        "TYPE": "AVC",
-        "Value": 258,
-        "Meaning": "Application Visibility and Control"
-    },
-    {
-        "TYPE": "DOA",
-        "Value": 259,
-        "Meaning": "Digital Object Architecture"
-    },
-    {
-        "TYPE": "AMTRELAY",
-        "Value": 260,
-        "Meaning": "Automatic Multicast Tunneling Relay"
-    },
-    {
-        "TYPE": "TA",
-        "Value": 32768,
-        "Meaning": "DNSSEC Trust Authorities"
-    },
-    {
-        "TYPE": "DLV",
-        "Value": 32769,
-        "Meaning": "DNSSEC Lookaside Validation (OBSOLETE)"
-    }
-]
+{
+    "RecordTypes": [
+        {
+            "type": "A",
+            "value": 1,
+            "meaning": "a host address"
+        },
+        {
+            "type": "NS",
+            "value": 2,
+            "meaning": "an authoritative name server"
+        },
+        {
+            "type": "MD",
+            "value": 3,
+            "meaning": "a mail destination (OBSOLETE - use MX)"
+        },
+        {
+            "type": "MF",
+            "value": 4,
+            "meaning": "a mail forwarder (OBSOLETE - use MX)"
+        },
+        {
+            "type": "CNAME",
+            "value": 5,
+            "meaning": "the canonical name for an alias"
+        },
+        {
+            "type": "SOA",
+            "value": 6,
+            "meaning": "marks the start of a zone of authority"
+        },
+        {
+            "type": "MB",
+            "value": 7,
+            "meaning": "a mailbox domain name (EXPERIMENTAL)"
+        },
+        {
+            "type": "MG",
+            "value": 8,
+            "meaning": "a mail group member (EXPERIMENTAL)"
+        },
+        {
+            "type": "MR",
+            "value": 9,
+            "meaning": "a mail rename domain name (EXPERIMENTAL)"
+        },
+        {
+            "type": null,
+            "value": 10,
+            "meaning": "a null RR (EXPERIMENTAL)"
+        },
+        {
+            "type": "WKS",
+            "value": 11,
+            "meaning": "a well known service description"
+        },
+        {
+            "type": "PTR",
+            "value": 12,
+            "meaning": "a domain name pointer"
+        },
+        {
+            "type": "HINFO",
+            "value": 13,
+            "meaning": "host information"
+        },
+        {
+            "type": "MINFO",
+            "value": 14,
+            "meaning": "mailbox or mail list information"
+        },
+        {
+            "type": "MX",
+            "value": 15,
+            "meaning": "mail exchange"
+        },
+        {
+            "type": "TXT",
+            "value": 16,
+            "meaning": "text strings"
+        },
+        {
+            "type": "RP",
+            "value": 17,
+            "meaning": "for Responsible Person"
+        },
+        {
+            "type": "AFSDB",
+            "value": 18,
+            "meaning": "for AFS Data Base location"
+        },
+        {
+            "type": "X25",
+            "value": 19,
+            "meaning": "for X.25 PSDN address"
+        },
+        {
+            "type": "ISDN",
+            "value": 20,
+            "meaning": "for ISDN address"
+        },
+        {
+            "type": "RT",
+            "value": 21,
+            "meaning": "for Route Through"
+        },
+        {
+            "type": "NSAP",
+            "value": 22,
+            "meaning": "for NSAP address, NSAP style A record"
+        },
+        {
+            "type": "NSAP-PTR",
+            "value": 23,
+            "meaning": "for domain name pointer, NSAP style"
+        },
+        {
+            "type": "SIG",
+            "value": 24,
+            "meaning": "for security signature"
+        },
+        {
+            "type": "KEY",
+            "value": 25,
+            "meaning": "for security key"
+        },
+        {
+            "type": "PX",
+            "value": 26,
+            "meaning": "X.400 mail mapping information"
+        },
+        {
+            "type": "GPOS",
+            "value": 27,
+            "meaning": "Geographical Position"
+        },
+        {
+            "type": "AAAA",
+            "value": 28,
+            "meaning": "IP6 Address"
+        },
+        {
+            "type": "LOC",
+            "value": 29,
+            "meaning": "Location Information"
+        },
+        {
+            "type": "NXT",
+            "value": 30,
+            "meaning": "Next Domain (OBSOLETE)"
+        },
+        {
+            "type": "EID",
+            "value": 31,
+            "meaning": "Endpoint Identifier"
+        },
+        {
+            "type": "NIMLOC",
+            "value": 32,
+            "meaning": "Nimrod Locator"
+        },
+        {
+            "type": "SRV",
+            "value": 33,
+            "meaning": "Server Selection"
+        },
+        {
+            "type": "ATMA",
+            "value": 34,
+            "meaning": "ATM Address"
+        },
+        {
+            "type": "NAPTR",
+            "value": 35,
+            "meaning": "Naming Authority Pointer"
+        },
+        {
+            "type": "KX",
+            "value": 36,
+            "meaning": "Key Exchanger"
+        },
+        {
+            "type": "CERT",
+            "value": 37,
+            "meaning": "CERT"
+        },
+        {
+            "type": "A6",
+            "value": 38,
+            "meaning": "A6 (OBSOLETE - use AAAA)"
+        },
+        {
+            "type": "DNAME",
+            "value": 39,
+            "meaning": "DNAME"
+        },
+        {
+            "type": "SINK",
+            "value": 40,
+            "meaning": "SINK"
+        },
+        {
+            "type": "OPT",
+            "value": 41,
+            "meaning": "OPT"
+        },
+        {
+            "type": "APL",
+            "value": 42,
+            "meaning": "APL"
+        },
+        {
+            "type": "DS",
+            "value": 43,
+            "meaning": "Delegation Signer"
+        },
+        {
+            "type": "SSHFP",
+            "value": 44,
+            "meaning": "SSH Key Fingerprint"
+        },
+        {
+            "type": "IPSECKEY",
+            "value": 45,
+            "meaning": "IPSECKEY"
+        },
+        {
+            "type": "RRSIG",
+            "value": 46,
+            "meaning": "RRSIG"
+        },
+        {
+            "type": "NSEC",
+            "value": 47,
+            "meaning": "NSEC"
+        },
+        {
+            "type": "DNSKEY",
+            "value": 48,
+            "meaning": "DNSKEY"
+        },
+        {
+            "type": "DHCID",
+            "value": 49,
+            "meaning": "DHCID"
+        },
+        {
+            "type": "NSEC3",
+            "value": 50,
+            "meaning": "NSEC3"
+        },
+        {
+            "type": "NSEC3PARAM",
+            "value": 51,
+            "meaning": "NSEC3PARAM"
+        },
+        {
+            "type": "TLSA",
+            "value": 52,
+            "meaning": "TLSA"
+        },
+        {
+            "type": "SMIMEA",
+            "value": 53,
+            "meaning": "S/MIME cert association"
+        },
+        {
+            "type": "HIP",
+            "value": 55,
+            "meaning": "Host Identity Protocol"
+        },
+        {
+            "type": "NINFO",
+            "value": 56,
+            "meaning": "NINFO"
+        },
+        {
+            "type": "RKEY",
+            "value": 57,
+            "meaning": "RKEY"
+        },
+        {
+            "type": "TALINK",
+            "value": 58,
+            "meaning": "Trust Anchor LINK"
+        },
+        {
+            "type": "CDS",
+            "value": 59,
+            "meaning": "Child DS"
+        },
+        {
+            "type": "CDNSKEY",
+            "value": 60,
+            "meaning": "DNSKEY(s) the Child wants reflected in DS"
+        },
+        {
+            "type": "OPENPGPKEY",
+            "value": 61,
+            "meaning": "OpenPGP Key"
+        },
+        {
+            "type": "CSYNC",
+            "value": 62,
+            "meaning": "Child-To-Parent Synchronization"
+        },
+        {
+            "type": "ZONEMD",
+            "value": 63,
+            "meaning": "message digest for DNS zone"
+        },
+        {
+            "type": "SPF",
+            "value": 99,
+            "meaning": ""
+        },
+        {
+            "type": "UINFO",
+            "value": 100,
+            "meaning": ""
+        },
+        {
+            "type": "UID",
+            "value": 101,
+            "meaning": ""
+        },
+        {
+            "type": "GID",
+            "value": 102,
+            "meaning": ""
+        },
+        {
+            "type": "UNSPEC",
+            "value": 103,
+            "meaning": ""
+        },
+        {
+            "type": "NID",
+            "value": 104,
+            "meaning": ""
+        },
+        {
+            "type": "L32",
+            "value": 105,
+            "meaning": ""
+        },
+        {
+            "type": "L64",
+            "value": 106,
+            "meaning": ""
+        },
+        {
+            "type": "LP",
+            "value": 107,
+            "meaning": ""
+        },
+        {
+            "type": "EUI48",
+            "value": 108,
+            "meaning": "an EUI-48 address"
+        },
+        {
+            "type": "EUI64",
+            "value": 109,
+            "meaning": "an EUI-64 address"
+        },
+        {
+            "type": "TKEY",
+            "value": 249,
+            "meaning": "Transaction Key"
+        },
+        {
+            "type": "TSIG",
+            "value": 250,
+            "meaning": "Transaction Signature"
+        },
+        {
+            "type": "IXFR",
+            "value": 251,
+            "meaning": "incremental transfer"
+        },
+        {
+            "type": "AXFR",
+            "value": 252,
+            "meaning": "transfer of an entire zone"
+        },
+        {
+            "type": "MAILB",
+            "value": 253,
+            "meaning": "mailbox-related RRs (MB, MG or MR)"
+        },
+        {
+            "type": "MAILA",
+            "value": 254,
+            "meaning": "mail agent RRs (OBSOLETE - see MX)"
+        },
+        {
+            "type": "*",
+            "value": 255,
+            "meaning": "A request for some or all records the server has available"
+        },
+        {
+            "type": "URI",
+            "value": 256,
+            "meaning": "URI"
+        },
+        {
+            "type": "CAA",
+            "value": 257,
+            "meaning": "Certification Authority Restriction"
+        },
+        {
+            "type": "AVC",
+            "value": 258,
+            "meaning": "Application Visibility and Control"
+        },
+        {
+            "type": "DOA",
+            "value": 259,
+            "meaning": "Digital Object Architecture"
+        },
+        {
+            "type": "AMTRELAY",
+            "value": 260,
+            "meaning": "Automatic Multicast Tunneling Relay"
+        },
+        {
+            "type": "TA",
+            "value": 32768,
+            "meaning": "DNSSEC Trust Authorities"
+        },
+        {
+            "type": "DLV",
+            "value": 32769,
+            "meaning": "DNSSEC Lookaside Validation (OBSOLETE)"
+        }
+    ]
+}

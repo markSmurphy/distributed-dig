@@ -326,6 +326,8 @@ if (config) {
                                 'unique': '',
                                 'domain': response.domain,
                                 'IPAddress': chalk.green(response.ipAddress),
+                                'RecordType': response.RecordType,
+                                'TTL': response.TTL,
                                 'provider': chalk.grey(response.provider),
                             }];
                             if (ddig.isAddressUnique(response.ipAddress)) {
@@ -372,6 +374,8 @@ if (config) {
                                 unique: {minWidth:1, maxWidth: 1},
                                 domain: {minWidth: domainColumnWidth},
                                 IPAddress: {minWidth: 15},
+                                RecordType: {minWidth:6, maxWidth:6},
+                                TTL: {minWidth:2},
                                 provider: {minWidth: providerColumnWidth},
                                 nameServer: {minWidth: nameServerColumnWidth},
                                 duration: {minWidth: 7}

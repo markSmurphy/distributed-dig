@@ -286,11 +286,23 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.4.0] - March 14<sup>th</sup> 2020
+
+#### Added
+
+* Standard output now includes record type.
+
+#### Changed
+
+* Updated dependencies.
+
+---
+
 ### [1.3.1] - February 14<sup>th</sup> 2020
 
 #### Fixed
 
-* Fixed a nest array bounds check which resulted in valid domains being reported as non-existent.
+* Fixed a nested array bounds check which resulted in valid domains being reported as non-existent.
 
 ---
 
