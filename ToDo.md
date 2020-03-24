@@ -45,3 +45,4 @@
 * Look to add [fuzzy search](https://www.npmjs.com/package/fuzzy) for unknown (mistyped) CLI options
 * Replace moment.js with native code as per [You-Don't-Need-Moment.js](https://github.com/you-dont-need/You-Dont-Need-Momentjs#difference)
 * Allow URLs to be supplied and parse them for the hostname.
+* Show warning on invalid domain.
