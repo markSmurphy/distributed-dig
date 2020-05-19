@@ -42,7 +42,7 @@
     "debug": "^4.1.1",
     "fuzzy-search": "^3.1.0",
     "is-ip": "^3.1.0",
-    "is-valid-domain": "0.0.11",
+    "is-valid-domain": "0.0.14",
     "moment": "^2.24.0",
     "native-dns-multisocket": "^0.7.0",
     "prettyjson": "^1.2.1",
