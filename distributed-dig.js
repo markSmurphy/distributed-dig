@@ -326,8 +326,8 @@ if (config) {
                                 'unique': '',
                                 'domain': response.domain,
                                 'IPAddress': chalk.green(response.ipAddress),
-                                'RecordType': response.RecordType,
-                                'TTL': response.TTL,
+                                'RecordType': response.recordType,
+                                'TTL': response.ttl,
                                 'provider': chalk.grey(response.provider),
                             }];
                             if (ddig.isAddressUnique(response.ipAddress)) {
