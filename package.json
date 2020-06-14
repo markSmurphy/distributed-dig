@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/MarkSMurphy/distributed-dig#readme",
   "dependencies": {
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "columnify": "^1.5.4",
     "debug": "^4.1.1",
     "fuzzy-search": "^3.2.1",
