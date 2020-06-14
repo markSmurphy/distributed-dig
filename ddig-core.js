@@ -15,6 +15,9 @@ const moment = require('moment');
 // Platform agnostic new line character
 const EOL =  require('os').EOL;
 
+const path = require('path');
+var configFilePath = path.resolve(__dirname);
+
 module.exports = {
     resolve(domain, resolver, options, callback) {
         const startTime = moment();
@@ -260,12 +263,12 @@ module.exports = {
     },
 
     ResourceRecordType(value) { // Takes the integer value returned in an answer and returns the corresponding record name
-        const DNSResourceRecordsDatabase = 'DNSResourceRecords.json';
+        const DNSResourceRecordsDatabase = configFilePath +'/' + 'DNSResourceRecords.json';
         try {
             debug('ResourceRecordType() called with value: %s', value);
             // Read in Resource Record database
             const fs = require('fs');
-            debug('Reading in DNS Resource Records data from %s', DNSResourceRecordsDatabase);
+            debug('Reading in DNS Resource Records data from [%s]', DNSResourceRecordsDatabase);
             let rawData = fs.readFileSync(DNSResourceRecordsDatabase);
             let DNSRecords = JSON.parse(rawData);
 
@@ -296,7 +299,7 @@ module.exports = {
 
         } catch (error) {
             debug('An error occurred in "ResourceRecordType(): %O"', error);
-            return ('Unknown');
+            return ('----');
         }
     }
 };

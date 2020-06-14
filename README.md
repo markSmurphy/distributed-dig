@@ -287,6 +287,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.4.2] - June 14<sup>th</sup> 2020
+
+#### Changed
+
+* Fixed a bug causing the `Record Type` to be `Unknown` due to erroneously locating the json lookup file when install globally.
+
+---
+
 ### [1.4.1] - June 14<sup>th</sup> 2020
 
 #### Added
