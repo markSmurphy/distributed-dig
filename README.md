@@ -287,7 +287,7 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.4.1] - TBC
+### [1.4.1] - June 14<sup>th</sup> 2020
 
 #### Added
 
@@ -295,7 +295,9 @@ $env:debug="ddig"
 
 #### Changed
 
-* Updated Dependencies
+* Updated Dependencies.
+* Fixed a bug causing `Record Type` and `TTL` column values being `undefined`.
+* Increased `TTL` column width and made it right-aligned.
 
 ---
 
