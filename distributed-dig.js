@@ -375,7 +375,7 @@ if (config) {
                                 domain: {minWidth: domainColumnWidth},
                                 IPAddress: {minWidth: 15},
                                 RecordType: {minWidth:6, maxWidth:6},
-                                TTL: {minWidth:2},
+                                TTL: {minWidth:6, align: 'right'},
                                 provider: {minWidth: providerColumnWidth},
                                 nameServer: {minWidth: nameServerColumnWidth},
                                 duration: {minWidth: 7}
