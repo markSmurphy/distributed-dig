@@ -11,15 +11,17 @@
                                          8.20.247.20                            fuse.fuseuniversal.com --> 34.247.233.174
 ```
 
-- [ ] Include TTL in `--verbose` output (*increase recommended console width accordingly*).
-- [ ] Include record type in output.
+- [X] Include TTL in output.
+- [X] Include record type in output.
+- [ ] Increase the recommended `--verbose` console width in line with new `TTL` and `record` columns.
 - [ ] Use `dns.GetServers()` to save current resolvers and highlight those in output if they're called.
 - [ ] Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [`ip-geolocate`](https://www.npmjs.com/package/ip-geolocate) [ipstack.com](https://ipstack.com/)).
 - [ ] Look into short command-line switches.
 - [ ] Use `findup-sync` to find config file if not in current directory.
+- [ ] Add support for new version notification via [update-notifier](https://www.npmjs.com/package/update-notifier).
 - [ ] Add a `--file` option to take domain names from a flat text file.
-- [ ] Add the option `--unique` | to display only the first occurrence of each unique IP address.
-- [ ] Add `--bare` option which just shows resolver output rather than which resolver it came from.
+- [ ] Add the option `--unique` to display only the first occurrence of each unique IP address.
+- [ ] Add `--bare` option (or `--short`) which just shows resolver output rather than which resolver it came from.
 - [ ] Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
   - [ ] [fuzzy-search](https://www.npmjs.com/package/fuzzy-search) ... `npm install fuzzy-search --save`
 - [ ] Add `--certs` switch which instructs `distributed-dig.js` to extract an x.505 certificate from each unique IP address, and add the details to the `lookupResult` response object using:
