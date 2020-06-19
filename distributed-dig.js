@@ -293,13 +293,14 @@ if (config) {
 
                 } else {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
-                    if (process.argv[i].substr(0, 2) != '--') {
-                        console.log(chalk.blue('Ignoring [') + chalk.blue.underline('%s') + chalk.blue('] because it is not a valid domain name'), process.argv[i]);
+                    if (process.argv[i].substr(0, 1) !== '-') {
+                        // We don't want to warn on switches (which start with '-')
+                        console.log(chalk.yellow('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' because it\'s not a valid domain name');
                     }
 
                     // Check for arguments that are missing the double dash prefix
                     if ((process.argv[i].substring(0, 1) === '-') && (process.argv[i].substring(0, 2) !== '--')) {
-                        console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid argument');
+                        console.log(chalk.yellow('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' as it\'s not a valid argument');
                     }
                 }
             }

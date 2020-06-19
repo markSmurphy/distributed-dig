@@ -287,6 +287,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.5.1] - June 19<sup>th</sup> 2020
+
+#### Changed
+
+* Improved the detection and reporting of invalid domains and switches
+
+---
+
 ### [1.5.0] - June 19<sup>th</sup> 2020
 
 #### Added
