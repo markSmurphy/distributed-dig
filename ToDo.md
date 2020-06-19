@@ -13,7 +13,7 @@
 
 - [X] Include TTL in output.
 - [X] Include record type in output.
-- [ ] Increase the recommended `--verbose` console width in line with new `TTL` and `record` columns.
+- [X] Increase the recommended `--verbose` console width in line with new `TTL` and `record` columns.
 - [ ] Use `dns.GetServers()` to save current resolvers and highlight those in output if they're called.
 - [ ] Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [`ip-geolocate`](https://www.npmjs.com/package/ip-geolocate) [ipstack.com](https://ipstack.com/)).
 - [ ] Look into short command-line switches.
@@ -45,6 +45,6 @@
 - [ ] Add option to make HTTPS request to endpoints (to each uniquely resolved IP address and insert `host` header) and list all or specified response headers.
 - [ ] Allow for `--certs` *and* `--verbose` to display more x.509 properties.
 - [ ] Look to add [fuzzy search](https://www.npmjs.com/package/fuzzy) for unknown (mistyped) CLI options
-- [ ] Replace moment.js with native code as per [You-Don't-Need-Moment.js](https://github.com/you-dont-need/You-Dont-Need-Momentjs#difference)
+- [X] Replace moment.js with native code as per [You-Don't-Need-Moment.js](https://github.com/you-dont-need/You-Dont-Need-Momentjs#difference)
 - [ ] Allow URLs to be supplied and parse them for the hostname.
-- [ ] Show warning on invalid domain.
+- [X] Show warning on invalid domain.

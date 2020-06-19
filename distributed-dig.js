@@ -293,6 +293,10 @@ if (config) {
 
                 } else {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
+                    if (process.argv[i].substr(0, 2) != '--') {
+                        console.log(chalk.blue('Ignoring [') + chalk.blue.underline('%s') + chalk.blue('] because it is not a valid domain name'), process.argv[i]);
+                    }
+
                     // Check for arguments that are missing the double dash prefix
                     if ((process.argv[i].substring(0, 1) === '-') && (process.argv[i].substring(0, 2) !== '--')) {
                         console.log('Warning: '.yellow + 'ignoring ' + process.argv[i].blue + ' as it\'s not a valid argument');
@@ -306,8 +310,8 @@ if (config) {
                 // Display which configuration file is being used
                 printUsingConfigFile();
                 // If we're going to be outputting verbose columns, check the terminal width is sufficient
-                if ((config.options.verbose) && (process.stdout.columns < 130)) {
-                    console.log(chalk.cyan('When using the --verbose switch you might want to consider increasing your console width to at least 130 (it\'s currently %s)'), process.stdout.columns);
+                if ((config.options.verbose) && (process.stdout.columns < 140)) {
+                    console.log(chalk.cyan('When using the --verbose switch you might want to consider increasing your console width to at least 140 (it\'s currently %s)'), process.stdout.columns);
                 }
             }
 
@@ -327,7 +331,7 @@ if (config) {
                                 'domain': response.domain,
                                 'IPAddress': chalk.green(response.ipAddress),
                                 'RecordType': response.recordType,
-                                'TTL': response.ttl,
+                                'TTL': response.ttl + 's',
                                 'provider': chalk.grey(response.provider),
                             }];
                             if (ddig.isAddressUnique(response.ipAddress)) {
@@ -375,7 +379,7 @@ if (config) {
                                 domain: {minWidth: domainColumnWidth},
                                 IPAddress: {minWidth: 15},
                                 RecordType: {minWidth:6, maxWidth:6},
-                                TTL: {minWidth:6, align: 'right'},
+                                TTL: {minWidth:7, align: 'right'},
                                 provider: {minWidth: providerColumnWidth},
                                 nameServer: {minWidth: nameServerColumnWidth},
                                 duration: {minWidth: 7}

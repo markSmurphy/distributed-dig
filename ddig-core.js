@@ -9,9 +9,6 @@ const isIp = require('is-ip');
 // Import DNS library
 const dns = require('native-dns-multisocket');
 
-// Use 'moment' to do time difference calculations
-const moment = require('moment');
-
 // Platform agnostic new line character
 const EOL =  require('os').EOL;
 
@@ -20,7 +17,7 @@ var configFilePath = path.resolve(__dirname);
 
 module.exports = {
     resolve(domain, resolver, options, callback) {
-        const startTime = moment();
+        const startTime = Date.now();
         debug('resolve() called for domain [%s] via resolver [%s (%s)] with options: %O', domain, resolver.nameServer, resolver.provider ,options);
         // Initialise lookup result object
         var lookupResult = {
@@ -43,7 +40,7 @@ module.exports = {
             debug('resolve() skipping the resolver [%s] because it is not a valid IP address', resolver.nameServer);
             // Populate lookup results object
             lookupResult.success=false;
-            lookupResult.duration = moment(moment()).diff(startTime);
+            lookupResult.duration = Math.ceil((Date.now() - startTime));
             lookupResult.msg = 'Invalid resolver IP address';
 
         } else {
@@ -77,7 +74,7 @@ module.exports = {
                 // Populate lookup result object
                 lookupResult.msg = 'Timeout';
                 lookupResult.success = false;
-                lookupResult.duration = moment(moment()).diff(startTime);
+                lookupResult.duration = Math.ceil((Date.now() - startTime));
 
                 // Return the result
                 callback(lookupResult);
@@ -90,7 +87,7 @@ module.exports = {
                     lookupResult.msg = 'An error occurred';
                     lookupResult.error = JSON.stringify(err);
                     lookupResult.success = false;
-                    lookupResult.duration = moment(moment()).diff(startTime);
+                    lookupResult.duration = Math.ceil((Date.now() - startTime));
 
                     // Return the result
                     callback(lookupResult);
@@ -109,14 +106,16 @@ module.exports = {
 
                         lookupResult.msg = 'Success';
                         lookupResult.success = true;
-                        lookupResult.duration = moment(moment()).diff(startTime);
+                        let endTime = Date.now();
+                        let duration = Math.ceil((endTime - startTime));
+                        lookupResult.duration = duration;
                     } else{
                         debug('The resolver [%s] provided an empty answer: %O', resolver.nameServer, answer);
 
                         lookupResult.msg = 'Non-Existent Domain';
                         lookupResult.error = 'NXDomain';
                         lookupResult.success = false;
-                        lookupResult.duration = moment(moment()).diff(startTime);
+                        lookupResult.duration = Math.ceil((Date.now() - startTime));
                     }
 
                     // Return the result

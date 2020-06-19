@@ -287,6 +287,20 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.5.0] - June 19<sup>th</sup> 2020
+
+#### Added
+
+* If you tried to lookup a domain that was invalid, according to the DNS RFC, it was ignored.  You'll now see a warning message when `ddig` ignores an input.
+* Appended a unit suffix to the `TTL` value.
+
+#### Changed
+
+* Removed `moment` as a dependency and refactored time difference calculations to be handled natively.
+* Increased the recommended columns width to 140 when using the `--verbose` switch,  allowing for the new 'TTL' and `record type` columns.
+
+---
+
 ### [1.4.2] - June 14<sup>th</sup> 2020
 
 #### Changed
