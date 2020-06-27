@@ -287,6 +287,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.5.2] - June 27<sup>th</sup> 2020
+
+#### Changed
+
+* The message displaying the configuration file being used now only includes the full path if it differs from the current working directory.
+
+---
+
 ### [1.5.1] - June 19<sup>th</sup> 2020
 
 #### Changed
