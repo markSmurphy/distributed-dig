@@ -200,10 +200,11 @@ function getConfig() {
 }
 
 function printUsingConfigFile() {
-    console.log('cwd: %s', process.cwd());
-    console.log('__dirname: %s', __dirname);
-    console.log('configFileName: %s', configFileName);
-    console.log('configFilePath: %s', configFilePath);
+    debug('printUsingConfigFile()');
+    debug('cwd: %s', process.cwd());
+    debug('__dirname: %s', __dirname);
+    debug('configFileName: %s', configFileName);
+    debug('configFilePath: %s', configFilePath);
     // Don't bother displaying the directory if it's the current working directory
     if ((configFilePath === '.') || (configFilePath === process.cwd())) {
         console.log(chalk.grey('Using configuration file: ') + chalk.yellow(configFileName));
