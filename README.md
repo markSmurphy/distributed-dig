@@ -27,7 +27,7 @@ npm install -g distributed-dig
 ddig domain
 ```
 
-![`ddig [domain]`](https://marksmurphy.github.io/img/ddig.single.domain.gif)
+![`ddig [domain]`](https://marksmurphy.github.io/img/ddig.single.domains.gif)
 
 ---
 
@@ -135,7 +135,7 @@ Switches on verbose mode which outputs the following additional fields:
 * Resolver IP Address
 * Response time
 
-![ddig www.asos.com --verbose](https://marksmurphy.github.io/img/ddig.single.domain.verbose.gif)
+![ddig www.asos.com --verbose](https://marksmurphy.github.io/img/ddig.single.domain.www.asos.com.verbose.gif)
 
 `--verbose` also modifies the `--list-resolvers` and `--list-options` switches.
 
