@@ -287,6 +287,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.5.4] - July 11<sup>th</sup> 2020
+
+#### Changed
+
+* Updated dependencies.
+
+---
+
 ### [1.5.2] - June 27<sup>th</sup> 2020
 
 #### Changed
@@ -333,7 +341,7 @@ $env:debug="ddig"
 
 #### Changed
 
-* Updated Dependencies.
+* Updated dependencies.
 * Fixed a bug causing `Record Type` and `TTL` column values being `undefined`.
 * Increased `TTL` column width and made it right-aligned.
 

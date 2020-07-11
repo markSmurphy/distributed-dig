@@ -49,4 +49,4 @@
 - [ ] Allow URLs to be supplied and parse them for the hostname.
 - [X] Show warning on invalid domain.
 - [ ] Enhance standard error reporting with [pretty-error](https://www.npmjs.com/package/pretty-error).
-- [ ] Only show config file path when it differs from the current directory.
+- [X] Only show config file path when it differs from the current directory.
