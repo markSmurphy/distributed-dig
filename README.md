@@ -289,6 +289,10 @@ $env:debug="ddig"
 
 ### [1.5.5] - August 10<sup>th</sup> 2020
 
+#### Added
+
+* Improved the standard (non-verbose) output for `CNAME` records to now include the first FQDN it resolves to along with the IP address.
+
 #### Changed
 
 * Fixed an `undefined` reference when using `--list-defaults`.

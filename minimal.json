@@ -1,0 +1,20 @@
+{
+  "options": {
+    "request": {
+      "port": 53,
+      "type": "udp",
+      "timeout": 2500,
+      "try_edns": false,
+      "cache": false
+    },
+    "question": {
+      "type": "A"
+    }
+  },
+  "resolvers": [
+    {
+      "nameServer": "208.67.222.222",
+      "provider": "OpenDNS (Primary)"
+    }
+  ]
+}

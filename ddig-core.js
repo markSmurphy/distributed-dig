@@ -193,7 +193,7 @@ module.exports = {
             // We've gone through the whole list without finding the IP address, so add it to the list
             module.exports.isAddressUnique.addresses.push(ipAddress);
             // Return true as the address is unique
-            debug('Returning "True"');
+            debug('The IP Address %s is unique', ipAddress);
             return(true);
         } catch (error) {
             debug('isAddressUnique() caught an exception: %O', error);

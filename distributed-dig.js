@@ -340,11 +340,23 @@ if (config) {
                                 'TTL': response.ttl + 's',
                                 'provider': chalk.grey(response.provider),
                             }];
+
+                            // If we've received a CNAME record, include the top level resolution with the IP address
+                            if (response.recordType === 'CNAME') {
+                                debug('Response is a CNAME.  Augment the IP address with top level resolution');
+                                debug('Parsing the answer: %O', response.answer);
+                                let answer = JSON.parse(response.answer);
+                                debug('Picked out: %s', answer[0].data);
+                                result[0].IPAddress = chalk.green(answer[0].data) + EOL + chalk.green(response.ipAddress);
+                            }
+
+                            // Mark unique IP addresses
                             if (ddig.isAddressUnique(response.ipAddress)) {
                                 // If this is first time we've seen this IP address mark the 'unique' column
-                                if (process.stdout.isTTY) { // A Text Terminal is attached to stdout
+                                if (process.stdout.isTTY) { // A Text Terminal is attached to stdout. Can use unicode characters
                                     // Use the mathematical Existential Quantification symbol "∃" (There Exists)
                                     //result[0].unique = '∃';
+
                                     // Use a bullet point
                                     result[0].unique = '•';
                                 } else { // A Text Terminal is NOT attached to stdout. Output is being piped. Refrain from using unicode characters
