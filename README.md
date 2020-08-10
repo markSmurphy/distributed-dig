@@ -287,7 +287,7 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.5.5] - August 10<sup>th</sup> 2020
+### [1.6.0] - August 10<sup>th</sup> 2020
 
 #### Added
 
