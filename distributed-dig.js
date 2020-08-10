@@ -268,7 +268,7 @@ if (config) {
             console.log(columns);
         }
     } else if (argv.listDefaults) {
-        //
+        // Initialise the 'defaults' module
         const defaults = require('./ddig-defaults');
         // if printDefaultConfig(true) then output json is pretty printed; pass through the opposite of the verbose switch so it's pretty by default and --verbose switches it off
         defaults.printDefaultConfig(!argv.verbose);

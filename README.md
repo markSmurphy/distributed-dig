@@ -287,6 +287,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.5.5] - August 10<sup>th</sup> 2020
+
+#### Changed
+
+* Fixed an `undefined` reference when using `--list-defaults`.
+
+---
+
 ### [1.5.4] - July 11<sup>th</sup> 2020
 
 #### Changed

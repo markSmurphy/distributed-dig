@@ -117,7 +117,8 @@ const defaultConfig = {
       printDefaultConfig(prettyPrint) {
           if (prettyPrint) {
               const prettyjson = require('prettyjson');
-              console.log('Default Configuration'.yellow);
+              const chalk = require('chalk');
+              console.log(chalk.yellow('Default Configuration:'));
               console.log(prettyjson.render(defaultConfig));
           } else {
               // Raw json output
