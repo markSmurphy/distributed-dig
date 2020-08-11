@@ -218,7 +218,6 @@ function printUsingConfigFile() {
 config = getConfig();
 
 if (config) {
-
     // Check for 'help' command line parameters, or no parameters at all
     if ((process.argv.length === 2) || (argv.help)) {
         // Show help screen
@@ -229,21 +228,20 @@ if (config) {
         // Get list of resolvers
         if (config.options.verbose) {
         // Raw JSON output
-            const prettyjson = require('prettyjson');
-            console.log(chalk.yellow('Resolvers'));
-            console.log(prettyjson.render(config.resolvers));
+            console.log(chalk.yellow('DNS Resolvers:'));
+            console.dir(config.resolvers);
         } else {
             const columnify = require('columnify');
             const columns = columnify(config.resolvers, {
                 config: {
                     'nameServer': {
                         headingTransform: function() {
-                        return 'Resolver IP Address'.underline;
+                        return chalk.bold('Resolver IP Address');
                         }
                     },
                     'provider': {
                         headingTransform: function() {
-                        return 'DNS Provider'.underline;
+                        return chalk.bold('DNS Provider');
                         }
                     }
                 }
@@ -255,9 +253,8 @@ if (config) {
         printUsingConfigFile();
         if (config.options.verbose) {
             // Raw JSON output
-            const prettyjson = require('prettyjson');
-            console.log(chalk.yellow('Options'));
-            console.log(prettyjson.render(config.options));
+            console.log(chalk.yellow('Options:'));
+            console.dir(config.options);
         } else {
             const columnify = require('columnify');
             console.log(chalk.yellow('{request}'));
@@ -268,10 +265,9 @@ if (config) {
             console.log(columns);
         }
     } else if (argv.listDefaults) {
-        // Initialise the 'defaults' module
+        // Initialise the 'defaults' module and list default options to console
         const defaults = require('./ddig-defaults');
-        // if printDefaultConfig(true) then output json is pretty printed; pass through the opposite of the verbose switch so it's pretty by default and --verbose switches it off
-        defaults.printDefaultConfig(!argv.verbose);
+        defaults.printDefaultConfig();
     } else {
         try {
             // Loop through command line parameters to extract domains.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'

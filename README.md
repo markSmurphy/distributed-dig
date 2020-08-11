@@ -287,6 +287,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.6.1] - TBA <sup>th</sup> 2020
+
+#### Changed
+
+* Fixed output formatting bugs in `--list-resolvers` and `--list-options`
+
+---
+
 ### [1.6.0] - August 10<sup>th</sup> 2020
 
 #### Added
