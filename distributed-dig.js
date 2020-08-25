@@ -294,7 +294,7 @@ if (config) {
 
                 } else {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
-                    if (process.argv[i].substr(0, 1) !== '-') {
+                    if ((process.argv[i].substr(0, 1) !== '-') && (process.argv[i - 1].substr(0, 2) !== '--')) {
                         // We don't want to warn on switches (which start with '-')
                         console.log(chalk.yellow('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' because it\'s not a valid domain name');
                     }

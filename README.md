@@ -287,7 +287,15 @@ $env:debug="ddig"
 
 ## Changelog
 
-### [1.6.1] - TBA <sup>th</sup> 2020
+### [1.6.2] - 25<sup>th</sup> 2020
+
+#### Changed
+
+* Fixed erroneous `warning` when parsing certain command line arguments
+
+---
+
+### [1.6.1] - 11<sup>th</sup> 2020
 
 #### Changed
 
