@@ -278,11 +278,10 @@ if (config) {
                 debug('Extracted [%s] from the command line', process.argv[i]);
                 // Check that's a valid domain
                 if (isValidDomain(process.argv[i])){
-                    debug('[%s] passed domain name validation');
                     if (process.argv[i] === argv.config) {
                         debug('[%s] is the config file, so excluding it from the domains list', process.argv[i]);
                     } else {
-                        debug('Adding [%s] to the domains[] array');
+                        debug('[%s] passed domain name validation. Adding it to the domains[] array', process.argv[i]);
                         // Add domain into the array
                         domains.push(process.argv[i]);
                         // Set domain column width
