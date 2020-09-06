@@ -14,6 +14,9 @@ ddig.cmd
 # Screenshots folder
 screenshots/*
 
+#Word documents
+*.doc?
+
 # Logs
 logs
 *.log
