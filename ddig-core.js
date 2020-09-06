@@ -261,7 +261,7 @@ module.exports = {
         }
     },
 
-    ResourceRecordType(value) { // Takes the integer value returned in an answer and returns the corresponding record name
+    ResourceRecordType(value) { // Takes the integer value returned in a DNS "answer" and returns the corresponding record name
         const DNSResourceRecordsDatabase = configFilePath +'/' + 'DNSResourceRecords.json';
         try {
             debug('ResourceRecordType() called with value: %s', value);
@@ -271,19 +271,10 @@ module.exports = {
             let rawData = fs.readFileSync(DNSResourceRecordsDatabase);
             let DNSRecords = JSON.parse(rawData);
 
-            DNSRecords.RecordTypes.forEach(element => {
-                debug('Evaluating resource record database value [%s] against [%s]', element.value, value);
-                if (element.value === value) {
-                    debug('Returning: %s', element.type);
-                    return(element.type);
-                }
-                // *** TO DO *** This is inefficient as the forEach loop continues even after finding a match
-            });
-
-            // We're going to return 'Unknown' by default unless we find something
+            // Default the return value to 'Unknown'
             var returnValue = 'Unknown';
             for (let i = 0; i < DNSRecords.RecordTypes.length; i++) {
-                debug('Evaluating resource record database value [%s] against [%s]', DNSRecords.RecordTypes[i].value, value);
+                //debug('Evaluating resource record database value [%s] against [%s]', DNSRecords.RecordTypes[i].value, value);
                 if (DNSRecords.RecordTypes[i].value === value) {
                     debug('Returning: %s', DNSRecords.RecordTypes[i].type);
                     // Set new return value of the record type found
