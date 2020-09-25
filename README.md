@@ -287,6 +287,18 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.6.4] - September 25<sup>th</sup> 2020
+
+#### Added
+
+* Added `pretty-error` formatting to TryCatch blocks' console output.
+
+#### Changed
+
+* Updated dependency (`debug`)
+
+---
+
 ### [1.6.3] - September 11<sup>th</sup> 2020
 
 #### Changed

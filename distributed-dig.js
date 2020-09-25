@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var debug = require('debug')('ddig');
+const debug = require('debug')('ddig');
 debug('[%s] started: %O', __filename, process.argv);
 
 // Platform agnostic new line character
@@ -32,6 +32,9 @@ const columnify = require('columnify');
 const chalk = require('chalk');
 // eslint-disable-next-line no-unused-vars
 
+// Error formatting object
+var PrettyError = require('pretty-error');
+var pe = new PrettyError();
 
 // Import IP validation library
 const isIp = require('is-ip');
@@ -403,7 +406,8 @@ if (config) {
                 });
             });
         } catch(err) {
-            console.error(chalk.red('An error occurred: %O'), err);
+            console.error(chalk.red('An error occurred'));
+            console.log(pe.render(err));
         }
     }
 }

@@ -50,7 +50,7 @@
 - [X] Replace moment.js with native code as per [You-Don't-Need-Moment.js](https://github.com/you-dont-need/You-Dont-Need-Momentjs#difference)
 - [ ] Allow URLs to be supplied and parse them for the hostname.
 - [X] Show warning on invalid domain.
-- [ ] Enhance standard error reporting with [pretty-error](https://www.npmjs.com/package/pretty-error).
+- [X] Enhance standard error reporting with [pretty-error](https://www.npmjs.com/package/pretty-error).
 - [X] Only show config file path when it differs from the current directory.
 - [ ] Fix formatting problem when using multiple domains:
 
