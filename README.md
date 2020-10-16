@@ -287,6 +287,14 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.6.5] - October 16<sup>th</sup> 2020
+
+#### Changed
+
+* Updated dependencies (`yargs` & `is-valid-domain`)
+
+---
+
 ### [1.6.4] - September 25<sup>th</sup> 2020
 
 #### Added
