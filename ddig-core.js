@@ -128,7 +128,9 @@ module.exports = {
     parseAnswer(answer, options) {
         debug('parseAnswer() called with ---> [options]: %O ---> [answer]: %O', options, answer);
         // Validate the answer object has something to parse
-        if (answer === []) {
+        //if (answer === []) {
+        if (Array.isArray(answer) && answer.length) {
+            console.log('EMPTY ARRAY');
             // No IP addresses, `answer` is an empty array
             return('no_address');
         }
@@ -215,7 +217,7 @@ module.exports = {
             return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         } catch (error) {
             debug('formatBytes() caught an exception: %O', error);
-            return('%d Bytes', bytes);
+            return(bytes + ' Bytes');
         }
 
     },
@@ -236,7 +238,7 @@ module.exports = {
         } catch (error) {
                 debug('secondsToHms() caught an exception: %O', error);
                 // an unexpected error occurred; return the original value
-                return('%d seconds', seconds);
+                return(seconds + ' seconds');
         }
     },
 
