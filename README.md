@@ -287,6 +287,16 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.6.6] - TBC
+
+#### Changed
+
+* Updated dependency (`pretty-error`)
+* Fixed empty array check in `ddig-core.js`
+* Fixed erroneous string substitution in `return()` function calls in `ddig-core.js`
+
+---
+
 ### [1.6.5] - October 16<sup>th</sup> 2020
 
 #### Changed
