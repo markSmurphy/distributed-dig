@@ -294,6 +294,7 @@ $env:debug="ddig"
 * Updated dependencies (`pretty-error` & `is-valid-domain`)
 * Fixed empty array check in `ddig-core.js`
 * Fixed erroneous string substitution in `return()` function calls in `ddig-core.js`
+* Improved colour output for `CNAME` records and their IP addresses
 
 ---
 
