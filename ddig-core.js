@@ -160,13 +160,13 @@ module.exports = {
                 }
             } else if (options.getRecordType) {
                 // Get the Resource Record type (CNAME, A, AAA, etc)
-                var rrtype =module.exports.ResourceRecordType(answer[0].type);
+                var rrtype = module.exports.resourceRecordType(answer[0].type);
                 // Add record type to the response object
                 response = rrtype;
                 debug('Resource Record Type: %s', rrtype);
             } else if (options.getTTL) {
                 // Get the record's time-to-live value
-                response = answer[0].ttl
+                response = answer[0].ttl;
                 debug('TTL: %s', answer[0].ttl);
             }
 
@@ -263,10 +263,10 @@ module.exports = {
         }
     },
 
-    ResourceRecordType(value) { // Takes the integer value returned in a DNS "answer" and returns the corresponding record name
+    resourceRecordType(value) { // Takes the integer value returned in a DNS "answer" and returns the corresponding record name
         const DNSResourceRecordsDatabase = configFilePath +'/' + 'DNSResourceRecords.json';
         try {
-            debug('ResourceRecordType() called with value: %s', value);
+            debug('resourceRecordType() called with value: %s', value);
             // Read in Resource Record database
             const fs = require('fs');
             debug('Reading in DNS Resource Records data from [%s]', DNSResourceRecordsDatabase);
@@ -282,7 +282,7 @@ module.exports = {
                     // Set new return value of the record type found
                     returnValue = DNSRecords.RecordTypes[i].type;
                     // Stop processing the rest of the loop by skipping the array index forward to the end
-                    i = DNSRecords.RecordTypes.length
+                    i = DNSRecords.RecordTypes.length;
                 }
             }
 

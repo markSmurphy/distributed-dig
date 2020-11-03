@@ -29,21 +29,21 @@
   - [ ] Look to add [fuzzy search](https://www.npmjs.com/package/fuzzy) for unknown (mistyped) CLI options.
 - [ ] Add `--certs` switch which instructs `distributed-dig.js` to extract an x.505 certificate from each unique IP address, and add the details to the `lookupResult` response object using:
 
-    ```javascript
-    const https = require('https');
+  ```javascript
+  const https = require('https');
 
-    https.get('https://92.122.153.27', {
-        headers : { host : 'www.asos.com' },
-        //servername : 'www.asos.com'
-    }, res => {
-        //console.log(res);
-        var cert = res.socket.getPeerCertificate();
-        console.log(cert);
-        console.log(cert.subject);
-    }).on('error', e => {
-        console.log('Error: ', e.message);
-    });
-    ```
+  https.get('https://92.122.153.27', {
+      headers : { host : 'www.asos.com' },
+      //servername : 'www.asos.com'
+  }, res => {
+      //console.log(res);
+      var cert = res.socket.getPeerCertificate();
+      console.log(cert);
+      console.log(cert.subject);
+  }).on('error', e => {
+      console.log('Error: ', e.message);
+  });
+  ```
 
 - [ ] Add option to make HTTPS request to endpoints (to each uniquely resolved IP address and insert `host` header) and list all or specified response headers.
 - [ ] Allow for `--certs` *and* `--verbose` to display more x.509 properties.
