@@ -345,7 +345,7 @@ if (config) {
                                 debug('Parsing the answer: %O', response.answer);
                                 let answer = JSON.parse(response.answer);
                                 debug('Picked out: %s', answer[0].data);
-                                result[0].IPAddress = chalk.green(answer[0].data) + EOL + chalk.green(response.ipAddress);
+                                result[0].IPAddress = chalk.cyan(answer[0].data) + EOL + chalk.green(response.ipAddress);
                             }
 
                             // Mark unique IP addresses

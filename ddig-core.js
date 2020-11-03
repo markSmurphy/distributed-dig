@@ -129,7 +129,7 @@ module.exports = {
         debug('parseAnswer() called with ---> [options]: %O ---> [answer]: %O', options, answer);
         // Validate the answer object has something to parse
         //if (answer === []) {
-        if (Array.isArray(answer) && answer.length) {
+        if (Array.isArray(answer) && answer.length === 0) {
             console.log('EMPTY ARRAY');
             // No IP addresses, `answer` is an empty array
             return('no_address');
