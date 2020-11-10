@@ -126,11 +126,11 @@ module.exports = {
     },
 
     parseAnswer(answer, options) {
-        debug('parseAnswer() called with ---> [options]: %O ---> [answer]: %O', options, answer);
+        debug('parseAnswer() called with ---> options: %O ---> answer: %O', options, answer);
         // Validate the answer object has something to parse
         //if (answer === []) {
         if (Array.isArray(answer) && answer.length === 0) {
-            console.log('EMPTY ARRAY');
+            debug('"answer" is an empty array. Nothing to parse; returning "no_address"');
             // No IP addresses, `answer` is an empty array
             return('no_address');
         }
