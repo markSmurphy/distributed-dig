@@ -44,7 +44,7 @@
     "is-valid-domain": "0.0.17",
     "native-dns-multisocket": "^0.7.0",
     "pretty-error": "^2.1.2",
-    "yargs": "^16.1.0"
+    "yargs": "^16.1.1"
   },
   "devDependencies": {}
 }

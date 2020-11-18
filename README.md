@@ -287,6 +287,15 @@ $env:debug="ddig"
 
 ## Changelog
 
+### [1.6.7] - November 18<sup>th</sup> 2020
+
+#### Changed
+
+* Updated dependencies (`yargs`)
+* Improved debug logging clarity in `parseAnswer()`
+
+---
+
 ### [1.6.6] - November 3<sup>rd</sup> 2020
 
 #### Changed
