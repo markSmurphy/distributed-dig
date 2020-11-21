@@ -22,7 +22,7 @@
 - [ ] Use `findup-sync` to find config file if not in current directory.
 - [ ] Add support for new version notification via [update-notifier](https://www.npmjs.com/package/update-notifier).
 - [ ] Add a `--file` option to take domain names from a flat text file. Perhaps check if each argument is a file and just read it in.
-- [ ] Add the option `--unique` to display only the first occurrence of each unique IP address.
+- [X] Add the option `--unique` to display only the first occurrence of each unique IP address.
 - [ ] Add `--bare` option (or `--short`) which just shows resolver output rather than which resolver it came from.
 - [ ] Add a **SoundEx** pattern match against invalid domains and CLI switches to allow *Did you mean ...* alongside the *Warning: Ignoring ...*.
   - [ ] [fuzzy-search](https://www.npmjs.com/package/fuzzy-search) ... `npm install fuzzy-search --save`.
