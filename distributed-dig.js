@@ -109,7 +109,7 @@ function getConfig() {
                 }
             } else {
                 // No filename was passed with --config
-                console.log(chalk.yellow('Warning: ') + 'ignoring ' + chalk.blue('--config') + '.  You must specify a valid filename');
+                console.log(chalk.yellowBright('Warning: ') + 'ignoring ' + chalk.blue('--config') + '.  You must specify a valid filename');
                 return(false);
             }
         } else {
@@ -135,7 +135,7 @@ function getConfig() {
                         // Config file found in application root directory
                         debug('[%s] found in [%s]', configFileName, configFilePath);
                     } else {
-                        console.log(chalk.red('Error:') + ' The config file ' + chalk.yellow(configFileName) + ' could not be found in:');
+                        console.log(chalk.red('Error:') + ' The config file ' + chalk.yellowBright(configFileName) + ' could not be found in:');
                         console.log(chalk.grey('current dir: ') + cwd);
                         console.log(chalk.grey('home dir:    ') + homedir);
                         console.log(chalk.grey('ddig root:   ') + configFilePath);
@@ -195,6 +195,12 @@ function getConfig() {
             debug('[try_edns] set to: %s', config.options.request.try_edns);
         }
 
+        // Unique addresses only
+        if (argv.unique) {
+            config.options.unique = true;
+            debug('[unique] set to true');
+        }
+
         return(config);
     } catch (e) {
         debug('An error occurred reading the config file [%s]: %O', configFileName, e);
@@ -210,9 +216,9 @@ function printUsingConfigFile() {
     debug('configFilePath: %s', configFilePath);
     // Don't bother displaying the directory if it's the current working directory
     if ((configFilePath === '.') || (configFilePath === process.cwd())) {
-        console.log(chalk.grey('Using configuration file: ') + chalk.yellow(configFileName));
+        console.log(chalk.grey('Using configuration file: ') + chalk.yellowBright(configFileName));
     } else {
-        console.log(chalk.grey('Using configuration file: ') + chalk.yellow(configFileName) + chalk.grey(' [') + chalk.grey(configFilePath) + chalk.grey(']'));
+        console.log(chalk.grey('Using configuration file: ') + chalk.yellowBright(configFileName) + chalk.grey(' [') + chalk.grey(configFilePath) + chalk.grey(']'));
     }
 
 }
@@ -231,7 +237,7 @@ if (config) {
         // Get list of resolvers
         if (config.options.verbose) {
         // Raw JSON output
-            console.log(chalk.yellow('DNS Resolvers:'));
+            console.log(chalk.yellowBright('DNS Resolvers:'));
             console.dir(config.resolvers);
         } else {
             const columnify = require('columnify');
@@ -256,14 +262,14 @@ if (config) {
         printUsingConfigFile();
         if (config.options.verbose) {
             // Raw JSON output
-            console.log(chalk.yellow('Options:'));
+            console.log(chalk.yellowBright('Options:'));
             console.dir(config.options);
         } else {
             const columnify = require('columnify');
-            console.log(chalk.yellow('{request}'));
+            console.log(chalk.yellowBright('{request}'));
             var columns = columnify(config.options.request, {columns: ['Option', 'Value']});
             console.log(columns);
-            console.log(chalk.yellow('{question}'));
+            console.log(chalk.yellowBright('{question}'));
             columns = columnify(config.options.question, {columns: ['Option', 'Value']});
             console.log(columns);
         }
@@ -298,12 +304,12 @@ if (config) {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
                     if ((process.argv[i].substr(0, 1) !== '-') && (process.argv[i - 1].substr(0, 2) !== '--')) {
                         // We don't want to warn on switches (which start with '-')
-                        console.log(chalk.yellow('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' because it\'s not a valid domain name');
+                        console.log(chalk.yellowBright('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' because it\'s not a valid domain name');
                     }
 
                     // Check for arguments that are missing the double dash prefix
                     if ((process.argv[i].substring(0, 1) === '-') && (process.argv[i].substring(0, 2) !== '--')) {
-                        console.log(chalk.yellow('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' as it\'s not a valid argument');
+                        console.log(chalk.yellowBright('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' as it\'s not a valid argument');
                     }
                 }
             }
@@ -332,7 +338,7 @@ if (config) {
                             // The lookup succeeded.  Extract the properties needed from the response
                             result = [{
                                 'unique': '',
-                                'domain': response.domain,
+                                'domain': chalk.whiteBright(response.domain),
                                 'IPAddress': chalk.green(response.ipAddress),
                                 'RecordType': response.recordType,
                                 'TTL': response.ttl + 's',
@@ -375,8 +381,8 @@ if (config) {
                         } else {
                             // The lookup failed
                             result = [{
-                                'unique': '',
-                                'domain': response.domain,
+                                'unique': chalk.red('Ø'),
+                                'domain': chalk.whiteBright(response.domain),
                                 'IPAddress': chalk.red(response.msg),
                                 'provider': chalk.grey(response.provider)
                             }];
@@ -386,22 +392,26 @@ if (config) {
                                 result[0].duration = response.duration + 'ms';
                             }
                         }
+
                         // Display the result
-                        let columns = columnify(result, {
-                            showHeaders: false,
-                            preserveNewLines: true,
-                            config: {
-                                unique: {minWidth:1, maxWidth: 1},
-                                domain: {minWidth: domainColumnWidth},
-                                IPAddress: {minWidth: 15},
-                                RecordType: {minWidth:6, maxWidth:6},
-                                TTL: {minWidth:7, align: 'right'},
-                                provider: {minWidth: providerColumnWidth},
-                                nameServer: {minWidth: nameServerColumnWidth},
-                                duration: {minWidth: 7}
-                            }
-                        });
-                        console.log(columns);
+                        if ((config.options.unique !== true) || ((config.options.unique === true) && (result[0].unique !== ''))) {
+                            // If NOT --unique OR --unique is turned on AND the current result is marked as a unique entry
+                            let columns = columnify(result, {
+                                showHeaders: false,
+                                preserveNewLines: true,
+                                config: {
+                                    unique: {minWidth:1, maxWidth: 1},
+                                    domain: {minWidth: domainColumnWidth},
+                                    IPAddress: {minWidth: 15},
+                                    RecordType: {minWidth:6, maxWidth:6},
+                                    TTL: {minWidth:7, align: 'right'},
+                                    provider: {minWidth: providerColumnWidth},
+                                    nameServer: {minWidth: nameServerColumnWidth},
+                                    duration: {minWidth: 7}
+                                }
+                            });
+                            console.log(columns);
+                        }
                     });
                 });
             });

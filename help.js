@@ -28,6 +28,7 @@ module.exports = {
         console.log('   ' + '--timeout <number>               ' + chalk.grey('Specify the DNS timeout in milliseconds [2500]'));
         console.log('   ' + '--edns <true|false>              ' + chalk.grey('Enable or disable EDNS(0) [false]'));
         console.log('   ' + '--config <filename>              ' + chalk.grey('Specify an alternative configuration file'));
+        console.log('   ' + '--unique                         ' + chalk.grey('Filter out duplicate IP addresses'));
         console.log('   ' + '--list-resolvers                 ' + chalk.grey('List resolvers configured in config file'));
         console.log('   ' + '--list-options                   ' + chalk.grey('List DNS request options configured in config file'));
         console.log('   ' + '--list-defaults                  ' + chalk.grey('Print json of default config file settings'));

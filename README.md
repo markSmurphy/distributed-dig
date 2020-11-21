@@ -197,9 +197,15 @@ The first occurrence of each unique IP address is marked by a bullet point:
 
 ![ddig unique IP Address Identifier](https://marksmurphy.github.io/img/ddig.unique.png)
 
-#### Unicode Support
+#### Unicode Support detection for Unique Address Identifier character
 
 The bullet point character used is `U+2022 • BULLET (HTML &#8226;)`.  If it is detected that the output is being piped (to a file or to `more` | `cat`) then the ascii character `42 * Asterisk (HTML &ast;)`
+
+#### Filtering out just unique addresses
+
+As of version `1.7.0` there is an option to provide a `--unique` switch which lists only the first occurrence of each distinct IP address returned. N.B. *It will not filter out errors*
+
+![`ddig [domain] --unique`](https://marksmurphy.github.io/img/ddig.single.domain.unique.gif)
 
 ### Column Width Warning
 
@@ -286,6 +292,21 @@ $env:debug="ddig"
 ---
 
 ## Changelog
+
+### [1.7.0] - November 21<sup>st</sup> 2020
+
+#### Added
+
+* New option `--unique` which filters out duplicate addresses (but not errors)
+
+![`ddig [domain] --unique`](https://marksmurphy.github.io/img/ddig.single.domain.unique.gif)
+
+#### Changed
+
+* Updated dependencies (`debug`)
+* Improved colour scheme to aid output readability
+
+---
 
 ### [1.6.7] - November 18<sup>th</sup> 2020
 
