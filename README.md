@@ -191,6 +191,16 @@ ddig www.asos.com my.asos.com secure.asos.com --timeout 5000
 
 ## Features
 
+### Lookup a domain from a URL
+
+As of version `1.8.0` you can provide a URL and the domain will be extracted. This is handy when performing a copy/paste from a browser's address bar.
+
+```text
+ddig https://example.com
+```
+
+![`ddig [URL]`](https://marksmurphy.github.io/img/ddig.single.url.gif)
+
 ### Unique IP Address Identifier
 
 The first occurrence of each unique IP address is marked by a bullet point:

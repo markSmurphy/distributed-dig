@@ -28,19 +28,22 @@ const ddig = require('./ddig-core');
 
 // Console output formatting for columns and colours
 const columnify = require('columnify');
+
 // console colours
 const chalk = require('chalk');
-// eslint-disable-next-line no-unused-vars
 
 // Error formatting object
-var PrettyError = require('pretty-error');
-var pe = new PrettyError();
+const PrettyError = require('pretty-error');
+const pe = new PrettyError();
 
 // Import IP validation library
 const isIp = require('is-ip');
 
-// command line options parser
-var argv = require('yargs')
+// Import URL validation library
+const validUrl = require('valid-url');
+
+// Command line options parser
+const argv = require('yargs')
 .help(false)
 .argv;
 
@@ -300,10 +303,15 @@ if (config) {
                         }
                     }
 
+                } else if (validUrl.isWebUri(process.argv[i])) { // Check if it is a valid URL
+                    // Extract hostname from URL and add it to the domains array
+                    let inputURL = new URL(process.argv[i]);
+                    domains.push(inputURL.hostname);
+
                 } else {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
-                    if ((process.argv[i].substr(0, 1) !== '-') && (process.argv[i - 1].substr(0, 2) !== '--')) {
-                        // We don't want to warn on switches (which start with '-')
+                    // Display console warning of ignored items
+                    if ((process.argv[i].substr(0, 1) !== '-') && (process.argv[i - 1].substr(0, 2) !== '--')) { // We don't want to erroneously warn on command line switches (which will all start with '-')
                         console.log(chalk.yellowBright('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' because it\'s not a valid domain name');
                     }
 

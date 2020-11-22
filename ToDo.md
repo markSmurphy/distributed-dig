@@ -48,7 +48,7 @@
 - [ ] Add option to make HTTPS request to endpoints (to each uniquely resolved IP address and insert `host` header) and list all or specified response headers.
 - [ ] Allow for `--certs` *and* `--verbose` to display more x.509 properties.
 - [X] Replace moment.js with native code as per [You-Don't-Need-Moment.js](https://github.com/you-dont-need/You-Dont-Need-Momentjs#difference)
-- [ ] Allow URLs to be supplied and parse them for the hostname.
+- [X] Allow URLs to be supplied and parse them for the hostname.
 - [X] Show warning on invalid domain.
 - [X] Enhance standard error reporting with [pretty-error](https://www.npmjs.com/package/pretty-error).
 - [X] Only show config file path when it differs from the current directory.
