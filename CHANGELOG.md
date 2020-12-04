@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.7.x] - *Unreleased*
+## [1.8.1] - 4<sup>th</sup> December 2020
 
 ### Changed
 
@@ -13,7 +13,7 @@
 
 ---
 
-## [1.7.0] - November 21<sup>st</sup> 2020
+## [1.8.0] - November 21<sup>st</sup> 2020
 
 ### Added
 
