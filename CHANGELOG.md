@@ -6,6 +6,10 @@
 
 * Moved the change log notes into its own `CHANGELOG.md` from `README.md`.
 
+### Added
+
+* Added `supports-color` to supplement `debug`
+
 ---
 
 ## [1.7.0] - November 21<sup>st</sup> 2020
