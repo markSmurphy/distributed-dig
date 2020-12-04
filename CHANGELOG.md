@@ -9,6 +9,7 @@
 ### Added
 
 * Added `supports-color` to supplement `debug`
+* Added `engines` into `package.json` to specify node version >=10.0.0
 
 ---
 
