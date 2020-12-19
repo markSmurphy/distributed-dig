@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.2] - December 19<sup>th</sup> 2020
+
+### Changed
+
+* Updated dependencies (`yargs` & `supports-color`)
+
+---
+
 ## [1.8.1] - 4<sup>th</sup> December 2020
 
 ### Changed
