@@ -16,8 +16,9 @@
 - [X] Include record type in output.
 - [X] Increase the recommended `--verbose` console width in line with new `TTL` and `record` columns.
 - [ ] Use `dns.GetServers()` to save current resolvers and highlight those in output if they're called.
+- [ ] Look into IPv6 support (DNS query of `ANY` rather `A` and handling `AAAA` responses).
 - [X] Optimise `ResourceRecordType()` function so the array iteration breaks when a match is found.
-- [ ] Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [`ip-geolocate`](https://www.npmjs.com/package/ip-geolocate) [ipstack.com](https://ipstack.com/)).
+- [ ] Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [ip-geolocate](https://www.npmjs.com/package/ip-geolocate), [ipstack.com](https://ipstack.com/), [ipwhois.io](https://ipwhois.io/)).
 - [ ] Look into short command-line switches.
 - [ ] Use `findup-sync` to find config file if not in current directory.
 - [ ] Add support for new version notification via [update-notifier](https://www.npmjs.com/package/update-notifier).
