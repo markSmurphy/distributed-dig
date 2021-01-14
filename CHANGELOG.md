@@ -4,7 +4,9 @@
 
 ### Changed
 
-* Updated dependency `pretty-error` to version `3.0.3`
+* Updated dependency `pretty-error` to version `3.0.3`.
+* Removed broken *Size* badge from `README.md`.
+* Added *Required Node Version* ![node-current](https://img.shields.io/node/v/distributed-dig?style=social) and *Github Stars* ![GitHub Repo stars](https://img.shields.io/github/stars/markSmurphy/distributed-dig?style=social) badges to `README.md`.
 
 ---
 

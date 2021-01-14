@@ -1,9 +1,10 @@
 # distributed-dig
 
 ![Version](https://img.shields.io/npm/v/distributed-dig.svg?style=plastic)
-![npm bundle size](https://img.shields.io/bundlephobia/min/distributed-dig?style=plastic)
+![node-current](https://img.shields.io/node/v/distributed-dig?style=plastic)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/47a2084dfb3146a58e7711d6444324a7)](https://www.codacy.com?utm_source=bitbucket.org&amp;utm_medium=referral&amp;utm_content=MarkSMurphy/distributed-dig&amp;utm_campaign=Badge_Grade)
 ![GitHub issues](https://img.shields.io/github/issues/markSmurphy/distributed-dig?style=plastic)
+![GitHub Repo stars](https://img.shields.io/github/stars/markSmurphy/distributed-dig?style=plastic)
 [![Known Vulnerabilities](https://snyk.io/test/npm/distributed-dig/badge.svg)](https://snyk.io/test/npm/distributed-dig)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/distributed-dig.svg?style=plastic)
 ![Downloads](https://img.shields.io/npm/dm/distributed-dig.svg?style=plastic)
