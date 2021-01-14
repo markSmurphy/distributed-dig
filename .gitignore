@@ -14,7 +14,10 @@ ddig.cmd
 # Screenshots folder
 screenshots/*
 
-#Word documents
+# Spikes folder
+spikes/*
+
+# Word documents
 *.doc?
 
 # Logs
