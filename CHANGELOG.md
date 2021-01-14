@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.3] - *Unreleased*
+
+### Changed
+
+* Updated dependency `pretty-error` to version `3.0.3`
+
+---
+
 ## [1.8.2] - December 19<sup>th</sup> 2020
 
 ### Changed
@@ -25,14 +33,14 @@
 
 ### Added
 
-* New option `--unique` which filters out duplicate addresses (but not errors)
+* New option `--unique` which filters out duplicate addresses (but not errors).
 
 ![`ddig [domain] --unique`](https://marksmurphy.github.io/img/ddig.single.domain.unique.gif)
 
 ### Changed
 
-* Updated dependencies (`debug`)
-* Improved colour scheme to aid output readability
+* Updated dependencies (`debug`).
+* Improved colour scheme to aid output readability.
 
 ---
 
@@ -40,8 +48,8 @@
 
 ### Changed
 
-* Updated dependencies (`yargs`)
-* Improved debug logging clarity in `parseAnswer()`
+* Updated dependencies (`yargs`).
+* Improved debug logging clarity in `parseAnswer()`.
 
 ---
 
@@ -49,10 +57,10 @@
 
 ### Changed
 
-* Updated dependencies (`pretty-error` & `is-valid-domain`)
-* Fixed empty array check in `ddig-core.js`
-* Fixed erroneous string substitution in `return()` function calls in `ddig-core.js`
-* Improved colour output for `CNAME` records and their IP addresses
+* Updated dependencies (`pretty-error` & `is-valid-domain`).
+* Fixed empty array check in `ddig-core.js`.
+* Fixed erroneous string substitution in `return()` function calls in `ddig-core.js`.
+* Improved colour output for `CNAME` records and their IP addresses.
 
 ---
 
@@ -60,7 +68,7 @@
 
 ### Changed
 
-* Updated dependencies (`yargs` & `is-valid-domain`)
+* Updated dependencies (`yargs` & `is-valid-domain`).
 
 ---
 
@@ -72,7 +80,7 @@
 
 ### Changed
 
-* Updated dependency (`debug`)
+* Updated dependency (`debug`).
 
 ---
 
@@ -80,7 +88,7 @@
 
 ### Changed
 
-* Updated dependencies (`yargs` & `is-valid-domain`)
+* Updated dependencies (`yargs` & `is-valid-domain`).
 
 ---
 
@@ -88,7 +96,7 @@
 
 ### Changed
 
-* Fixed erroneous `warning` when parsing certain command line arguments
+* Fixed erroneous `warning` when parsing certain command line arguments.
 
 ---
 
