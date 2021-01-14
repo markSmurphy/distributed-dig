@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.8.3] - *Unreleased*
+## [1.8.3] - January 14<sup>th</sup> 2021
 
 ### Changed
 
