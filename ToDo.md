@@ -18,7 +18,28 @@
 - [ ] Use `dns.GetServers()` to save current resolvers and highlight those in output if they're called.
 - [ ] Look into IPv6 support (DNS query of `ANY` rather `A` and handling `AAAA` responses).
 - [X] Optimise `ResourceRecordType()` function so the array iteration breaks when a match is found.
-- [ ] Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [ip-geolocate](https://www.npmjs.com/package/ip-geolocate), [ipstack.com](https://ipstack.com/), [ipwhois.io](https://ipwhois.io/)).
+- [ ] Look into **whois** and **geo-location** support | (`node-whois`, `node-xwhois`, [ip-geolocate](https://www.npmjs.com/package/ip-geolocate), [ipstack.com](https://ipstack.com/), [ipwhois.io](https://ipwhois.io/)):
+
+```bash
+http get https://ipwhois.app/json/8.8.4.4?objects=ip,success,message,continent,continent_code,country,country_code,region,city,org,isp,completed_requests --body
+```
+
+```json
+{
+    "city": "Newark",
+    "completed_requests": 8,
+    "continent": "North America",
+    "continent_code": "NA",
+    "country": "United States",
+    "country_code": "US",
+    "ip": "8.8.4.4",
+    "isp": "Google LLC",
+    "org": "Google LLC",
+    "region": "New Jersey",
+    "success": true
+}
+```
+
 - [ ] Look into short command-line switches.
 - [ ] Use `findup-sync` to find config file if not in current directory.
 - [ ] Add support for new version notification via [update-notifier](https://www.npmjs.com/package/update-notifier).
