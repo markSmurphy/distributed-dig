@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.4] - *Unreleased*
+
+### Changed
+
+* Updated dependency `supports-color` to version `8.1.1`.
+
+---
+
 ## [1.8.3] - January 14<sup>th</sup> 2021
 
 ### Changed
