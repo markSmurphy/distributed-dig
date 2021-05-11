@@ -1,10 +1,14 @@
 # Changelog
 
-## [1.8.4] - *Unreleased*
+## [1.8.4] - May 11<sup>th</sup> 2021
 
 ### Changed
 
+* Updated deep dependencies to apply `lodash` fix addressing [CVE-2021-23337](https://nvd.nist.gov/vuln/detail/CVE-2021-23337).
 * Updated dependency `supports-color` to version `8.1.1`.
+* Updated dependency `chalk` to version `4.1.1`.
+* Updated dependency `is-valid-domain` to version `0.0.19`.
+* Updated default Singapore DNS resolver.
 
 ---
 

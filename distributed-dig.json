@@ -69,7 +69,7 @@
       "provider": "Verisign DNS (Secondary)"
     },
     {
-      "nameServer": "202.21.158.41",
+      "nameServer": "172.104.49.100",
       "provider": "Singapore"
     },
     {
