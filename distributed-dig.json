@@ -3,7 +3,7 @@
     "request": {
       "port": 53,
       "type": "udp",
-      "timeout": 2500,
+      "timeout": 3500,
       "try_edns": false,
       "cache": false
     },
@@ -77,7 +77,7 @@
       "provider": "Israel"
     },
     {
-      "nameServer": "159.134.248.17",
+      "nameServer": "185.228.169.9",
       "provider": "Ireland"
     },
     {

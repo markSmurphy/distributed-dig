@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.8.5] - May 11<sup>th</sup> 2021
+
+### Changed
+
+* Increased default timeout to `3500` milliseconds.
+  * Previously the default was `2500` which may have caused unnecessary timeouts when querying far away resolvers.
+* Changed problematic resolver in Ireland to and new one sourced from [dnspropagation.net](https://dnspropagation.net/free-public-dns-servers/ie/).
+
+---
+
 ## [1.8.4] - May 11<sup>th</sup> 2021
 
 ### Changed

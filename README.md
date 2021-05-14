@@ -274,7 +274,7 @@ Resolvers are configured in an array with each resolver having a `nameServer` el
 ]
 ```
 
-You can find a list of public DNS servers [here](https://public-dns.info/) and tailor the configured list for your own requirements.
+You can find a list of public DNS servers [here](https://public-dns.info/) and [here](https://dnspropagation.net/free-public-dns-servers/), and tailor the configured list for your own requirements.
 
 ---
 
