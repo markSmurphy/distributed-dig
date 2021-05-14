@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.8.5] - May 11<sup>th</sup> 2021
+## [1.8.5] - May 14<sup>th</sup> 2021
 
 ### Changed
 
