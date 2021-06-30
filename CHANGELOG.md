@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.6] - June 30<sup>th</sup> 2021
+
+### Changed
+
+* Updated dependency `pretty-error` to version `3.0.4` which addressed [CVE-2021-33587](https://nvd.nist.gov/vuln/detail/CVE-2021-33587).
+
+---
+
 ## [1.8.5] - May 14<sup>th</sup> 2021
 
 ### Changed
@@ -14,7 +22,7 @@
 
 ### Changed
 
-* Updated deep dependencies to apply `lodash` fix addressing [CVE-2021-23337](https://nvd.nist.gov/vuln/detail/CVE-2021-23337).
+* Updated dependencies to apply `lodash` fix which addressed [CVE-2021-23337](https://nvd.nist.gov/vuln/detail/CVE-2021-23337).
 * Updated dependency `supports-color` to version `8.1.1`.
 * Updated dependency `chalk` to version `4.1.1`.
 * Updated dependency `is-valid-domain` to version `0.0.19`.
