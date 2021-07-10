@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.6] - MMM DD<sup>th</sup> 2021
+
+### Changed
+
+* Updated dependency `debug` to version `4.3.2`.
+* Updated dependency `pretty-error` to version `3.0.4`.
+
+---
+
 ## [1.8.5] - May 14<sup>th</sup> 2021
 
 ### Changed

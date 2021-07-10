@@ -1,6 +1,6 @@
 {
   "name": "distributed-dig",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "description": "A utility which makes DNS lookup requests across multiple DNS resolvers and collates the results.",
   "main": "distributed-dig.js",
   "scripts": {
@@ -42,7 +42,7 @@
   "dependencies": {
     "chalk": "^4.1.1",
     "columnify": "^1.5.4",
-    "debug": "^4.3.1",
+    "debug": "^4.3.2",
     "is-ip": "^3.1.0",
     "is-valid-domain": "0.0.19",
     "native-dns-multisocket": "^0.7.0",
@@ -50,6 +50,5 @@
     "supports-color": "^8.1.0",
     "valid-url": "^1.0.9",
     "yargs": "^16.2.0"
-  },
-  "devDependencies": {}
+  }
 }
