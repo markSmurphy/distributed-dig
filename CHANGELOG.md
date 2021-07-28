@@ -1,10 +1,13 @@
 # Changelog
 
-## [1.8.7] - MMM DD<sup>th</sup> 2021
+## [1.8.7] - July 28<sup>th</sup> 2021
 
 ### Changed
 
 * Updated dependency `debug` to version `4.3.2`.
+* Updated dependency `is-valid-domain` to version `0.1.2`.
+* Increased default timeout to `10000` milliseconds.
+* Updated DNS server IP addresses for **UK**, **Singapore** and **Mexico**.
 
 ---
 

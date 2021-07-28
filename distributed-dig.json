@@ -3,7 +3,7 @@
     "request": {
       "port": 53,
       "type": "udp",
-      "timeout": 3500,
+      "timeout": 10000,
       "try_edns": false,
       "cache": false
     },
@@ -69,7 +69,7 @@
       "provider": "Verisign DNS (Secondary)"
     },
     {
-      "nameServer": "172.104.49.100",
+      "nameServer": "118.189.211.221",
       "provider": "Singapore"
     },
     {
@@ -85,7 +85,7 @@
       "provider": "Netherlands"
     },
     {
-      "nameServer": "5.133.40.77",
+      "nameServer": "212.118.241.33",
       "provider": "United Kingdom"
     },
     {
@@ -105,7 +105,7 @@
       "provider": "Argentina"
     },
     {
-      "nameServer": "201.147.98.2",
+      "nameServer": "200.76.5.147",
       "provider": "Mexico"
     }
   ]
