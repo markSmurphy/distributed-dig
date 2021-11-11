@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.8.8] - November 11<sup>th</sup> 2021
+
+### Changed
+
+* Updated dependency `chalk` to version `4.1.2`.
+* Updated dependency `is-valid-domain` to version `0.1.4`.
+* Updated dependency `supports-color` to version `9.0.2`.
+
+---
+
 ## [1.8.7] - July 28<sup>th</sup> 2021
 
 ### Changed
