@@ -47,7 +47,7 @@
     "is-valid-domain": "^0.1.2",
     "native-dns-multisocket": "^0.7.0",
     "pretty-error": "^3.0.4",
-    "supports-color": "^9.0.2",
+    "supports-color": "^9.1.0",
     "valid-url": "^1.0.9",
     "yargs": "^16.2.0"
   }
