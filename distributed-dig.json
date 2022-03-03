@@ -105,8 +105,12 @@
       "provider": "Argentina"
     },
     {
-      "nameServer": "200.76.5.147",
+      "nameServer": "187.188.112.16",
       "provider": "Mexico"
+    },
+    {
+      "nameServer": "45.225.123.34",
+      "provider": "Brazil"
     }
   ]
 }

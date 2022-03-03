@@ -1,4 +1,19 @@
-# Changelog
+# Change Log
+
+## [1.8.9] - March 3<sup>rd</sup> 2022
+
+### Changed
+
+* Updated DNS server IP addresses for **Brazil** and **Mexico**.
+* Updated dependency `columnify` to version `1.6.0`.
+* Updated dependency `debug` to version `4.3.3`.
+* Updated dependency `is-valid-domain` to version `0.1.6`.
+
+### Removed
+
+* Removed dependency `supports-color`.
+
+---
 
 ## [1.8.8] - November 11<sup>th</sup> 2021
 
