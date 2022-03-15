@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/npm/v/distributed-dig.svg?style=plastic)
 ![node-current](https://img.shields.io/node/v/distributed-dig?style=plastic)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/47a2084dfb3146a58e7711d6444324a7)](https://www.codacy.com?utm_source=bitbucket.org&amp;utm_medium=referral&amp;utm_content=MarkSMurphy/distributed-dig&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8ce535bbf396424ea774eaaa67effc47)](https://www.codacy.com/gh/markSmurphy/distributed-dig/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=markSmurphy/distributed-dig&amp;utm_campaign=Badge_Grade)
 ![GitHub issues](https://img.shields.io/github/issues/markSmurphy/distributed-dig?style=plastic)
 ![GitHub Repo stars](https://img.shields.io/github/stars/markSmurphy/distributed-dig?style=plastic)
 [![Known Vulnerabilities](https://snyk.io/test/npm/distributed-dig/badge.svg)](https://snyk.io/test/npm/distributed-dig)
