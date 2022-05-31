@@ -113,8 +113,8 @@ const defaultConfig = {
   ]
 };
 
-module.exports = {
-  printDefaultConfig() {
-    console.dir(defaultConfig);
-  }
-};
+function printDefaultConfig() {
+  console.dir(defaultConfig);
+}
+
+module.exports = { printDefaultConfig };
