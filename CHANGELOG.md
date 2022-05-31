@@ -1,5 +1,13 @@
 # Change Log
 
+## [1.8.10] - TBC
+
+### Changed
+
+* Updated dependency `debug` to version `4.3.4`.
+
+---
+
 ## [1.8.9] - March 3<sup>rd</sup> 2022
 
 ### Changed
