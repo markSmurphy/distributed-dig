@@ -4,7 +4,7 @@ const debug = require('debug')('ddig');
 debug('[%s] started: %O', __filename, process.argv);
 
 // Platform agnostic new line character
-const EOL =  require('os').EOL;
+const EOL = require('os').EOL;
 
 // Default config file & location
 const DefaultConfigFileName = 'distributed-dig.json';
@@ -44,8 +44,8 @@ const validUrl = require('valid-url');
 
 // Command line options parser
 const argv = require('yargs')
-.help(false)
-.argv;
+    .help(false)
+    .argv;
 
 function getNameServerColumnWidth(resolvers) {
     try {
@@ -59,10 +59,10 @@ function getNameServerColumnWidth(resolvers) {
                 debug('[Name Server] column width increased to %d', columnWidth);
             }
         }
-        return(columnWidth);
+        return (columnWidth);
     } catch (error) {
         debug('Exception caught in getNameServerColumnWidth(): %O', error);
-        return(15);
+        return (15);
     }
 }
 
@@ -78,11 +78,11 @@ function getProviderColumnWidth(resolvers) {
                 debug('[Provider] column width increased to %d', columnWidth);
             }
         }
-        return(columnWidth);
+        return (columnWidth);
     } catch (error) {
         debug('Exception caught in getProviderColumnWidth(): %O', error);
         // Return a default column width of 30
-        return(30);
+        return (30);
     }
 }
 
@@ -94,7 +94,7 @@ function getConfig() {
         if (argv.config) {
             debug('"--config" argument detected');
             // Check that a string was passed along with "--config"
-            if (typeof(argv.config) === 'string') {
+            if (typeof (argv.config) === 'string') {
                 debug('The --config parameter was passed [%s] which is type "string".  Checking if it is a valid file', argv.config);
                 // Check that the file exists
                 if (fs.existsSync(argv.config)) {
@@ -108,12 +108,12 @@ function getConfig() {
                     // the --config parameter doesn't contain a file that exists
                     debug('[%s] does not exist', argv.config);
                     console.log(chalk.red('Error: ') + 'The specified config file [' + chalk.blue(argv.config) + '] does not exist');
-                    return(false);
+                    return (false);
                 }
             } else {
                 // No filename was passed with --config
                 console.log(chalk.yellowBright('Warning: ') + 'ignoring ' + chalk.blue('--config') + '.  You must specify a valid filename');
-                return(false);
+                return (false);
             }
         } else {
             // Use default configuration file
@@ -142,14 +142,14 @@ function getConfig() {
                         console.log(chalk.grey('current dir: ') + cwd);
                         console.log(chalk.grey('home dir:    ') + homedir);
                         console.log(chalk.grey('ddig root:   ') + configFilePath);
-                        return(false);
+                        return (false);
                     }
                 }
             }
         }
     } catch (error) {
         debug('getConfig() caught an exception whilst determining where the configuration file is: %O', error);
-        return(false);
+        return (false);
     }
 
     // Read the configuration file
@@ -157,7 +157,7 @@ function getConfig() {
         debug('Reading config file: %s', configFilePath + '/' + configFileName);
         let rawJSON = fs.readFileSync(configFilePath + '/' + configFileName);
         let config = JSON.parse(rawJSON);
-        debug('getConfig() read the configuration file [%s]: %O',configFileName, config);
+        debug('getConfig() read the configuration file [%s]: %O', configFileName, config);
 
         // Parse list of Resolvers to acquire column widths
         nameServerColumnWidth = getNameServerColumnWidth(config.resolvers);
@@ -184,7 +184,7 @@ function getConfig() {
 
         // DNS Timeout
         if (argv.timeout) {
-            if(typeof argv.timeout === 'number'){
+            if (typeof argv.timeout === 'number') {
                 config.options.request.timeout = argv.timeout;
                 debug('[timeout] set to: %s', config.options.request.timeout);
             } else {
@@ -204,10 +204,10 @@ function getConfig() {
             debug('[unique] set to true');
         }
 
-        return(config);
+        return (config);
     } catch (e) {
         debug('An error occurred reading the config file [%s]: %O', configFileName, e);
-        return(false);
+        return (false);
     }
 }
 
@@ -239,7 +239,7 @@ if (config) {
         printUsingConfigFile();
         // Get list of resolvers
         if (config.options.verbose) {
-        // Raw JSON output
+            // Raw JSON output
             console.log(chalk.yellowBright('DNS Resolvers:'));
             console.dir(config.resolvers);
         } else {
@@ -247,13 +247,13 @@ if (config) {
             const columns = columnify(config.resolvers, {
                 config: {
                     'nameServer': {
-                        headingTransform: function() {
-                        return chalk.bold('Resolver IP Address');
+                        headingTransform: function () {
+                            return chalk.bold('Resolver IP Address');
                         }
                     },
                     'provider': {
-                        headingTransform: function() {
-                        return chalk.bold('DNS Provider');
+                        headingTransform: function () {
+                            return chalk.bold('DNS Provider');
                         }
                     }
                 }
@@ -270,10 +270,10 @@ if (config) {
         } else {
             const columnify = require('columnify');
             console.log(chalk.yellowBright('{request}'));
-            var columns = columnify(config.options.request, {columns: ['Option', 'Value']});
+            var columns = columnify(config.options.request, { columns: ['Option', 'Value'] });
             console.log(columns);
             console.log(chalk.yellowBright('{question}'));
-            columns = columnify(config.options.question, {columns: ['Option', 'Value']});
+            columns = columnify(config.options.question, { columns: ['Option', 'Value'] });
             console.log(columns);
         }
     } else if (argv.listDefaults) {
@@ -289,7 +289,7 @@ if (config) {
             for (i = 2; i < process.argv.length; i++) {
                 debug('Extracted [%s] from the command line', process.argv[i]);
                 // Check that's a valid domain
-                if (isValidDomain(process.argv[i])){
+                if (isValidDomain(process.argv[i])) {
                     if (process.argv[i] === argv.config) {
                         debug('[%s] is the config file, so excluding it from the domains list', process.argv[i]);
                     } else {
@@ -408,14 +408,14 @@ if (config) {
                                 showHeaders: false,
                                 preserveNewLines: true,
                                 config: {
-                                    unique: {minWidth:1, maxWidth: 1},
-                                    domain: {minWidth: domainColumnWidth},
-                                    IPAddress: {minWidth: 15},
-                                    RecordType: {minWidth:6, maxWidth:6},
-                                    TTL: {minWidth:7, align: 'right'},
-                                    provider: {minWidth: providerColumnWidth},
-                                    nameServer: {minWidth: nameServerColumnWidth},
-                                    duration: {minWidth: 7}
+                                    unique: { minWidth: 1, maxWidth: 1 },
+                                    domain: { minWidth: domainColumnWidth },
+                                    IPAddress: { minWidth: 15 },
+                                    RecordType: { minWidth: 6, maxWidth: 6 },
+                                    TTL: { minWidth: 7, align: 'right' },
+                                    provider: { minWidth: providerColumnWidth },
+                                    nameServer: { minWidth: nameServerColumnWidth },
+                                    duration: { minWidth: 7 }
                                 }
                             });
                             console.log(columns);
@@ -423,7 +423,7 @@ if (config) {
                     });
                 });
             });
-        } catch(err) {
+        } catch (err) {
             console.error(chalk.red('An error occurred'));
             console.log(pe.render(err));
         }

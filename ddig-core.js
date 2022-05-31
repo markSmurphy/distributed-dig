@@ -10,7 +10,7 @@ const isIp = require('is-ip');
 const dns = require('native-dns-multisocket');
 
 // Platform agnostic new line character
-const EOL =  require('os').EOL;
+const EOL = require('os').EOL;
 
 const path = require('path');
 var configFilePath = path.resolve(__dirname);
@@ -18,7 +18,7 @@ var configFilePath = path.resolve(__dirname);
 module.exports = {
     resolve(domain, resolver, options, callback) {
         const startTime = Date.now();
-        debug('resolve() called for domain [%s] via resolver [%s (%s)] with options: %O', domain, resolver.nameServer, resolver.provider ,options);
+        debug('resolve() called for domain [%s] via resolver [%s (%s)] with options: %O', domain, resolver.nameServer, resolver.provider, options);
         // Initialise lookup result object
         var lookupResult = {
             'domain': domain,
@@ -39,7 +39,7 @@ module.exports = {
         if (isIp(resolver.nameServer) === false) {
             debug('resolve() skipping the resolver [%s] because it is not a valid IP address', resolver.nameServer);
             // Populate lookup results object
-            lookupResult.success=false;
+            lookupResult.success = false;
             lookupResult.duration = Math.ceil((Date.now() - startTime));
             lookupResult.msg = 'Invalid resolver IP address';
 
@@ -92,24 +92,24 @@ module.exports = {
                     // Return the result
                     callback(lookupResult);
 
-                } else{
+                } else {
                     // Check that the answer is a populated array
                     if (Array.isArray(answer.answer) && answer.answer.length) {
                         debug('The resolver [%s] provided the answer: %O', resolver.nameServer, answer);
 
                         // Populate lookup result object
                         lookupResult.answer = JSON.stringify(answer.answer);
-                        lookupResult.ipAddress = module.exports.parseAnswer(answer.answer, {getIpAddress: true});
-                        lookupResult.recursion = module.exports.parseAnswer(answer.answer, {getRecursion: true});
-                        lookupResult.recordType = module.exports.parseAnswer(answer.answer, {getRecordType: true});
-                        lookupResult.ttl = module.exports.parseAnswer(answer.answer, {getTTL: true});
+                        lookupResult.ipAddress = module.exports.parseAnswer(answer.answer, { getIpAddress: true });
+                        lookupResult.recursion = module.exports.parseAnswer(answer.answer, { getRecursion: true });
+                        lookupResult.recordType = module.exports.parseAnswer(answer.answer, { getRecordType: true });
+                        lookupResult.ttl = module.exports.parseAnswer(answer.answer, { getTTL: true });
 
                         lookupResult.msg = 'Success';
                         lookupResult.success = true;
                         let endTime = Date.now();
                         let duration = Math.ceil((endTime - startTime));
                         lookupResult.duration = duration;
-                    } else{
+                    } else {
                         debug('The resolver [%s] provided an empty answer: %O', resolver.nameServer, answer);
 
                         lookupResult.msg = 'Non-Existent Domain';
@@ -132,13 +132,13 @@ module.exports = {
         if (Array.isArray(answer) && answer.length === 0) {
             debug('"answer" is an empty array. Nothing to parse; returning "no_address"');
             // No IP addresses, `answer` is an empty array
-            return('no_address');
+            return ('no_address');
         }
 
         try {
             var response = '';
             // Extract IP Address
-            if ((options===null) || (options.getIpAddress)) {
+            if ((options === null) || (options.getIpAddress)) {
                 // Just get the IP address; i.e. the A record at the end.
                 for (let i = 0; i < answer.length; i++) {
                     if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
@@ -147,15 +147,15 @@ module.exports = {
                 }
             } else if (options.getRecursion) {
                 // Get the whole nested recursion
-                for (let i = 0; i < answer.length; i++){
+                for (let i = 0; i < answer.length; i++) {
                     // Check if the answer element has a "data" property (which a CNAME record will have)
-                    if(Object.prototype.hasOwnProperty.call(answer[i], 'data')){
+                    if (Object.prototype.hasOwnProperty.call(answer[i], 'data')) {
                         response = response.concat(answer[i].name, ' --> ', answer[i].data, EOL);
-                    // Check if the answer element has an "address" property (which an A record will have)
+                        // Check if the answer element has an "address" property (which an A record will have)
                     } else if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
                         response = response.concat(answer[i].name, ' --> ', answer[i].address, EOL);
                     } else {
-                       debug('Warning: There is an unhandled element [%s] in answer array: %O', i, answer[i]);
+                        debug('Warning: There is an unhandled element [%s] in answer array: %O', i, answer[i]);
                     }
                 }
             } else if (options.getRecordType) {
@@ -171,11 +171,11 @@ module.exports = {
             }
 
             debug('parseAnswer() returning: %s', response);
-            return(response);
+            return (response);
 
         } catch (error) {
             debug('parseAnswer() caught an exception: %O', error);
-            return('error parsing answer');
+            return ('error parsing answer');
         }
     },
 
@@ -188,7 +188,7 @@ module.exports = {
                 if (ipAddress === module.exports.isAddressUnique.addresses[i]) {
                     debug('A match has been found. Returning "False" as %s is not unique', ipAddress);
                     // IP Address found on the list, so it's not unique; return false
-                    return(false);
+                    return (false);
                 }
             }
             debug('%s was not found on the list, so adding it...', ipAddress);
@@ -196,10 +196,10 @@ module.exports = {
             module.exports.isAddressUnique.addresses.push(ipAddress);
             // Return true as the address is unique
             debug('The IP Address %s is unique', ipAddress);
-            return(true);
+            return (true);
         } catch (error) {
             debug('isAddressUnique() caught an exception: %O', error);
-            return(false);
+            return (false);
         }
     },
 
@@ -217,7 +217,7 @@ module.exports = {
             return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         } catch (error) {
             debug('formatBytes() caught an exception: %O', error);
-            return(bytes + ' Bytes');
+            return (bytes + ' Bytes');
         }
 
     },
@@ -233,12 +233,12 @@ module.exports = {
 
                 return ('0' + h).slice(-2) + ' hours, ' + ('0' + m).slice(-2) + ' minutes, ' + ('0' + s).slice(-2) + ' seconds';
             } else {
-                return('<invalid>');
+                return ('<invalid>');
             }
         } catch (error) {
-                debug('secondsToHms() caught an exception: %O', error);
-                // an unexpected error occurred; return the original value
-                return(seconds + ' seconds');
+            debug('secondsToHms() caught an exception: %O', error);
+            // an unexpected error occurred; return the original value
+            return (seconds + ' seconds');
         }
     },
 
@@ -259,12 +259,12 @@ module.exports = {
 
         } catch (error) {
             debug('getColourLevelDesc() caught an exception: %O', error);
-            return('Unknown');
+            return ('Unknown');
         }
     },
 
     resourceRecordType(value) { // Takes the integer value returned in a DNS "answer" and returns the corresponding record name
-        const DNSResourceRecordsDatabase = configFilePath +'/' + 'DNSResourceRecords.json';
+        const DNSResourceRecordsDatabase = configFilePath + '/' + 'DNSResourceRecords.json';
         try {
             debug('resourceRecordType() called with value: %s', value);
             // Read in Resource Record database
