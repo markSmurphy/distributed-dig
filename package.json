@@ -42,7 +42,7 @@
   "dependencies": {
     "chalk": "^4.1.1",
     "columnify": "^1.6.0",
-    "debug": "^4.3.3",
+    "debug": "^4.3.4",
     "is-ip": "^3.1.0",
     "is-valid-domain": "^0.1.6",
     "native-dns-multisocket": "^0.7.0",
