@@ -10,33 +10,33 @@ const isIp = require('is-ip');
 const dns = require('native-dns-multisocket');
 
 // Platform agnostic new line character
-const EOL = require('os').EOL;
+const { EOL } = require('os');
 
 const path = require('path');
-var configFilePath = path.resolve(__dirname);
+const configFilePath = path.resolve(__dirname);
 
 module.exports = {
     resolve(domain, resolver, options, callback) {
         const startTime = Date.now();
         debug('resolve() called for domain [%s] via resolver [%s (%s)] with options: %O', domain, resolver.nameServer, resolver.provider, options);
         // Initialise lookup result object
-        var lookupResult = {
-            'domain': domain,
-            'ipAddress': null,
-            'recursion': null,
-            'answer': null,
-            'nameServer': resolver.nameServer,
-            'provider': resolver.provider,
-            'msg': '',
-            'success': false,
-            'duration': 0,
-            'error': '',
-            'recordType': null,
-            'ttl': 0
+        const lookupResult = {
+            domain,
+            ipAddress: null,
+            recursion: null,
+            answer: null,
+            nameServer: resolver.nameServer,
+            provider: resolver.provider,
+            msg: '',
+            success: false,
+            duration: 0,
+            error: '',
+            recordType: null,
+            ttl: 0
         };
 
         // Validate the resolver IP address is valid
-        if (isIp(resolver.nameServer) === false) {
+        if (!isIp(resolver.nameServer)) {
             debug('resolve() skipping the resolver [%s] because it is not a valid IP address', resolver.nameServer);
             // Populate lookup results object
             lookupResult.success = false;
@@ -45,14 +45,14 @@ module.exports = {
 
         } else {
             // Create DNS Question object
-            var question = dns.Question({
+            const question = dns.Question({
                 name: domain,
                 type: options.question.type,
             });
 
             // Create DNS Request object to "ask" the Question
-            var req = dns.Request({
-                question: question,
+            const req = dns.Request({
+                question,
                 server: {
                     address: resolver.nameServer,
                     port: options.request.port,
@@ -69,7 +69,7 @@ module.exports = {
             req.send();
 
             // Handle a DNS timeout event
-            req.on('timeout', function () {
+            req.on('timeout', () => {
                 debug('The %sms timeout elapsed before %s [%s] responded', options.request.timeout, resolver.nameServer, resolver.provider);
                 // Populate lookup result object
                 lookupResult.msg = 'Timeout';
@@ -81,7 +81,7 @@ module.exports = {
             });
 
             // Handle DNS message event; i.e process the `answer` response
-            req.on('message', function (err, answer) {
+            req.on('message', (err, answer) => {
                 if (err) {
                     debug('Error received: %O', err);
                     lookupResult.msg = 'An error occurred';
@@ -106,8 +106,8 @@ module.exports = {
 
                         lookupResult.msg = 'Success';
                         lookupResult.success = true;
-                        let endTime = Date.now();
-                        let duration = Math.ceil((endTime - startTime));
+                        const endTime = Date.now();
+                        const duration = Math.ceil((endTime - startTime));
                         lookupResult.duration = duration;
                     } else {
                         debug('The resolver [%s] provided an empty answer: %O', resolver.nameServer, answer);
@@ -136,7 +136,7 @@ module.exports = {
         }
 
         try {
-            var response = '';
+            let response = '';
             // Extract IP Address
             if ((options === null) || (options.getIpAddress)) {
                 // Just get the IP address; i.e. the A record at the end.
@@ -150,17 +150,17 @@ module.exports = {
                 for (let i = 0; i < answer.length; i++) {
                     // Check if the answer element has a "data" property (which a CNAME record will have)
                     if (Object.prototype.hasOwnProperty.call(answer[i], 'data')) {
-                        response = response.concat(answer[i].name, ' --> ', answer[i].data, EOL);
+                        response = `${response}${answer[i].name} --> ${answer[i].data}${EOL}`;
                         // Check if the answer element has an "address" property (which an A record will have)
                     } else if (Object.prototype.hasOwnProperty.call(answer[i], 'address')) {
-                        response = response.concat(answer[i].name, ' --> ', answer[i].address, EOL);
+                        response = `${response}${answer[i].name} --> ${answer[i].address}${EOL}`;
                     } else {
                         debug('Warning: There is an unhandled element [%s] in answer array: %O', i, answer[i]);
                     }
                 }
             } else if (options.getRecordType) {
                 // Get the Resource Record type (CNAME, A, AAA, etc)
-                var rrtype = module.exports.resourceRecordType(answer[0].type);
+                const rrtype = module.exports.resourceRecordType(answer[0].type);
                 // Add record type to the response object
                 response = rrtype;
                 debug('Resource Record Type: %s', rrtype);
@@ -264,17 +264,17 @@ module.exports = {
     },
 
     resourceRecordType(value) { // Takes the integer value returned in a DNS "answer" and returns the corresponding record name
-        const DNSResourceRecordsDatabase = configFilePath + '/' + 'DNSResourceRecords.json';
+        const DNSResourceRecordsDatabase = `${configFilePath}/DNSResourceRecords.json`;
         try {
             debug('resourceRecordType() called with value: %s', value);
             // Read in Resource Record database
             const fs = require('fs');
             debug('Reading in DNS Resource Records data from [%s]', DNSResourceRecordsDatabase);
-            let rawData = fs.readFileSync(DNSResourceRecordsDatabase);
-            let DNSRecords = JSON.parse(rawData);
+            const rawData = fs.readFileSync(DNSResourceRecordsDatabase);
+            const DNSRecords = JSON.parse(rawData);
 
             // Default the return value to 'Unknown'
-            var returnValue = 'Unknown';
+            let returnValue = 'Unknown';
             for (let i = 0; i < DNSRecords.RecordTypes.length; i++) {
                 //debug('Evaluating resource record database value [%s] against [%s]', DNSRecords.RecordTypes[i].value, value);
                 if (DNSRecords.RecordTypes[i].value === value) {
@@ -297,4 +297,4 @@ module.exports = {
 };
 
 // Initialise address list array; stored as a property of the function object so it's values persist between function calls
-module.exports.isAddressUnique.addresses = new Array();
+module.exports.isAddressUnique.addresses = [];

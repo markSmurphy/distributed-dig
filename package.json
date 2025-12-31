@@ -12,7 +12,7 @@
     "ddig": "./distributed-dig.js"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=18"
   },
   "repository": {
     "type": "git",

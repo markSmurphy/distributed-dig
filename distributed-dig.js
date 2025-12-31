@@ -4,24 +4,23 @@ const debug = require('debug')('ddig');
 debug('[%s] started: %O', __filename, process.argv);
 
 // Platform agnostic new line character
-const EOL = require('os').EOL;
+const { EOL, homedir } = require('os');
 
 // Default config file & location
 const DefaultConfigFileName = 'distributed-dig.json';
 const path = require('path');
-const homedir = require('os').homedir();
-var configFilePath = path.resolve(__dirname);
-var configFileName = DefaultConfigFileName;
+let configFilePath = path.resolve(__dirname);
+let configFileName = DefaultConfigFileName;
 
 // Holds the config json
-var config = {};
+let config = {};
 
 // Initialise empty array of domains
-var domains = [];
+const domains = [];
 // Global variables to hold column widths
-var domainColumnWidth = 0;
-var nameServerColumnWidth = 0;
-var providerColumnWidth = 0;
+let domainColumnWidth = 0;
+let nameServerColumnWidth = 0;
+let providerColumnWidth = 0;
 
 // Core ddig functions
 const ddig = require('./ddig-core');
@@ -51,7 +50,7 @@ function getNameServerColumnWidth(resolvers) {
     try {
         debug('parsing %s resolvers for the column width of "nameServer"', resolvers.length);
         // Get maximum column widths
-        var columnWidth = 0;
+        let columnWidth = 0;
         for (let i = 0; i < resolvers.length; i++) {
             // Maximum resolver length
             if ((resolvers[i].nameServer.length > columnWidth) && (isIp(resolvers[i].nameServer))) {
@@ -70,7 +69,7 @@ function getProviderColumnWidth(resolvers) {
     try {
         debug('parsing %s resolvers for the column width of "provider"', resolvers.length);
         // Get maximum column width
-        var columnWidth = 0;
+        let columnWidth = 0;
         for (let i = 0; i < resolvers.length; i++) {
             // Maximum resolver length
             if ((resolvers[i].provider.length > columnWidth) && (isIp(resolvers[i].nameServer))) {
@@ -107,17 +106,17 @@ function getConfig() {
                 } else {
                     // the --config parameter doesn't contain a file that exists
                     debug('[%s] does not exist', argv.config);
-                    console.log(chalk.red('Error: ') + 'The specified config file [' + chalk.blue(argv.config) + '] does not exist');
+                    console.log(`${chalk.red('Error: ')}The specified config file [${chalk.blue(argv.config)}] does not exist`);
                     return (false);
                 }
             } else {
                 // No filename was passed with --config
-                console.log(chalk.yellowBright('Warning: ') + 'ignoring ' + chalk.blue('--config') + '.  You must specify a valid filename');
+                console.log(`${chalk.yellowBright('Warning: ')}ignoring ${chalk.blue('--config')}.  You must specify a valid filename`);
                 return (false);
             }
         } else {
             // Use default configuration file
-            var cwd = process.cwd();
+            const cwd = process.cwd();
             debug('Looking for [%s] in [%s] ...', configFileName, cwd);
             // Check if the config file exists in current directory
             if (fs.existsSync(configFileName)) {
@@ -126,22 +125,23 @@ function getConfig() {
                 configFilePath = cwd;
 
             } else {
-                debug('Looking for [%s] in [%s] ...', configFileName, homedir);
+                const homedirPath = homedir();
+                debug('Looking for [%s] in [%s] ...', configFileName, homedirPath);
                 // Check for the config file in the "home" directory
-                if (fs.existsSync(homedir + '/' + configFileName)) {
-                    debug('[%s] found in [%s]', configFileName, homedir);
+                if (fs.existsSync(`${homedirPath}/${configFileName}`)) {
+                    debug('[%s] found in [%s]', configFileName, homedirPath);
                     // Config file found in homedir so remember the path
-                    configFilePath = homedir;
+                    configFilePath = homedirPath;
                 } else {
                     // Check for the config file in the application's root directory
-                    if (fs.existsSync(configFilePath + '/' + configFileName)) {
+                    if (fs.existsSync(`${configFilePath}/${configFileName}`)) {
                         // Config file found in application root directory
                         debug('[%s] found in [%s]', configFileName, configFilePath);
                     } else {
-                        console.log(chalk.red('Error:') + ' The config file ' + chalk.yellowBright(configFileName) + ' could not be found in:');
-                        console.log(chalk.grey('current dir: ') + cwd);
-                        console.log(chalk.grey('home dir:    ') + homedir);
-                        console.log(chalk.grey('ddig root:   ') + configFilePath);
+                        console.log(`${chalk.red('Error:')} The config file ${chalk.yellowBright(configFileName)} could not be found in:`);
+                        console.log(`${chalk.grey('current dir: ')}${cwd}`);
+                        console.log(`${chalk.grey('home dir:    ')}${homedirPath}`);
+                        console.log(`${chalk.grey('ddig root:   ')}${configFilePath}`);
                         return (false);
                     }
                 }
@@ -154,9 +154,9 @@ function getConfig() {
 
     // Read the configuration file
     try {
-        debug('Reading config file: %s', configFilePath + '/' + configFileName);
-        let rawJSON = fs.readFileSync(configFilePath + '/' + configFileName);
-        let config = JSON.parse(rawJSON);
+        debug('Reading config file: %s', `${configFilePath}/${configFileName}`);
+        const rawJSON = fs.readFileSync(`${configFilePath}/${configFileName}`);
+        const config = JSON.parse(rawJSON);
         debug('getConfig() read the configuration file [%s]: %O', configFileName, config);
 
         // Parse list of Resolvers to acquire column widths
@@ -178,7 +178,7 @@ function getConfig() {
 
         // DNS Protocol
         if (argv.protocol) {
-            config.options.request.type = String.prototype.toLowerCase(argv.protocol);
+            config.options.request.type = argv.protocol.toLowerCase();
             debug('[type (protocol)] set to: %s', config.options.request.type);
         }
 
@@ -188,7 +188,7 @@ function getConfig() {
                 config.options.request.timeout = argv.timeout;
                 debug('[timeout] set to: %s', config.options.request.timeout);
             } else {
-                console.log(chalk.grey('Ignoring ') + chalk.blue('--timeout') + chalk.grey(' as its value is not a number'));
+                console.log(`${chalk.grey('Ignoring ')}${chalk.blue('--timeout')}${chalk.grey(' as its value is not a number')}`);
             }
         }
 
@@ -219,9 +219,9 @@ function printUsingConfigFile() {
     debug('configFilePath: %s', configFilePath);
     // Don't bother displaying the directory if it's the current working directory
     if ((configFilePath === '.') || (configFilePath === process.cwd())) {
-        console.log(chalk.grey('Using configuration file: ') + chalk.yellowBright(configFileName));
+        console.log(`${chalk.grey('Using configuration file: ')}${chalk.yellowBright(configFileName)}`);
     } else {
-        console.log(chalk.grey('Using configuration file: ') + chalk.yellowBright(configFileName) + chalk.grey(' [') + chalk.grey(configFilePath) + chalk.grey(']'));
+        console.log(`${chalk.grey('Using configuration file: ')}${chalk.yellowBright(configFileName)}${chalk.grey(' [')}${chalk.grey(configFilePath)}${chalk.grey(']')}`);
     }
 
 }
@@ -247,14 +247,10 @@ if (config) {
             const columns = columnify(config.resolvers, {
                 config: {
                     'nameServer': {
-                        headingTransform: function () {
-                            return chalk.bold('Resolver IP Address');
-                        }
+                        headingTransform: () => chalk.bold('Resolver IP Address')
                     },
                     'provider': {
-                        headingTransform: function () {
-                            return chalk.bold('DNS Provider');
-                        }
+                        headingTransform: () => chalk.bold('DNS Provider')
                     }
                 }
             });
@@ -283,10 +279,9 @@ if (config) {
     } else {
         try {
             // Loop through command line parameters to extract domains.  Expecting 'distributed-dig.js domain [domain [domain] ... ]'
-            var i = 2;
             const isValidDomain = require('is-valid-domain');
 
-            for (i = 2; i < process.argv.length; i++) {
+            for (let i = 2; i < process.argv.length; i++) {
                 debug('Extracted [%s] from the command line', process.argv[i]);
                 // Check that's a valid domain
                 if (isValidDomain(process.argv[i])) {
@@ -305,19 +300,19 @@ if (config) {
 
                 } else if (validUrl.isWebUri(process.argv[i])) { // Check if it is a valid URL
                     // Extract hostname from URL and add it to the domains array
-                    let inputURL = new URL(process.argv[i]);
+                    const inputURL = new URL(process.argv[i]);
                     domains.push(inputURL.hostname);
 
                 } else {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
                     // Display console warning of ignored items
-                    if ((process.argv[i].substr(0, 1) !== '-') && (process.argv[i - 1].substr(0, 2) !== '--')) { // We don't want to erroneously warn on command line switches (which will all start with '-')
-                        console.log(chalk.yellowBright('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' because it\'s not a valid domain name');
+                    if ((process.argv[i].slice(0, 1) !== '-') && (process.argv[i - 1].slice(0, 2) !== '--')) { // We don't want to erroneously warn on command line switches (which will all start with '-')
+                        console.log(`${chalk.yellowBright('Warning: ')}ignoring ${chalk.blue(process.argv[i])} because it's not a valid domain name`);
                     }
 
                     // Check for arguments that are missing the double dash prefix
-                    if ((process.argv[i].substring(0, 1) === '-') && (process.argv[i].substring(0, 2) !== '--')) {
-                        console.log(chalk.yellowBright('Warning: ') + 'ignoring ' + chalk.blue(process.argv[i]) + ' as it\'s not a valid argument');
+                    if ((process.argv[i].slice(0, 1) === '-') && (process.argv[i].slice(0, 2) !== '--')) {
+                        console.log(`${chalk.yellowBright('Warning: ')}ignoring ${chalk.blue(process.argv[i])} as it's not a valid argument`);
                     }
                 }
             }
@@ -340,26 +335,26 @@ if (config) {
                     // Perform a lookup for the current domain via the current resolver
                     ddig.resolve(domain, resolver, config.options, (response) => {
                         debug('Looking up %s against %s (%s) returned: %O', domain, resolver.nameServer, resolver.provider, response);
-                        var result = {};
+                        let result = {};
                         if (response.success) {
                             // *** Basic Output ***
                             // The lookup succeeded.  Extract the properties needed from the response
                             result = [{
-                                'unique': '',
-                                'domain': chalk.whiteBright(response.domain),
-                                'IPAddress': chalk.green(response.ipAddress),
-                                'RecordType': response.recordType,
-                                'TTL': response.ttl + 's',
-                                'provider': chalk.grey(response.provider),
+                                unique: '',
+                                domain: chalk.whiteBright(response.domain),
+                                IPAddress: chalk.green(response.ipAddress),
+                                RecordType: response.recordType,
+                                TTL: `${response.ttl}s`,
+                                provider: chalk.grey(response.provider),
                             }];
 
                             // If we've received a CNAME record, include the top level resolution with the IP address
                             if (response.recordType === 'CNAME') {
                                 debug('Response is a CNAME.  Augment the IP address with top level resolution');
                                 debug('Parsing the answer: %O', response.answer);
-                                let answer = JSON.parse(response.answer);
+                                const answer = JSON.parse(response.answer);
                                 debug('Picked out: %s', answer[0].data);
-                                result[0].IPAddress = chalk.cyan(answer[0].data) + EOL + chalk.green(response.ipAddress);
+                                result[0].IPAddress = `${chalk.cyan(answer[0].data)}${EOL}${chalk.green(response.ipAddress)}`;
                             }
 
                             // Mark unique IP addresses
@@ -382,29 +377,29 @@ if (config) {
                             // Add additional 'success' columns if `verbose` is switched on
                             if (config.options.verbose) {
                                 //result[0].nameServer = response.nameServer.grey;
-                                result[0].provider += EOL + chalk.grey(response.nameServer);
-                                result[0].duration = response.duration + 'ms';
+                                result[0].provider += `${EOL}${chalk.grey(response.nameServer)}`;
+                                result[0].duration = `${response.duration}ms`;
                                 result[0].recursion = response.recursion;
                             }
                         } else {
                             // The lookup failed
                             result = [{
-                                'unique': chalk.red('Ø'),
-                                'domain': chalk.whiteBright(response.domain),
-                                'IPAddress': chalk.red(response.msg),
-                                'provider': chalk.grey(response.provider)
+                                unique: chalk.red('Ø'),
+                                domain: chalk.whiteBright(response.domain),
+                                IPAddress: chalk.red(response.msg),
+                                provider: chalk.grey(response.provider)
                             }];
                             // Add additional 'failed' columns if `verbose` is switched on
                             if (config.options.verbose) {
-                                result[0].provider += EOL + chalk.grey(response.nameServer);
-                                result[0].duration = response.duration + 'ms';
+                                result[0].provider += `${EOL}${chalk.grey(response.nameServer)}`;
+                                result[0].duration = `${response.duration}ms`;
                             }
                         }
 
                         // Display the result
-                        if ((config.options.unique !== true) || ((config.options.unique === true) && (result[0].unique !== ''))) {
+                        if (!config.options.unique || (config.options.unique && result[0].unique !== '')) {
                             // If NOT --unique OR --unique is turned on AND the current result is marked as a unique entry
-                            let columns = columnify(result, {
+                            const columns = columnify(result, {
                                 showHeaders: false,
                                 preserveNewLines: true,
                                 config: {

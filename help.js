@@ -1,40 +1,40 @@
 function helpScreen(verbose) {
     // Platform independent end-of-line character
-    const endOfLine = require('os').EOL;
+    const { EOL: endOfLine } = require('os');
     // console colours
     const chalk = require('chalk');
     // parse package.json for the version number
-    const package = require('./package.json');
+    const packageInfo = require('./package.json');
 
     // Display help screen
-    console.log(chalk.blue('%s [a.k.a %s]'), package.name, Object.keys(package.bin)[0]);
-    console.log(chalk.green('Read the docs: ') + package.homepage);
-    console.log(chalk.magenta('Support & bugs: ') + package.bugs.url);
+    console.log(chalk.blue('%s [a.k.a %s]'), packageInfo.name, Object.keys(packageInfo.bin)[0]);
+    console.log(`${chalk.green('Read the docs: ')}${packageInfo.homepage}`);
+    console.log(`${chalk.magenta('Support & bugs: ')}${packageInfo.bugs.url}`);
     console.log(endOfLine);
     console.log(chalk.grey('DESCRIPTION:'));
-    console.log(chalk.italic('   %s'), package.description);
+    console.log(chalk.italic('   %s'), packageInfo.description);
     console.log(endOfLine);
     console.log(chalk.grey('VERSION:'));
-    console.log('   ' + package.version);
+    console.log(`   ${packageInfo.version}`);
     console.log(endOfLine);
     console.log(chalk.grey('USAGE:'));
-    console.log('   ' + 'ddig domain [domain [domain] ...] [options]');
+    console.log('   ddig domain [domain [domain] ...] [options]');
     console.log(endOfLine);
     console.log(chalk.grey('OPTIONS:'));
-    console.log('   ' + 'domain [domain [domain] ...]     ' + chalk.grey('Perform DNS lookups on one or more domains'));
-    console.log('   ' + '--port <number>                  ' + chalk.grey('Specify the DNS port [53]'));
-    console.log('   ' + '--protocol <upd|tcp>             ' + chalk.grey('Specify the DNS protocol [udp]'));
-    console.log('   ' + '--timeout <number>               ' + chalk.grey('Specify the DNS timeout in milliseconds [2500]'));
-    console.log('   ' + '--edns <true|false>              ' + chalk.grey('Enable or disable EDNS(0) [false]'));
-    console.log('   ' + '--config <filename>              ' + chalk.grey('Specify an alternative configuration file'));
-    console.log('   ' + '--unique                         ' + chalk.grey('Filter out duplicate IP addresses'));
-    console.log('   ' + '--list-resolvers                 ' + chalk.grey('List resolvers configured in config file'));
-    console.log('   ' + '--list-options                   ' + chalk.grey('List DNS request options configured in config file'));
-    console.log('   ' + '--list-defaults                  ' + chalk.grey('Print json of default config file settings'));
-    console.log('   ' + '--verbose                        ' + chalk.grey('Outputs more information'));
-    console.log('   ' + '--no-color                       ' + chalk.grey('Switches off colour output'));
-    console.log('   ' + '--version                        ' + chalk.grey('Display version number'));
-    console.log('   ' + '--help                           ' + chalk.grey('Display this help'));
+    console.log(`   domain [domain [domain] ...]     ${chalk.grey('Perform DNS lookups on one or more domains')}`);
+    console.log(`   --port <number>                  ${chalk.grey('Specify the DNS port [53]')}`);
+    console.log(`   --protocol <upd|tcp>             ${chalk.grey('Specify the DNS protocol [udp]')}`);
+    console.log(`   --timeout <number>               ${chalk.grey('Specify the DNS timeout in milliseconds [2500]')}`);
+    console.log(`   --edns <true|false>              ${chalk.grey('Enable or disable EDNS(0) [false]')}`);
+    console.log(`   --config <filename>              ${chalk.grey('Specify an alternative configuration file')}`);
+    console.log(`   --unique                         ${chalk.grey('Filter out duplicate IP addresses')}`);
+    console.log(`   --list-resolvers                 ${chalk.grey('List resolvers configured in config file')}`);
+    console.log(`   --list-options                   ${chalk.grey('List DNS request options configured in config file')}`);
+    console.log(`   --list-defaults                  ${chalk.grey('Print json of default config file settings')}`);
+    console.log(`   --verbose                        ${chalk.grey('Outputs more information')}`);
+    console.log(`   --no-color                       ${chalk.grey('Switches off colour output')}`);
+    console.log(`   --version                        ${chalk.grey('Display version number')}`);
+    console.log(`   --help                           ${chalk.grey('Display this help')}`);
     console.log(endOfLine);
     console.log(chalk.grey('EXAMPLES:'));
     console.log('   ddig www.example.com');
