@@ -16,7 +16,7 @@
 
 **Install globally**:
 
-```text
+```shell
 npm install -g distributed-dig
 ```
 
@@ -24,7 +24,7 @@ npm install -g distributed-dig
 
 **Lookup a single domain**:
 
-```text
+```shell
 ddig domain
 ```
 
@@ -44,7 +44,7 @@ Useful for checking if a DNS record has been fully propagated, or for querying t
 
 Installing globally is recommended:
 
-```text
+```shell
 npm install -g distributed-dig
 ```
 
@@ -52,7 +52,7 @@ npm install -g distributed-dig
 
 ## Usage
 
-```text
+```shell
 ddig domain [domain [domain] ...] [options]
 ```
 
@@ -162,7 +162,7 @@ Displays the help screen:
 
 * List the IP address returned for `www.asos.com` from each of the configured resolver:
 
-```text
+```shell
 ddig www.asos.com
 ```
 
@@ -172,7 +172,7 @@ ddig www.asos.com
 
 * List the IP address and full recursive path returned for `www.asos.com` from each of the configured resolver:
 
-```text
+```shell
 ddig www.asos.com --verbose
 ```
 
@@ -182,7 +182,7 @@ ddig www.asos.com --verbose
 
 * List the IP addresses returned for both `www.asos.com` & `secure.asos.com` from each of the configured resolver with a 5 second timeout:
 
-```text
+```shell
 ddig www.asos.com my.asos.com secure.asos.com --timeout 5000
 ```
 
@@ -196,7 +196,7 @@ ddig www.asos.com my.asos.com secure.asos.com --timeout 5000
 
 As of version `1.8.0` you can provide a URL and the domain will be extracted. This is handy when performing a copy/paste from a browser's address bar.
 
-```text
+```shell
 ddig https://example.com
 ```
 
@@ -274,7 +274,7 @@ Resolvers are configured in an array with each resolver having a `nameServer` el
 ]
 ```
 
-You can find a list of public DNS servers [here](https://public-dns.info/) and [here](https://dnspropagation.net/free-public-dns-servers/), and tailor the configured list for your own requirements.
+You can find a list of public DNS servers on [public-dns.info](https://public-dns.info/) and [dnspropagation.net](https://dnspropagation.net/free-public-dns-servers/), and tailor the configured list for your own requirements.
 
 ---
 
@@ -284,37 +284,20 @@ You can find a list of public DNS servers [here](https://public-dns.info/) and [
 
 ### Windows
 
-```text
+```shell
 set debug=ddig
 ```
 
 ### Linux
 
-```text
+```shell
 DEBUG=ddig
 ```
 
 ### Powershell
 
-```text
+```shell
 $env:debug="ddig"
 ```
-
----
-
-## FAQ
-
-* [Where is the Change Log?](#where-is-the-change-log)
-* [What terminal/console are you using in the screen shots?](#what-terminal-are-you-using)
-
-### Where is the Change Log
-
-The `CHANGELOG.md` can be found [here](./CHANGELOG.md)
-
----
-
-### What terminal are you using
-
-I'm using Microsoft's new tabbed [Windows Terminal](https://github.com/microsoft/terminal) which has many excellent features, and the ability to [configure a background image](https://www.howtogeek.com/426346/how-to-customize-the-new-windows-terminal-app/).
 
 ---
