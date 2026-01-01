@@ -11,9 +11,6 @@ auth.edgerc
 # Local batch file emulating shebang
 ddig.cmd
 
-# Screenshots folder
-screenshots/*
-
 # Spikes folder
 spikes/*
 
