@@ -302,6 +302,11 @@ if (config) {
                     // Extract hostname from URL and add it to the domains array
                     const inputURL = new URL(process.argv[i]);
                     domains.push(inputURL.hostname);
+                    // Set domain column width
+                    if (inputURL.hostname.length > domainColumnWidth) {
+                        domainColumnWidth = inputURL.hostname.length;
+                        debug('Domain column width increased to %d', domainColumnWidth);
+                    }
 
                 } else {
                     debug('"%s" is not a valid hostname.  Excluding it from the domains[] array', process.argv[i]);
