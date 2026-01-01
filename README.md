@@ -28,7 +28,7 @@ npm install -g distributed-dig
 ddig domain
 ```
 
-![`ddig [domain]`](https://marksmurphy.github.io/img/ddig.single.domains.gif)
+![`ddig [domain]`](screenshots/ddig.single.domain.gif)
 
 ---
 
@@ -116,13 +116,13 @@ To create a custom config you can:
 
 Lists the resolvers configured in the `distributed-dig.json` config file:
 
-![ddig --list-resolvers](https://marksmurphy.github.io/img/ddig.list-resolvers.gif)
+![ddig --list-resolvers](screenshots/ddig.list-resolvers.gif)
 
 ### list-options
 
 Lists the options configured in the `distributed-dig.json` config file:
 
-![ddig --list-options](https://marksmurphy.github.io/img/ddig.list-options.gif)
+![ddig --list-options](screenshots/ddig.list-options.gif)
 
 ### list-defaults
 
@@ -136,7 +136,7 @@ Switches on verbose mode which outputs the following additional fields:
 * Resolver IP Address
 * Response time
 
-![ddig www.asos.com --verbose](https://marksmurphy.github.io/img/ddig.single.domain.www.asos.com.verbose.gif)
+![ddig www.asos.com --verbose](screenshots/ddig.single.domain.verbose.gif)
 
 `--verbose` also modifies the `--list-resolvers` and `--list-options` switches.
 
@@ -152,7 +152,7 @@ Prints out `distributed-dig`'s version number.
 
 Displays the help screen:
 
-![`ddig --help`](https://marksmurphy.github.io/img/ddig.help.gif)
+![`ddig --help`](screenshots/ddig.help.gif)
 
 ---
 
@@ -166,7 +166,7 @@ Displays the help screen:
 ddig www.asos.com
 ```
 
-![ddig www.asos.com](https://marksmurphy.github.io/img/ddig.example.01.png)
+![ddig www.asos.com](screenshots/ddig.example.01.png)
 
 ### Lookup a single domain with verbose enabled
 
@@ -176,7 +176,7 @@ ddig www.asos.com
 ddig www.asos.com --verbose
 ```
 
-![ddig www.asos.com --verbose](https://marksmurphy.github.io/img/ddig.example.02.png)
+![ddig www.asos.com --verbose](screenshots/ddig.example.02.png)
 
 ### Lookup multiple domains with an increased timeout
 
@@ -186,7 +186,7 @@ ddig www.asos.com --verbose
 ddig www.asos.com my.asos.com secure.asos.com --timeout 5000
 ```
 
-![ddig www.asos.com my.asos.com secure.asos.com](https://marksmurphy.github.io/img/ddig.example.03.png)
+![ddig www.asos.com my.asos.com secure.asos.com](screenshots/ddig.example.03.png)
 
 ---
 
@@ -197,16 +197,16 @@ ddig www.asos.com my.asos.com secure.asos.com --timeout 5000
 As of version `1.8.0` you can provide a URL and the domain will be extracted. This is handy when performing a copy/paste from a browser's address bar.
 
 ```shell
-ddig https://example.com
+ddig https://www.example.com
 ```
 
-![`ddig [URL]`](https://marksmurphy.github.io/img/ddig.single.url.gif)
+![`ddig [URL]`](screenshots/ddig.single.url.gif)
 
 ### Unique IP Address Identifier
 
 The first occurrence of each unique IP address is marked by a bullet point:
 
-![ddig unique IP Address Identifier](https://marksmurphy.github.io/img/ddig.unique.png)
+![ddig unique IP Address Identifier](screenshots/ddig.unique.png)
 
 #### Unicode Support detection for Unique Address Identifier character
 
@@ -216,13 +216,13 @@ The bullet point character used is `U+2022 • BULLET (HTML &#8226;)`.  If it is
 
 As of version `1.7.0` there is an option to provide a `--unique` switch which lists only the first occurrence of each distinct IP address returned. N.B. *It will not filter out errors*
 
-![`ddig [domain] --unique`](https://marksmurphy.github.io/img/ddig.single.domain.unique.gif)
+![`ddig [domain] --unique`](screenshots/ddig.single.domain.unique.gif)
 
 ### Column Width Warning
 
 If you use the `--verbose` switch and have a terminal window that's narrower than 130 columns you'll see a warning:
 
-![ddig column width warning](https://marksmurphy.github.io/img/ddig.width.warning.png)
+![ddig column width warning](screenshots/ddig.width.warning.png)
 
 ---
 
