@@ -69,35 +69,31 @@
       "provider": "Verisign DNS (Secondary)"
     },
     {
-      "nameServer": "118.189.211.221",
+      "nameServer": "118.201.187.122",
       "provider": "Singapore"
-    },
-    {
-      "nameServer": "62.219.45.200",
-      "provider": "Israel"
     },
     {
       "nameServer": "185.228.169.9",
       "provider": "Ireland"
     },
     {
-      "nameServer": "87.213.68.130",
+      "nameServer": "46.166.189.68",
       "provider": "Netherlands"
     },
     {
-      "nameServer": "212.118.241.33",
+      "nameServer": "41.215.243.43",
       "provider": "United Kingdom"
     },
     {
-      "nameServer": "216.98.109.133",
+      "nameServer": "8.20.247.188",
       "provider": "United States"
     },
     {
-      "nameServer": "221.138.17.154",
+      "nameServer": "202.30.143.44",
       "provider": "South Korea"
     },
     {
-      "nameServer": "103.224.162.37",
+      "nameServer": "58.162.206.206",
       "provider": "Australia"
     },
     {
@@ -105,11 +101,11 @@
       "provider": "Argentina"
     },
     {
-      "nameServer": "187.188.112.16",
+      "nameServer": "200.76.52.60",
       "provider": "Mexico"
     },
     {
-      "nameServer": "45.225.123.34",
+      "nameServer": "177.105.210.58",
       "provider": "Brazil"
     }
   ]
