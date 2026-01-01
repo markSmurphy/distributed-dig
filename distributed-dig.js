@@ -404,8 +404,8 @@ if (config) {
                                 preserveNewLines: true,
                                 config: {
                                     unique: { minWidth: 1, maxWidth: 1 },
-                                    domain: { minWidth: domainColumnWidth },
-                                    IPAddress: { minWidth: 15 },
+                                    domain: { minWidth: domainColumnWidth, maxWidth: domainColumnWidth },
+                                    IPAddress: { minWidth: 35 },
                                     RecordType: { minWidth: 6, maxWidth: 6 },
                                     TTL: { minWidth: 7, align: 'right' },
                                     provider: { minWidth: providerColumnWidth },
