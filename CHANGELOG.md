@@ -1,10 +1,18 @@
 # Change Log
 
-## [1.8.10] - TBC
+## [1.9.0] - January 1<sup>st</sup> 2026
 
 ### Changed
 
-* Updated dependency `debug` to version `4.3.4`.
+- Updated codebase to modern JavaScript conventions.
+- Updated source of public DNS servers
+- Updated all screenshots and recordings
+- Fixed URL parsing RangeError
+- Fixed column width output formatting issue
+- Updated DNS resolver list
+- Updated dependencies
+- Fixed "bin" entry in package.json
+- README updates
 
 ---
 
@@ -12,14 +20,14 @@
 
 ### Changed
 
-* Updated DNS server IP addresses for **Brazil** and **Mexico**.
-* Updated dependency `columnify` to version `1.6.0`.
-* Updated dependency `debug` to version `4.3.3`.
-* Updated dependency `is-valid-domain` to version `0.1.6`.
+- Updated DNS server IP addresses for **Brazil** and **Mexico**.
+- Updated dependency `columnify` to version `1.6.0`.
+- Updated dependency `debug` to version `4.3.3`.
+- Updated dependency `is-valid-domain` to version `0.1.6`.
 
 ### Removed
 
-* Removed dependency `supports-color`.
+- Removed dependency `supports-color`.
 
 ---
 
@@ -27,9 +35,9 @@
 
 ### Changed
 
-* Updated dependency `chalk` to version `4.1.2`.
-* Updated dependency `is-valid-domain` to version `0.1.4`.
-* Updated dependency `supports-color` to version `9.0.2`.
+- Updated dependency `chalk` to version `4.1.2`.
+- Updated dependency `is-valid-domain` to version `0.1.4`.
+- Updated dependency `supports-color` to version `9.0.2`.
 
 ---
 
@@ -37,10 +45,10 @@
 
 ### Changed
 
-* Updated dependency `debug` to version `4.3.2`.
-* Updated dependency `is-valid-domain` to version `0.1.2`.
-* Increased default timeout to `10000` milliseconds.
-* Updated DNS server IP addresses for **UK**, **Singapore** and **Mexico**.
+- Updated dependency `debug` to version `4.3.2`.
+- Updated dependency `is-valid-domain` to version `0.1.2`.
+- Increased default timeout to `10000` milliseconds.
+- Updated DNS server IP addresses for **UK**, **Singapore** and **Mexico**.
 
 ---
 
@@ -48,7 +56,7 @@
 
 ### Changed
 
-* Updated dependency `pretty-error` to version `3.0.4` which addressed [CVE-2021-33587](https://nvd.nist.gov/vuln/detail/CVE-2021-33587).
+- Updated dependency `pretty-error` to version `3.0.4` which addressed [CVE-2021-33587](https://nvd.nist.gov/vuln/detail/CVE-2021-33587).
 
 ---
 
@@ -56,9 +64,9 @@
 
 ### Changed
 
-* Increased default timeout to `3500` milliseconds.
-  * Previously the default was `2500` which may have caused unnecessary timeouts when querying far away resolvers.
-* Changed problematic resolver in Ireland to and new one sourced from [dnspropagation.net](https://dnspropagation.net/free-public-dns-servers/ie/).
+- Increased default timeout to `3500` milliseconds.
+  - Previously the default was `2500` which may have caused unnecessary timeouts when querying far away resolvers.
+- Changed problematic resolver in Ireland to and new one sourced from [dnspropagation.net](https://dnspropagation.net/free-public-dns-servers/ie/).
 
 ---
 
@@ -66,11 +74,11 @@
 
 ### Changed
 
-* Updated dependencies to apply `lodash` fix which addressed [CVE-2021-23337](https://nvd.nist.gov/vuln/detail/CVE-2021-23337).
-* Updated dependency `supports-color` to version `8.1.1`.
-* Updated dependency `chalk` to version `4.1.1`.
-* Updated dependency `is-valid-domain` to version `0.0.19`.
-* Updated default Singapore DNS resolver.
+- Updated dependencies to apply `lodash` fix which addressed [CVE-2021-23337](https://nvd.nist.gov/vuln/detail/CVE-2021-23337).
+- Updated dependency `supports-color` to version `8.1.1`.
+- Updated dependency `chalk` to version `4.1.1`.
+- Updated dependency `is-valid-domain` to version `0.0.19`.
+- Updated default Singapore DNS resolver.
 
 ---
 
@@ -78,9 +86,9 @@
 
 ### Changed
 
-* Updated dependency `pretty-error` to version `3.0.3`.
-* Removed broken *Size* badge from `README.md`.
-* Added *Required Node Version* ![node-current](https://img.shields.io/node/v/distributed-dig?style=social) and *Github Stars* ![GitHub Repo stars](https://img.shields.io/github/stars/markSmurphy/distributed-dig?style=social) badges to `README.md`.
+- Updated dependency `pretty-error` to version `3.0.3`.
+- Removed broken *Size* badge from `README.md`.
+- Added *Required Node Version* ![node-current](https://img.shields.io/node/v/distributed-dig?style=social) and *Github Stars* ![GitHub Repo stars](https://img.shields.io/github/stars/markSmurphy/distributed-dig?style=social) badges to `README.md`.
 
 ---
 
@@ -88,7 +96,7 @@
 
 ### Changed
 
-* Updated dependencies (`yargs` & `supports-color`)
+- Updated dependencies (`yargs` & `supports-color`)
 
 ---
 
@@ -96,12 +104,12 @@
 
 ### Changed
 
-* Moved the change log notes into its own `CHANGELOG.md` from `README.md`.
+- Moved the change log notes into its own `CHANGELOG.md` from `README.md`.
 
 ### Added
 
-* Added `supports-color` to supplement `debug`
-* Added `engines` into `package.json` to specify node version >=10.0.0
+- Added `supports-color` to supplement `debug`
+- Added `engines` into `package.json` to specify node version >=10.0.0
 
 ---
 
@@ -109,14 +117,14 @@
 
 ### Added
 
-* New option `--unique` which filters out duplicate addresses (but not errors).
+- New option `--unique` which filters out duplicate addresses (but not errors).
 
 ![`ddig [domain] --unique`](https://marksmurphy.github.io/img/ddig.single.domain.unique.gif)
 
 ### Changed
 
-* Updated dependencies (`debug`).
-* Improved colour scheme to aid output readability.
+- Updated dependencies (`debug`).
+- Improved colour scheme to aid output readability.
 
 ---
 
@@ -124,8 +132,8 @@
 
 ### Changed
 
-* Updated dependencies (`yargs`).
-* Improved debug logging clarity in `parseAnswer()`.
+- Updated dependencies (`yargs`).
+- Improved debug logging clarity in `parseAnswer()`.
 
 ---
 
@@ -133,10 +141,10 @@
 
 ### Changed
 
-* Updated dependencies (`pretty-error` & `is-valid-domain`).
-* Fixed empty array check in `ddig-core.js`.
-* Fixed erroneous string substitution in `return()` function calls in `ddig-core.js`.
-* Improved colour output for `CNAME` records and their IP addresses.
+- Updated dependencies (`pretty-error` & `is-valid-domain`).
+- Fixed empty array check in `ddig-core.js`.
+- Fixed erroneous string substitution in `return()` function calls in `ddig-core.js`.
+- Improved colour output for `CNAME` records and their IP addresses.
 
 ---
 
@@ -144,7 +152,7 @@
 
 ### Changed
 
-* Updated dependencies (`yargs` & `is-valid-domain`).
+- Updated dependencies (`yargs` & `is-valid-domain`).
 
 ---
 
@@ -152,11 +160,11 @@
 
 ### Added
 
-* Added `pretty-error` formatting to TryCatch blocks' console output.
+- Added `pretty-error` formatting to TryCatch blocks' console output.
 
 ### Changed
 
-* Updated dependency (`debug`).
+- Updated dependency (`debug`).
 
 ---
 
@@ -164,7 +172,7 @@
 
 ### Changed
 
-* Updated dependencies (`yargs` & `is-valid-domain`).
+- Updated dependencies (`yargs` & `is-valid-domain`).
 
 ---
 
@@ -172,7 +180,7 @@
 
 ### Changed
 
-* Fixed erroneous `warning` when parsing certain command line arguments.
+- Fixed erroneous `warning` when parsing certain command line arguments.
 
 ---
 
@@ -180,7 +188,7 @@
 
 ### Changed
 
-* Fixed output formatting bugs in `--list-resolvers` and `--list-options`
+- Fixed output formatting bugs in `--list-resolvers` and `--list-options`
 
 ---
 
@@ -188,11 +196,11 @@
 
 ### Added
 
-* Improved the standard (non-verbose) output for `CNAME` records to now include the first FQDN it resolves to along with the IP address.
+- Improved the standard (non-verbose) output for `CNAME` records to now include the first FQDN it resolves to along with the IP address.
 
 ### Changed
 
-* Fixed an `undefined` reference when using `--list-defaults`.
+- Fixed an `undefined` reference when using `--list-defaults`.
 
 ---
 
@@ -200,7 +208,7 @@
 
 ### Changed
 
-* Updated dependencies.
+- Updated dependencies.
 
 ---
 
@@ -208,7 +216,7 @@
 
 ### Changed
 
-* The message displaying the configuration file being used now only includes the full path if it differs from the current working directory.
+- The message displaying the configuration file being used now only includes the full path if it differs from the current working directory.
 
 ---
 
@@ -216,7 +224,7 @@
 
 ### Changed
 
-* Improved the detection and reporting of invalid domains and switches
+- Improved the detection and reporting of invalid domains and switches
 
 ---
 
@@ -224,13 +232,13 @@
 
 ### Added
 
-* If you tried to lookup a domain that was invalid, according to the DNS RFC, it was ignored.  You'll now see a warning message when `ddig` ignores an input.
-* Appended a unit suffix to the `TTL` value.
+- If you tried to lookup a domain that was invalid, according to the DNS RFC, it was ignored.  You'll now see a warning message when `ddig` ignores an input.
+- Appended a unit suffix to the `TTL` value.
 
 ### Changed
 
-* Removed `moment` as a dependency and refactored time difference calculations to be handled natively.
-* Increased the recommended columns width to 140 when using the `--verbose` switch,  allowing for the new 'TTL' and `record type` columns.
+- Removed `moment` as a dependency and refactored time difference calculations to be handled natively.
+- Increased the recommended columns width to 140 when using the `--verbose` switch,  allowing for the new 'TTL' and `record type` columns.
 
 ---
 
@@ -238,7 +246,7 @@
 
 ### Changed
 
-* Fixed a bug causing the `Record Type` to be `Unknown` due to erroneously locating the json lookup file when install globally.
+- Fixed a bug causing the `Record Type` to be `Unknown` due to erroneously locating the json lookup file when install globally.
 
 ---
 
@@ -246,13 +254,13 @@
 
 ### Added
 
-* Added [Snyk](https://snyk.io/test/npm/distributed-dig) security checks, and badge to README.
+- Added [Snyk](https://snyk.io/test/npm/distributed-dig) security checks, and badge to README.
 
 ### Changed
 
-* Updated dependencies.
-* Fixed a bug causing `Record Type` and `TTL` column values being `undefined`.
-* Increased `TTL` column width and made it right-aligned.
+- Updated dependencies.
+- Fixed a bug causing `Record Type` and `TTL` column values being `undefined`.
+- Increased `TTL` column width and made it right-aligned.
 
 ---
 
@@ -260,11 +268,11 @@
 
 ### Added
 
-* Standard output now includes record type.
+- Standard output now includes record type.
 
 ### Changed
 
-* Updated dependencies.
+- Updated dependencies.
 
 ---
 
@@ -272,7 +280,7 @@
 
 ### Fixed
 
-* Fixed a nested array bounds check which resulted in valid domains being reported as non-existent.
+- Fixed a nested array bounds check which resulted in valid domains being reported as non-existent.
 
 ---
 
@@ -280,12 +288,12 @@
 
 ### Changed
 
-* Updated default DNS resolvers list.
-* Updated dependencies.
+- Updated default DNS resolvers list.
+- Updated dependencies.
 
 ### Fixed
 
-* Better handling of `nxdomain`.  Non-existent domains aren't DNS errors, just an empty answer - so now handling those more sensibly.
+- Better handling of `nxdomain`.  Non-existent domains aren't DNS errors, just an empty answer - so now handling those more sensibly.
 
 ---
 
@@ -293,7 +301,7 @@
 
 ### Changed
 
-* Fixed `npm-shrinkwrap.json` problem that prevented `npm update` succeeding.
+- Fixed `npm-shrinkwrap.json` problem that prevented `npm update` succeeding.
 
 ---
 
@@ -301,9 +309,9 @@
 
 ### Changed
 
-* Switched to using `chalk` instead of `colors`.
-* Updated dependencies.
-* `--list-defaults` now pretty-prints the raw json output.
+- Switched to using `chalk` instead of `colors`.
+- Updated dependencies.
+- `--list-defaults` now pretty-prints the raw json output.
 
 ---
 
@@ -311,9 +319,9 @@
 
 ### Changed
 
-* Use * instead of unicode character • to signify unique IP address when `process.stdout.isTTY` is `false` [^1].
-* Updated Dependencies.
-* Shrink-wrapped `npm` dependencies.
+- Use * instead of unicode character • to signify unique IP address when `process.stdout.isTTY` is `false` [^1].
+- Updated Dependencies.
+- Shrink-wrapped `npm` dependencies.
 
 [^1]: When `process.stdout.isTTY` is `false` it signifies that the output is being piped or redirected. There's no guarantee that the target of the pipe (e.g. `more` on Windows, for screen pagination) or the redirect (e.g. a text file) has unicode support so we refrain from outputting any unicode.
 
@@ -323,10 +331,10 @@
 
 ### Changed
 
-* Added `--verbose` support tp `--help` to display more information.
-* Dabbled with using `chalk` instead of `colors` (on `--help` output).
-* Updated dependency `yargs` to version 14.2.0
-* Fixed a cross-platform file path separator bug.
+- Added `--verbose` support tp `--help` to display more information.
+- Dabbled with using `chalk` instead of `colors` (on `--help` output).
+- Updated dependency `yargs` to version 14.2.0
+- Fixed a cross-platform file path separator bug.
 
 ---
 
@@ -334,11 +342,11 @@
 
 ### Changed
 
-* Removed unneeded dependency `valid-filename`.
-* Updated dependency `colors` to version 1.4.0
-* Improved reporting on configuration file location when directory is `.`.
-* Improved `debug` logging.
-* Improved reporting on an empty answer (i.e. *no error, but no IP address returned*).
+- Removed unneeded dependency `valid-filename`.
+- Updated dependency `colors` to version 1.4.0
+- Improved reporting on configuration file location when directory is `.`.
+- Improved `debug` logging.
+- Improved reporting on an empty answer (i.e. *no error, but no IP address returned*).
 
 ---
 
@@ -346,8 +354,8 @@
 
 ### Changed
 
-* Fixed a problem when specifying a full path with the `--config` option.
-* Fixed erroneous warnings when using `--config`.
+- Fixed a problem when specifying a full path with the `--config` option.
+- Fixed erroneous warnings when using `--config`.
 
 ---
 
@@ -355,24 +363,24 @@
 
 ### Added
 
-* New `--config` option to specify an alternative configuration file.
-* New `--list-defaults` option which prints a default config json file to the console; useful as an initial custom configuration file.
+- New `--config` option to specify an alternative configuration file.
+- New `--list-defaults` option which prints a default config json file to the console; useful as an initial custom configuration file.
 
 ### Changed
 
-* Improved input validation for `--timeout` & `--protocol`.
-* Improved the `Warning` logic for ignored domains to remove erroneous warnings with valid switches and options.
+- Improved input validation for `--timeout` & `--protocol`.
+- Improved the `Warning` logic for ignored domains to remove erroneous warnings with valid switches and options.
 
 ---
 
 ## [1.0.4] - September 17<sup>th</sup> 2019
 
-* Fixed file system path separator problem when attempting to locate a config file on Linux systems.
+- Fixed file system path separator problem when attempting to locate a config file on Linux systems.
 
 ---
 
 ## [1.0.0] - September 17<sup>th</sup> 2019
 
-* Initial Release.
+- Initial Release.
 
 ---
